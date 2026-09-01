@@ -139,7 +139,7 @@ function buildPage(v) {
   const isInternal = v === 'internal';
   const pageTitle = isInternal
     ? `[INTERNAL] Tata Tertib Grup - ${M.name}`
-    : `${M.title} Grup & Saluran WhatsApp - ${M.name}`;
+    : `${M.title} WhatsApp - ${M.name}`;
   const pageDesc = isInternal
     ? 'Versi internal tanpa sensor. Khusus member grup XyCloud | Official.'
     : M.description;
