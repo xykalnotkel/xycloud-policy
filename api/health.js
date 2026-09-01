@@ -19,7 +19,7 @@ export default function handler(req, res) {
       html: '/api/policy?format=html',
       text: '/api/policy?format=text',
       embed: '/embed.js',
-      docs: '/docs.html'
+      docs: '/docs'
     },
     license: 'MIT',
     attribution: 'Credit required: https://rules.xyc.my.id',

@@ -215,7 +215,7 @@ fetch('${M.url}/api/policy')
   .then(d =&gt; console.log(d.sections));</code></pre>
       <div class="cta">
         <a class="btn ghost" href="/api/policy" target="_blank" rel="noopener">Lihat API JSON</a>
-        <a class="btn ghost" href="/docs.html">Dokumentasi API</a>
+        <a class="btn ghost" href="/docs">Dokumentasi API</a>
         <a class="btn ghost" href="${M.repo}" target="_blank" rel="noopener">Source Code</a>
       </div>
     </section>`;
@@ -237,7 +237,7 @@ fetch('${M.url}/api/policy')
 
   const switcher = isInternal
     ? `    <div class="switch"><a href="/">&larr; Balik ke versi publik</a></div>`
-    : `    <div class="switch"><a href="/internal.html">Versi internal (blak-blakan) &rarr;</a></div>`;
+    : `    <div class="switch"><a href="/internal">Versi internal (blak-blakan) &rarr;</a></div>`;
 
   return `<!DOCTYPE html>
 <html lang="id">
@@ -280,7 +280,7 @@ ${switcher}
   <footer>
     <p>${pick(policy.footer, v)}</p>
     <p style="margin-top:10px">&copy; 2026 <b>${M.nameStyled}</b> &middot; ${esc(M.tagline)}</p>
-    <p style="margin-top:6px">Open source (MIT) &middot; <a href="${M.repo}" target="_blank" rel="noopener">GitHub</a> &middot; <a href="/api/policy">API</a> &middot; <a href="/docs.html">Docs</a></p>
+    <p style="margin-top:6px">Open source (MIT) &middot; <a href="${M.repo}" target="_blank" rel="noopener">GitHub</a> &middot; <a href="/api/policy">API</a> &middot; <a href="/docs">Docs</a></p>
   </footer>
 
 </div>
@@ -298,6 +298,7 @@ fs.writeFileSync(path.join(pub, 'internal.html'), buildPage('internal'));
 
 fs.writeFileSync(path.join(pub, 'robots.txt'), `User-agent: *
 Allow: /
+Disallow: /internal
 Disallow: /internal.html
 
 User-agent: GPTBot
@@ -320,7 +321,7 @@ fs.writeFileSync(path.join(pub, 'sitemap.xml'), `<?xml version="1.0" encoding="U
     </image:image>
   </url>
   <url>
-    <loc>${M.url}/docs.html</loc>
+    <loc>${M.url}/docs</loc>
     <lastmod>${M.updated}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

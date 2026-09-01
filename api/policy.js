@@ -22,7 +22,7 @@ function shape(version) {
       requestedVersion: version,
       license: 'MIT',
       attribution: 'Wajib cantumkan kredit ke https://rules.xyc.my.id',
-      docs: `${policy.meta.url}/docs.html`
+      docs: `${policy.meta.url}/docs`
     },
     alert: {
       title: policy.alert.title,

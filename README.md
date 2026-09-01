@@ -12,7 +12,7 @@ Website statis + API publik + widget embed. Satu file JSON jadi sumber kebenaran
 [![API](https://img.shields.io/badge/API-public%20%C2%B7%20no%20key-075e54?style=flat-square)](https://rules.xyc.my.id/api/policy)
 [![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE)
 
-[Website](https://rules.xyc.my.id) · [Dokumentasi API](https://rules.xyc.my.id/docs.html) · [Endpoint JSON](https://rules.xyc.my.id/api/policy)
+[Website](https://rules.xyc.my.id) · [Dokumentasi API](https://rules.xyc.my.id/docs) · [Endpoint JSON](https://rules.xyc.my.id/api/policy)
 
 </div>
 
@@ -28,7 +28,7 @@ Aturan intinya satu: **member yang keluar atau dikeluarkan dari Grup tidak bisa 
 
 | | |
 |---|---|
-| **Dua versi** | `/` versi publik (SEO-friendly) dan `/internal.html` versi blak-blakan (`noindex`) |
+| **Dua versi** | `/` versi publik (SEO-friendly) dan `/internal` versi blak-blakan (`noindex`) |
 | **Satu sumber data** | Semua teks ada di [`data/policy.json`](data/policy.json). Edit di situ, jalankan build, semua ikut berubah |
 | **API publik** | JSON, HTML, Markdown, dan teks polos. Tanpa API key, CORS terbuka |
 | **Widget embed** | Satu baris `<script>` untuk menempelkan kebijakan di website mana pun |
@@ -85,7 +85,7 @@ curl "https://rules.xyc.my.id/api/health"                          # status
 
 **Section:** `keluar-masuk` `aturan-harian` `promosi` `transaksi` `ketipu` `member-batu` `larangan` `sanksi` `saluran` `privasi` `admin`
 
-Dokumentasi lengkap dengan contoh React, PHP, dan bot: **[rules.xyc.my.id/docs.html](https://rules.xyc.my.id/docs.html)**
+Dokumentasi lengkap dengan contoh React, PHP, dan bot: **[rules.xyc.my.id/docs](https://rules.xyc.my.id/docs)**
 
 ## Widget
 
@@ -129,7 +129,7 @@ vercel --prod
 
 ## Kontribusi
 
-Isu dan pull request diterima. Untuk perubahan teks aturan, edit `data/policy.json` — jangan edit `public/index.html` atau `public/internal.html` langsung karena akan tertimpa saat build.
+Isu dan pull request diterima. Untuk perubahan teks aturan, edit `data/policy.json` — jangan edit `public/index.html` atau `public/internal` langsung karena akan tertimpa saat build.
 
 ## Lisensi
 
