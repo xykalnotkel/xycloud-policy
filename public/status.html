@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Status Layanan — XyCloud Policy</title>
+<meta name="description" content="Status real time layanan XyCloud Policy: website, API kebijakan, pengiriman email feedback, dan edge network.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://rules.xyc.my.id/status">
+<meta name="theme-color" content="#075e54">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="XyCloud | Official">
+<meta property="og:locale" content="id_ID">
+<meta property="og:url" content="https://rules.xyc.my.id/status">
+<meta property="og:title" content="Status Layanan — XyCloud Policy">
+<meta property="og:description" content="Pantau kondisi website, API kebijakan, dan layanan email secara real time.">
+<meta property="og:image" content="https://rules.xyc.my.id/og-docs.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Status Layanan — XyCloud Policy">
+<meta name="twitter:description" content="Pantau kondisi website, API kebijakan, dan layanan email secara real time.">
+<meta name="twitter:image" content="https://rules.xyc.my.id/og-docs.png">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:#ece5dd;color:#111b21;line-height:1.65}
+.wrap{max-width:780px;margin:0 auto;padding:0 18px 60px}
+header{background:linear-gradient(160deg,#075e54 0%,#128c7e 100%);color:#fff;padding:40px 18px 34px;text-align:center}
+.badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);padding:5px 14px;border-radius:999px;font-size:12px;letter-spacing:.5px;text-transform:uppercase;margin-bottom:12px}
+header h1{font-size:24px;font-weight:800}
+header p{margin-top:8px;font-size:13.5px;opacity:.85}
+
+.hero{background:#fff;border-radius:14px;padding:26px;margin:-22px 0 16px;box-shadow:0 6px 22px rgba(0,0,0,.1);text-align:center}
+.dot{display:inline-block;width:13px;height:13px;border-radius:50%;background:#c4c9cc;margin-right:9px;vertical-align:-1px;position:relative}
+.dot.live::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:2px solid currentColor;opacity:.45;animation:pulse 1.9s ease-out infinite}
+@keyframes pulse{0%{transform:scale(.7);opacity:.6}100%{transform:scale(1.5);opacity:0}}
+.hero h2{font-size:21px;font-weight:800;display:inline-block}
+.hero .sub{font-size:13px;color:#54656f;margin-top:9px}
+
+.grid{display:grid;gap:11px;margin-bottom:16px}
+.cmp{background:#fff;border-radius:12px;padding:17px 19px;box-shadow:0 2px 8px rgba(0,0,0,.05);display:flex;align-items:center;gap:14px}
+.cmp .ic{width:9px;height:9px;border-radius:50%;background:#c4c9cc;flex-shrink:0}
+.cmp .tx{flex:1;min-width:0}
+.cmp .nm{font-size:15px;font-weight:700}
+.cmp .ds{font-size:12.5px;color:#54656f;margin-top:1px;word-break:break-word}
+.cmp .rt{text-align:right;flex-shrink:0}
+.cmp .st{font-size:12px;font-weight:700;letter-spacing:.3px}
+.cmp .lt{font-size:11.5px;color:#8696a0;margin-top:2px;font-variant-numeric:tabular-nums}
+
+.card{background:#fff;border-radius:12px;padding:22px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.card h3{font-size:13px;text-transform:uppercase;letter-spacing:1px;color:#54656f;margin-bottom:14px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+td{padding:8px 0;border-bottom:1px solid #f0f2f5;vertical-align:top}
+td:first-child{color:#54656f;width:42%}
+td:last-child{text-align:right;font-weight:600;font-variant-numeric:tabular-nums;word-break:break-word}
+tr:last-child td{border-bottom:none}
+code{background:#f0f2f5;padding:2px 7px;border-radius:4px;font-size:12.5px;font-family:ui-monospace,Menlo,monospace}
+
+.spark{display:flex;align-items:flex-end;gap:3px;height:46px;margin-top:6px}
+.spark i{flex:1;background:#25d366;border-radius:2px 2px 0 0;min-height:3px;opacity:.85;transition:height .3s}
+.spark i.slow{background:#f79009}
+.spark i.bad{background:#d92d20}
+.legend{display:flex;justify-content:space-between;font-size:11.5px;color:#8696a0;margin-top:7px}
+
+.bar{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:18px 0 6px}
+.btn{background:#25d366;color:#fff;border:none;border-radius:9px;padding:10px 20px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;text-decoration:none;display:inline-block}
+.btn:hover{background:#1eb85a}
+.btn.g{background:transparent;color:#075e54;border:1.5px solid #075e54}
+.btn.g:hover{background:#075e54;color:#fff}
+footer{text-align:center;font-size:12.5px;color:#54656f;padding-top:22px;border-top:1px solid #d1d7db;margin-top:22px}
+footer a{color:#075e54}
+.err{background:#fef3f2;border:1px solid #fecdca;color:#912018;border-radius:10px;padding:14px;font-size:14px;margin-bottom:16px;display:none}
+@media(max-width:520px){.cmp{padding:15px}.hero h2{font-size:18px}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">Status Layanan</div>
+  <h1>XyCloud Policy</h1>
+  <p>Kondisi sistem dipantau langsung dari browser lu, bukan data lama</p>
+</header>
+
+<div class="wrap">
+
+  <div class="err" id="err"></div>
+
+  <div class="hero">
+    <span class="dot" id="hdot"></span><h2 id="htext">Ngecek...</h2>
+    <div class="sub" id="hsub">Sebentar ya</div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <div class="card">
+    <h3>Waktu Respons Halaman Utama</h3>
+    <div class="spark" id="spark"></div>
+    <div class="legend"><span id="sparkOld">—</span><span id="sparkAvg">—</span><span>sekarang</span></div>
+  </div>
+
+  <div class="card">
+    <h3>Detail Endpoint</h3>
+    <table id="eps"></table>
+  </div>
+
+  <div class="card">
+    <h3>Informasi Sistem</h3>
+    <table id="sys"></table>
+  </div>
+
+  <div class="bar">
+    <button class="btn" id="again">Cek Ulang</button>
+    <a class="btn g" href="/">Kebijakan</a>
+    <a class="btn g" href="/docs">Docs</a>
+  </div>
+
+  <footer>
+    <p>Halaman ini ngecek ulang otomatis tiap 30 detik.</p>
+    <p style="margin-top:7px">&copy; 2026 <b>XyCloud | Official</b> &middot; <a href="https://github.com/xykalnotkel/xycloud-policy" target="_blank" rel="noopener">GitHub</a></p>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var COLOR={operational:'#25d366',degraded:'#f79009',down:'#d92d20'};
+  var LABEL={operational:'NORMAL',degraded:'TERGANGGU',down:'MATI'};
+  var hist=[];
+  try{hist=JSON.parse(sessionStorage.getItem('xyc_lat')||'[]')}catch(e){}
+
+  var EPS=[
+    {n:'Halaman Kebijakan',u:'/',m:'GET'},
+    {n:'Policy API',u:'/api/policy?format=index',m:'GET'},
+    {n:'Health Check',u:'/api/health',m:'GET'},
+    {n:'Widget Embed',u:'/embed.js',m:'GET'},
+    {n:'Gate Popup',u:'/gate.js',m:'GET'},
+    {n:'Dokumentasi',u:'/docs',m:'GET'},
+    {n:'Banner OG',u:'/og.png',m:'GET'}
+  ];
+
+  function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+
+  function ping(u){
+    var t=performance.now();
+    return fetch(u+(u.indexOf('?')>-1?'&':'?')+'_t='+Date.now(),{cache:'no-store'})
+      .then(function(r){return {ok:r.ok,code:r.status,ms:Math.round(performance.now()-t)}})
+      .catch(function(){return {ok:false,code:0,ms:Math.round(performance.now()-t)}});
+  }
+
+  function drawSpark(){
+    var s=document.getElementById('spark');s.innerHTML='';
+    var arr=hist.slice(-24);
+    if(!arr.length){s.innerHTML='<div style="color:#8696a0;font-size:13px">Belum ada data</div>';return}
+    var max=Math.max.apply(null,arr.concat([200]));
+    arr.forEach(function(v){
+      var b=el('i');
+      b.style.height=Math.max(3,(v/max)*46)+'px';
+      if(v>800)b.className='bad';else if(v>350)b.className='slow';
+      b.title=v+' ms';
+      s.appendChild(b);
+    });
+    var avg=Math.round(arr.reduce(function(a,b){return a+b},0)/arr.length);
+    document.getElementById('sparkAvg').textContent='rata-rata '+avg+' ms';
+    document.getElementById('sparkOld').textContent=arr.length+' cek terakhir';
+  }
+
+  function renderComponents(d,browserMs){
+    var g=document.getElementById('grid');g.innerHTML='';
+    var list=d.components.slice();
+    list.unshift({id:'web',name:'Website',desc:'rules.xyc.my.id',status:'operational',latency:browserMs,detail:'diakses dari browser lu'});
+    list.forEach(function(c){
+      var row=el('div','cmp');
+      var ic=el('div','ic');ic.style.background=COLOR[c.status]||'#c4c9cc';
+      var tx=el('div','tx');
+      tx.appendChild(el('div','nm',c.name));
+      tx.appendChild(el('div','ds',c.detail||c.desc||''));
+      var rt=el('div','rt');
+      var st=el('div','st',LABEL[c.status]||'?');st.style.color=COLOR[c.status]||'#8696a0';
+      rt.appendChild(st);
+      if(c.latency!=null)rt.appendChild(el('div','lt',c.latency+' ms'));
+      row.appendChild(ic);row.appendChild(tx);row.appendChild(rt);
+      g.appendChild(row);
+    });
+  }
+
+  function renderTable(id,rows){
+    var t=document.getElementById(id);t.innerHTML='';
+    rows.forEach(function(r){
+      var tr=document.createElement('tr');
+      var a=document.createElement('td');a.textContent=r[0];
+      var b=document.createElement('td');b.innerHTML=r[1];
+      tr.appendChild(a);tr.appendChild(b);t.appendChild(tr);
+    });
+  }
+
+  function run(){
+    var btn=document.getElementById('again');btn.disabled=true;btn.textContent='Ngecek...';
+    document.getElementById('err').style.display='none';
+
+    Promise.all(EPS.map(function(e){return ping(e.u)})).then(function(res){
+      var main=res[0];
+      hist.push(main.ms);if(hist.length>60)hist=hist.slice(-60);
+      try{sessionStorage.setItem('xyc_lat',JSON.stringify(hist))}catch(e){}
+      drawSpark();
+
+      renderTable('eps',EPS.map(function(e,i){
+        var r=res[i];
+        var col=r.ok?(r.ms>800?'#f79009':'#25d366'):'#d92d20';
+        return [e.n,'<span style="color:'+col+'">'+(r.ok?r.code:'GAGAL')+'</span> &middot; '+r.ms+' ms'];
+      }));
+
+      return fetch('/api/status?_t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(d){
+        renderComponents(d,main.ms);
+        var o=d.overall;
+        var dot=document.getElementById('hdot');
+        dot.style.background=o.color;dot.style.color=o.color;dot.className='dot live';
+        document.getElementById('htext').textContent=o.label;
+        document.getElementById('htext').style.color=o.color;
+        document.getElementById('hsub').textContent='Terakhir dicek '+new Date(d.checkedAt).toLocaleTimeString('id-ID')+' · pengecekan makan '+d.tookMs+' ms';
+
+        renderTable('sys',[
+          ['Versi kebijakan','<code>'+d.policy.version+'</code>'],
+          ['Terakhir diperbarui',d.policy.updated],
+          ['Isi',d.policy.sections+' bagian · '+d.policy.items+' poin · '+d.policy.faq+' FAQ'],
+          ['Environment','<code>'+d.build.env+'</code>'],
+          ['Region',d.build.region||'—'],
+          ['Commit',d.build.commit?'<code>'+d.build.commit+'</code>':'—'],
+          ['Node runtime',d.runtime.node],
+          ['Cold start',d.runtime.coldStart?'ya':'tidak']
+        ]);
+      });
+    }).catch(function(e){
+      var er=document.getElementById('err');
+      er.style.display='block';
+      er.textContent='Gagal ngecek status: '+e.message+'. Kemungkinan koneksi lu lagi bermasalah.';
+      document.getElementById('htext').textContent='Ga bisa dicek';
+      document.getElementById('hdot').style.background='#d92d20';
+    }).then(function(){
+      btn.disabled=false;btn.textContent='Cek Ulang';
+    });
+  }
+
+  document.getElementById('again').onclick=run;
+  run();
+  setInterval(run,30000);
+})();
+</script>
+</body>
+</html>

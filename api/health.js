@@ -21,7 +21,8 @@ export default function handler(req, res) {
       embed: '/embed.js',
       gate: '/gate.js',
       feedback: 'POST /api/feedback',
-      docs: '/docs'
+      docs: '/docs',
+      status: '/api/status'
     },
     license: 'MIT',
     attribution: 'Credit required: https://rules.xyc.my.id',

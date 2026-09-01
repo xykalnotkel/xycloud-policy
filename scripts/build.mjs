@@ -449,7 +449,7 @@ ${switcher}
   <footer>
     <p>${pick(policy.footer, v)}</p>
     <p style="margin-top:10px">&copy; 2026 <b>${M.nameStyled}</b> &middot; ${esc(M.tagline)}</p>
-    <p style="margin-top:6px">Open source (MIT) &middot; <a href="${M.repo}" target="_blank" rel="noopener">GitHub</a> &middot; <a href="/api/policy">API</a> &middot; <a href="/docs">Docs</a></p>
+    <p style="margin-top:6px">Open source (MIT) &middot; <a href="${M.repo}" target="_blank" rel="noopener">GitHub</a> &middot; <a href="/api/policy">API</a> &middot; <a href="/docs">Docs</a> &middot; <a href="/status">Status</a></p>
   </footer>
 
 </div>
@@ -488,6 +488,9 @@ fs.writeFileSync(path.join(pub, 'sitemap.xml'), `<?xml version="1.0" encoding="U
   </url>
   <url>
     <loc>${M.url}/demo</loc><lastmod>${M.updated}</lastmod><changefreq>monthly</changefreq><priority>0.5</priority>
+  </url>
+  <url>
+    <loc>${M.url}/status</loc><lastmod>${M.updated}</lastmod><changefreq>daily</changefreq><priority>0.4</priority>
   </url>
 </urlset>
 `);
