@@ -1,6 +1,6 @@
 const RESEND_URL = 'https://api.resend.com/emails';
 const TO = process.env.FEEDBACK_TO || 'xycdigital@gmail.com';
-const FROM = process.env.FEEDBACK_FROM || 'XyCloud Policy <onboarding@resend.dev>';
+const FROM = process.env.FEEDBACK_FROM || 'XyCloud Policy <noreply@xyc.my.id>';
 
 // rate limit sederhana per instance (best effort, bukan jaminan keras)
 const hits = new Map();

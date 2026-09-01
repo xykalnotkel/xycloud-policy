@@ -139,7 +139,7 @@ Hanya dibutuhkan untuk endpoint feedback:
 ```
 RESEND_API_KEY=re_xxx
 FEEDBACK_TO=email@tujuan.com
-FEEDBACK_FROM=Nama <onboarding@resend.dev>
+FEEDBACK_FROM=Nama <noreply@domain-kamu.com>
 ```
 
 ## Deploy
