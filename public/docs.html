@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dokumentasi API Kebijakan Grup - XyCloud | Official</title>
+<meta name="description" content="Dokumentasi API publik kebijakan grup XyCloud. Gratis, open source MIT, tanpa API key. Tarik tata tertib dalam format JSON, HTML, Markdown, atau teks dan tempel di website mana pun.">
+<meta name="keywords" content="api kebijakan grup, policy api gratis, api tata tertib whatsapp, embed policy widget, open source policy api">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://rules.xyc.my.id/docs.html">
+<meta name="theme-color" content="#075e54">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="XyCloud | Official">
+<meta property="og:locale" content="id_ID">
+<meta property="og:url" content="https://rules.xyc.my.id/docs.html">
+<meta property="og:title" content="Dokumentasi API Kebijakan Grup - XyCloud | Official">
+<meta property="og:description" content="API publik gratis tanpa key. Tarik tata tertib grup dalam JSON, HTML, Markdown, atau teks, atau tempel widget satu baris di website mana pun.">
+<meta property="og:image" content="https://rules.xyc.my.id/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Banner API Kebijakan Grup XyCloud">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Dokumentasi API Kebijakan Grup - XyCloud | Official">
+<meta name="twitter:description" content="API publik gratis tanpa key. JSON, HTML, Markdown, teks, plus widget embed satu baris.">
+<meta name="twitter:image" content="https://rules.xyc.my.id/og.png">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Dokumentasi API Kebijakan Grup XyCloud","description":"API publik gratis untuk mengambil tata tertib grup XyCloud dalam berbagai format.","inLanguage":"id-ID","datePublished":"2026-09-01","dateModified":"2026-09-01","author":{"@type":"Organization","name":"XyCloud | Official","url":"https://rules.xyc.my.id"},"image":"https://rules.xyc.my.id/og.png","license":"https://opensource.org/licenses/MIT"}</script>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:#ece5dd;color:#111b21;line-height:1.7}
+.wrap{max-width:820px;margin:0 auto;padding:0 18px 60px}
+header{background:linear-gradient(160deg,#075e54 0%,#128c7e 100%);color:#fff;padding:44px 18px 38px;text-align:center}
+.badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);padding:5px 14px;border-radius:999px;font-size:12px;letter-spacing:.5px;text-transform:uppercase;margin-bottom:14px}
+header h1{font-size:26px}
+header p{margin-top:10px;opacity:.88;font-size:14px}
+.card{background:#fff;border-radius:12px;padding:24px;margin:18px 0;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.card:first-of-type{margin-top:-22px}
+h2{font-size:17px;color:#075e54;margin-bottom:12px}
+h3{font-size:14.5px;color:#111b21;margin:18px 0 8px}
+p{font-size:15px;margin-bottom:10px}
+ul{list-style:none;margin-bottom:6px}
+li{position:relative;padding-left:24px;margin-bottom:8px;font-size:14.8px}
+li::before{content:"";position:absolute;left:7px;top:11px;width:7px;height:7px;border-radius:50%;background:#25d366}
+code{background:#f0f2f5;padding:2px 6px;border-radius:4px;font-size:13.5px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+pre{background:#0f1b17;color:#c8f5d8;padding:16px;border-radius:10px;overflow-x:auto;font-size:12.8px;line-height:1.65;margin:10px 0 14px}
+pre code{background:none;padding:0;color:inherit}
+table{width:100%;border-collapse:collapse;margin:10px 0 14px;font-size:14px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid #e4e7ec;vertical-align:top}
+th{color:#54656f;font-size:12.5px;text-transform:uppercase;letter-spacing:.5px}
+td code{white-space:nowrap}
+.note{font-size:13.5px;color:#54656f;background:#f0f2f5;border-radius:8px;padding:12px 14px;margin-top:12px}
+.note.warn{background:#fffaeb;color:#93370d;border:1px solid #fedf89}
+.btn{display:inline-block;background:#25d366;color:#fff;text-decoration:none;padding:10px 18px;border-radius:8px;font-size:14.5px;font-weight:600;margin:4px 6px 0 0}
+.btn.alt{background:#075e54}
+footer{text-align:center;font-size:13px;color:#54656f;padding-top:24px;border-top:1px solid #d1d7db;margin-top:28px}
+footer a{color:#075e54}
+.m{display:inline-block;background:#075e54;color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:4px;margin-right:6px;vertical-align:1px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">Public API &middot; No Key Required</div>
+  <h1>Dokumentasi API Kebijakan</h1>
+  <p>Ambil tata tertib XyCloud dan tampilkan di website mana pun. Gratis, open source, lisensi MIT.</p>
+</header>
+
+<div class="wrap">
+
+  <div class="card">
+    <h2>Izin Pemakaian</h2>
+    <p>API ini terbuka untuk umum dan boleh dipakai komunitas lain. Dua syaratnya:</p>
+    <ul>
+      <li><b>Izin dulu</b> ke admin XyCloud sebelum dipakai di komunitas atau produk lu.</li>
+      <li><b>Cantumkan kredit</b> balik ke <code>rules.xyc.my.id</code>. Widget embed sudah otomatis menambahkannya.</li>
+    </ul>
+    <a class="btn" href="https://wa.me/6283116632566?text=Halo%20Admin%20XyCloud%2C%20saya%20mau%20minta%20izin%20memakai%20API%20kebijakan%20dari%20rules.xyc.my.id" target="_blank" rel="noopener">Minta Izin ke Admin</a>
+    <a class="btn alt" href="https://github.com/xykalnotkel/xycloud-policy" target="_blank" rel="noopener">Source Code</a>
+  </div>
+
+  <div class="card">
+    <h2>Base URL</h2>
+    <pre><code>https://rules.xyc.my.id</code></pre>
+    <p>Tanpa autentikasi. Tanpa rate limit keras. CORS dibuka untuk semua origin (<code>*</code>), jadi bisa dipanggil langsung dari browser.</p>
+  </div>
+
+  <div class="card">
+    <h2>Endpoint</h2>
+    <table>
+      <tr><th>Method</th><th>Path</th><th>Keterangan</th></tr>
+      <tr><td><span class="m">GET</span></td><td><code>/api/policy</code></td><td>Seluruh kebijakan dalam JSON</td></tr>
+      <tr><td><span class="m">GET</span></td><td><code>/api/policy?format=index</code></td><td>Daftar section saja (ringan)</td></tr>
+      <tr><td><span class="m">GET</span></td><td><code>/api/policy?section=promosi</code></td><td>Satu section spesifik</td></tr>
+      <tr><td><span class="m">GET</span></td><td><code>/api/health</code></td><td>Status service &amp; daftar endpoint</td></tr>
+      <tr><td><span class="m">GET</span></td><td><code>/embed.js</code></td><td>Widget siap tempel</td></tr>
+    </table>
+
+    <h3>Query Parameter</h3>
+    <table>
+      <tr><th>Param</th><th>Nilai</th><th>Default</th><th>Fungsi</th></tr>
+      <tr><td><code>format</code></td><td>json, html, markdown, text, index</td><td>json</td><td>Format output</td></tr>
+      <tr><td><code>section</code></td><td>id atau nomor section</td><td>semua</td><td>Filter satu section</td></tr>
+      <tr><td><code>version</code></td><td>public, internal</td><td>public</td><td>Varian bahasa</td></tr>
+      <tr><td><code>pretty</code></td><td>1</td><td>0</td><td>JSON diformat rapi</td></tr>
+    </table>
+
+    <h3>ID Section</h3>
+    <p><code>keluar-masuk</code> &middot; <code>aturan-harian</code> &middot; <code>promosi</code> &middot; <code>transaksi</code> &middot; <code>ketipu</code> &middot; <code>member-batu</code> &middot; <code>larangan</code> &middot; <code>sanksi</code> &middot; <code>saluran</code> &middot; <code>privasi</code> &middot; <code>admin</code></p>
+  </div>
+
+  <div class="card">
+    <h2>Contoh Respons</h2>
+    <pre><code>GET /api/policy?section=promosi&amp;pretty=1
+
+{
+  "ok": true,
+  "meta": {
+    "name": "XyCloud | Official",
+    "version": "2.0.0",
+    "updated": "2026-09-01",
+    "license": "MIT",
+    "attribution": "Wajib cantumkan kredit ke https://rules.xyc.my.id"
+  },
+  "sections": [
+    {
+      "number": 3,
+      "id": "promosi",
+      "title": "Aturan Promosi",
+      "subtitle": "Ini yang paling sering dilanggar. Baca pelan-pelan.",
+      "items": [
+        { "type": "prohibited", "text": "Promosi apa pun WAJIB izin admin dulu..." },
+        { "type": "allowed",    "text": "Promosi yang diizinkan maksimal 1 kali per hari..." }
+      ],
+      "note": { "level": "strict", "text": "Admin punya hak penuh buat hapus promo lu..." }
+    }
+  ]
+}</code></pre>
+  </div>
+
+  <div class="card">
+    <h2>Cara Pakai</h2>
+
+    <h3>1. Widget instan (paling gampang)</h3>
+    <pre><code>&lt;div id="xyc-policy"&gt;&lt;/div&gt;
+&lt;script src="https://rules.xyc.my.id/embed.js" defer&gt;&lt;/script&gt;</code></pre>
+    <p>Opsi tambahan lewat atribut <code>data-*</code>:</p>
+    <pre><code>&lt;script src="https://rules.xyc.my.id/embed.js"
+        data-target="#kebijakan"
+        data-theme="dark"
+        data-section="promosi"
+        data-accent="#00ff88"
+        defer&gt;&lt;/script&gt;</code></pre>
+    <table>
+      <tr><th>Atribut</th><th>Nilai</th><th>Default</th></tr>
+      <tr><td><code>data-target</code></td><td>CSS selector</td><td>#xyc-policy</td></tr>
+      <tr><td><code>data-theme</code></td><td>light, dark, auto</td><td>auto</td></tr>
+      <tr><td><code>data-section</code></td><td>id section</td><td>semua</td></tr>
+      <tr><td><code>data-accent</code></td><td>warna CSS</td><td>#25d366</td></tr>
+      <tr><td><code>data-credit</code></td><td>true, false</td><td>true</td></tr>
+    </table>
+    <p>Widget memancarkan event <code>xyc:policy:loaded</code> setelah selesai render.</p>
+
+    <h3>2. JavaScript / Fetch</h3>
+    <pre><code>const res  = await fetch('https://rules.xyc.my.id/api/policy');
+const data = await res.json();
+
+data.sections.forEach(s =&gt; {
+  console.log(`${s.number}. ${s.title} (${s.items.length} poin)`);
+});</code></pre>
+
+    <h3>3. React</h3>
+    <pre><code>import { useEffect, useState } from 'react';
+
+export function Kebijakan() {
+  const [p, setP] = useState(null);
+  useEffect(() =&gt; {
+    fetch('https://rules.xyc.my.id/api/policy')
+      .then(r =&gt; r.json()).then(setP);
+  }, []);
+  if (!p) return &lt;p&gt;Memuat...&lt;/p&gt;;
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;{p.meta.title}&lt;/h1&gt;
+      {p.sections.map(s =&gt; (
+        &lt;section key={s.id}&gt;
+          &lt;h2&gt;{s.number}. {s.title}&lt;/h2&gt;
+          &lt;ul&gt;{s.items.map((i, n) =&gt; &lt;li key={n}&gt;{i.text}&lt;/li&gt;)}&lt;/ul&gt;
+        &lt;/section&gt;
+      ))}
+      &lt;a href={p.meta.url}&gt;Sumber: {p.meta.domain}&lt;/a&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+    <h3>4. PHP</h3>
+    <pre><code>$json = file_get_contents('https://rules.xyc.my.id/api/policy');
+$data = json_decode($json, true);
+foreach ($data['sections'] as $s) {
+    echo "&lt;h2&gt;{$s['number']}. {$s['title']}&lt;/h2&gt;";
+}</code></pre>
+
+    <h3>5. Bot WhatsApp / Telegram</h3>
+    <pre><code># Kirim satu section sebagai teks polos ke chat
+curl -s "https://rules.xyc.my.id/api/policy?section=ketipu&amp;format=text"
+
+# Versi Markdown untuk bot Telegram
+curl -s "https://rules.xyc.my.id/api/policy?format=markdown"</code></pre>
+
+    <h3>6. Tempel HTML langsung (server side)</h3>
+    <pre><code>curl -s "https://rules.xyc.my.id/api/policy?format=html" &gt; kebijakan.html</code></pre>
+    <div class="note">Output <code>format=html</code> memakai class ber-prefix <code>xyc-</code> tanpa CSS bawaan, jadi lu bebas styling sendiri biar nyatu sama tema web lu.</div>
+  </div>
+
+  <div class="card">
+    <h2>Error &amp; Caching</h2>
+    <table>
+      <tr><th>Kode</th><th>Arti</th></tr>
+      <tr><td><code>200</code></td><td>Sukses</td></tr>
+      <tr><td><code>404</code></td><td><code>section_not_found</code> — respons menyertakan daftar section yang tersedia</td></tr>
+      <tr><td><code>405</code></td><td>Method selain GET/HEAD/OPTIONS</td></tr>
+    </table>
+    <p>Respons di-cache di edge selama 1 jam (<code>s-maxage=3600</code>) dengan <code>stale-while-revalidate</code> 24 jam. Versi kebijakan bisa dicek lewat header <code>X-Policy-Version</code> tanpa parsing body.</p>
+    <div class="note warn">Kebijakan bisa berubah sewaktu-waktu. Kalau lu cache di sisi lu sendiri, refresh minimal sekali sehari atau pantau <code>meta.version</code>.</div>
+  </div>
+
+  <div class="card">
+    <h2>Self Host</h2>
+    <p>Ga mau bergantung sama server XyCloud? Fork aja, semua aturan ada di satu file <code>data/policy.json</code>.</p>
+    <pre><code>git clone https://github.com/xykalnotkel/xycloud-policy.git
+cd xycloud-policy
+npm run dev        # http://localhost:3000
+
+# edit data/policy.json, lalu:
+npm run build      # regenerate index.html + internal.html + sitemap</code></pre>
+    <p>Deploy ke Vercel, Netlify, Cloudflare Pages, atau hosting statis apa pun. Endpoint API butuh runtime Node 18+.</p>
+  </div>
+
+  <footer>
+    <p><a href="/">&larr; Balik ke halaman kebijakan</a></p>
+    <p style="margin-top:8px">&copy; 2026 <b>XyCloud | Official</b> &middot; MIT License &middot; <a href="https://github.com/xykalnotkel/xycloud-policy" target="_blank" rel="noopener">GitHub</a></p>
+  </footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /internal.html
+
+User-agent: GPTBot
+Allow: /
+
+Sitemap: https://rules.xyc.my.id/sitemap.xml

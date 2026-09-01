@@ -1,0 +1,17 @@
+name: Build
+on:
+  push: { branches: [main] }
+  pull_request:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - name: Validate policy.json
+        run: node -e "const p=require('./data/policy.json');if(!p.sections?.length)throw new Error('sections kosong');console.log('OK:',p.sections.length,'sections,',p.faq.length,'faq')"
+      - name: Build
+        run: node scripts/build.mjs
+      - name: Check output
+        run: test -s public/index.html && test -s public/internal.html && test -s public/sitemap.xml && echo "build OK"

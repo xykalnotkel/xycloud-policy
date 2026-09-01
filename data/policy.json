@@ -1,0 +1,320 @@
+{
+  "meta": {
+    "id": "xycloud-official",
+    "name": "XyCloud | Official",
+    "nameStyled": "𝙓𝙮𝘾𝙡𝙤𝙪𝙙 𝙡 𝙊𝙛𝙛𝙞𝙘𝙞𝙖𝙡",
+    "title": "Tata Tertib & Kebijakan Grup",
+    "tagline": "Cloud Game, Sewa PC & Jual Beli Akun Game",
+    "description": "Tata tertib dan kebijakan resmi Grup serta Saluran WhatsApp XyCloud | Official. Layanan Cloud Game, Sewa PC, dan jual beli akun game. Member yang keluar atau dikeluarkan tidak dapat bergabung kembali.",
+    "version": "2.0.0",
+    "locale": "id-ID",
+    "updated": "2026-09-01",
+    "effective": "2026-09-01",
+    "domain": "rules.xyc.my.id",
+    "url": "https://rules.xyc.my.id",
+    "adminPhone": "6283116632566",
+    "adminLabel": "Admin XyCloud",
+    "channelUrl": "",
+    "channelLabel": "Saluran XyCloud | Official",
+    "license": "MIT",
+    "repo": "https://github.com/xykalnotkel/xycloud-policy",
+    "tags": ["Cloud Game", "Sewa PC", "Jual Akun Rockstar", "Jual Beli Akun Game", "Diskusi & Candaan"],
+    "keywords": [
+      "tata tertib grup whatsapp",
+      "peraturan grup whatsapp",
+      "kebijakan grup whatsapp",
+      "aturan grup cloud game",
+      "rules grup gaming",
+      "template peraturan grup whatsapp",
+      "kebijakan saluran whatsapp",
+      "aturan jual beli akun game",
+      "sewa pc cloud gaming indonesia",
+      "xycloud official"
+    ]
+  },
+
+  "alert": {
+    "title": "BACA DULU SAMPAI HABIS, JANGAN SOK JAGO",
+    "paras": [
+      {
+        "public": "Yang udah <b>OUT sendiri</b> atau <b>di-KICK admin</b>, <b>GA BAKAL BISA MASUK LAGI</b>. Titik. Ga ada nego, ga ada drama, ga ada \"bang maaf bang khilaf\".",
+        "internal": "Yang udah <b>OUT sendiri</b> atau <b>di-KICK admin</b>, <b>GA BAKAL BISA MASUK LAGI</b>. Titik. Ga ada nego, ga ada drama, ga ada \"bang maaf bang khilaf\" sambil ngirim stiker nangis."
+      },
+      {
+        "public": "Mau balik pake nomor kedua? Kedetect, tendang lagi. Jadi pikir dulu sebelum pencet tombol Keluar dari Grup. Jari lu, tanggung jawab lu.",
+        "internal": "Mau balik pake nomor kedua? Kedetect, tendang lagi. Jadi mikir dulu sebelum pencet tombol Keluar dari Grup. Jari lu sendiri yang mencet, jangan nyalahin orang lain."
+      },
+      {
+        "public": "Aturan ini bukan pajangan. Yang ga mau baca terus melanggar, jangan nangis pas namanya ilang dari daftar member.",
+        "internal": "Aturan ini bukan pajangan doang. Yang males baca terus melanggar, terus nangis pas namanya ilang dari daftar member, itu goblok namanya. Bukan salah admin."
+      }
+    ]
+  },
+
+  "sections": [
+    {
+      "id": "keluar-masuk",
+      "title": "Kebijakan Out & Masuk Grup",
+      "sub": "Aturan paling utama. Ga ada tawar-menawar di sini.",
+      "items": [
+        { "type": "no", "public": "Out sendiri sama dengan resign permanen. Selesai. Ga usah balik lagi." },
+        { "type": "no", "public": "Kena kick karena melanggar sama dengan masuk blacklist selamanya." },
+        { "type": "no", "public": "Request join lagi otomatis ditolak. Mau lewat link, mau lewat orang dalam, sama aja." },
+        { "type": "no", "public": "Nyoba masuk pake nomor kedua atau akun cadangan? Ketauan langsung tendang tanpa ngomong." },
+        { "type": "no", "public": "Nitip temen buat bujuk admin cuma bikin lu makin dikunci. Buang-buang waktu.", "internal": "Nitip temen buat bujuk admin cuma bikin lu makin dikunci. Buang-buang waktu, dan bikin temen lu ikut keliatan bego." },
+        { "type": "no", "public": "Ngemis di japri admin berkali-kali sama dengan diblokir sekalian.", "internal": "Ngemis di japri admin berkali-kali sama dengan diblokir sekalian. Punya harga diri dikit napa." },
+        { "type": "ok", "public": "Yang stay dari awal dan ga bikin ulah, aman. Yang labil, mending out sekarang biar ga ganggu." }
+      ],
+      "note": {
+        "type": "info",
+        "public": "Satu-satunya pengecualian: out karena error teknis (ganti HP, akun ke-reset, WA bermasalah). Syaratnya <b>lapor admin maksimal 1x24 jam plus bukti</b>. Lewat dari itu, kebijakan permanen jalan dan ga bisa diganggu gugat."
+      }
+    },
+    {
+      "id": "aturan-harian",
+      "title": "Aturan Main Harian",
+      "sub": "Standar minimal biar grup ga jadi kandang.",
+      "items": [
+        { "type": "ok", "public": "Pake nama jelas. Jangan nama alay penuh simbol yang bikin admin pusing pas absen." },
+        { "type": "ok", "public": "Santai boleh, sopan wajib. Grup ini santai, bukan liar." },
+        { "type": "ok", "public": "Candaan bebas, tapi jangan bawa fisik, keluarga, agama, atau kondisi ekonomi orang." },
+        { "type": "ok", "public": "Nanya langsung to the point. Jangan cuma kirim \"P\" doang terus ngilang.", "internal": "Nanya langsung to the point. Jangan cuma kirim \"P\" doang terus ngilang. Ini grup, bukan kode morse." },
+        { "type": "ok", "public": "Scroll dan baca chat atas dulu sebelum nanya. Hampir semua pertanyaan lu udah kejawab di situ.", "internal": "Scroll dan baca chat atas dulu sebelum nanya. Hampir semua pertanyaan lu udah kejawab di situ. Males scroll tapi ga males ngetik, tolol." },
+        { "type": "no", "public": "Jangan nge-tag all atau spam mention admin buat hal ga penting." },
+        { "type": "ok", "public": "Jam 22.00 sampai 06.00 mode tenang. Kecuali urusan order atau server down." },
+        { "type": "no", "public": "Voice note panjang lebar buat hal yang bisa diketik tiga baris, jangan." }
+      ]
+    },
+    {
+      "id": "promosi",
+      "title": "Aturan Promosi",
+      "sub": "Ini yang paling sering dilanggar. Baca pelan-pelan.",
+      "items": [
+        { "type": "no", "public": "Promosi apa pun <b>WAJIB izin admin dulu</b>. Nekat posting tanpa izin sama dengan kick, ga pake peringatan." },
+        { "type": "no", "public": "Dilarang keras promosi grup lain, channel lain, atau komunitas sebelah. Cari member di kandang sendiri." },
+        { "type": "no", "public": "Dilarang promosi jasa kompetitor cloud game atau sewa PC. Numpang grup orang buat nyari duit sendiri itu ga tau diri.", "internal": "Dilarang promosi jasa kompetitor cloud game atau sewa PC. Numpang grup orang buat nyari duit sendiri itu bangsat namanya. Bikin grup sendiri sana." },
+        { "type": "no", "public": "Dilarang promo judi online, pinjol, investasi bodong, MLM, dan sejenisnya. Langsung kick permanen." },
+        { "type": "no", "public": "Dilarang sebar link pendek yang ga jelas isinya, APK modifan, atau file mencurigakan." },
+        { "type": "no", "public": "Dilarang japri member satu-satu buat nawarin dagangan. Itu namanya nyolong database grup." },
+        { "type": "no", "public": "Dilarang copy paste promo yang sama berulang-ulang tiap hari. Sekali cukup, ga usah dispam." },
+        { "type": "ok", "public": "Promosi yang diizinkan maksimal <b>1 kali per hari</b>, format rapi, dan sesuai topik grup." },
+        { "type": "ok", "public": "Format promo wajib jelas: nama produk, harga, spesifikasi, dan kontak. Jangan cuma \"minat japri\"." },
+        { "type": "ok", "public": "Promosi di Saluran resmi hanya boleh dilakukan oleh admin. Member ga punya akses posting." }
+      ],
+      "note": {
+        "type": "keras",
+        "public": "Admin punya hak penuh buat hapus promo lu tanpa penjelasan. Ga usah nanya \"kenapa dihapus bang\". Kalau dihapus berarti lu ga sesuai aturan, sesederhana itu.",
+        "internal": "Admin punya hak penuh hapus promo lu tanpa penjelasan apa pun. Ga usah sok nanya \"kenapa dihapus bang\" pake nada nyolot. Kalau dihapus berarti lu melanggar. Baca ulang aturannya, jangan malah ngajak ribut."
+      }
+    },
+    {
+      "id": "transaksi",
+      "title": "Aturan Jual Beli, Sewa & Transaksi",
+      "sub": "Berlaku buat Cloud Game, Sewa PC, dan Jual Beli Akun.",
+      "items": [
+        { "type": "ok", "public": "Semua negosiasi dan transaksi <b>WAJIB japri</b>. Jangan bikin grup jadi pasar berisik." },
+        { "type": "ok", "public": "Transaksi nominal besar <b>WAJIB lewat admin atau rekber</b>. Aman lebih penting daripada buru-buru." },
+        { "type": "no", "public": "Dilarang jual akun hasil hack, curian, sharing ilegal, atau hasil scam. Ketauan, kick plus data lu diumumkan." },
+        { "type": "no", "public": "Dilarang jual akun yang masih kena banned, limited, atau bermasalah tanpa dijelasin ke pembeli." },
+        { "type": "ok", "public": "Penjual wajib jujur soal kondisi barang. Pembeli wajib bayar sesuai kesepakatan. Simpel." },
+        { "type": "ok", "public": "Simpan semua bukti chat dan bukti transfer. Itu satu-satunya senjata lu kalau ada masalah." },
+        { "type": "no", "public": "Dilarang minta DP terus ngilang. Itu penipuan, bukan bercanda." },
+        { "type": "no", "public": "Dilarang review palsu atau bikin testimoni bohongan buat naikin dagangan sendiri." },
+        { "type": "no", "public": "Dilarang nawar sadis sampai ngehina harga orang. Ga cocok ya lewat, ga usah komentar." }
+      ],
+      "note": {
+        "type": "info",
+        "public": "Admin menjamin transaksi yang lewat admin atau rekber resmi. Selebihnya di luar tanggung jawab grup."
+      }
+    },
+    {
+      "id": "ketipu",
+      "title": "Buat Yang Ketipu Tapi Ngeluh di Grup",
+      "sub": "Section khusus. Dibaca berkali-kali kalau perlu.",
+      "items": [
+        {
+          "type": "no",
+          "public": "Udah dibilang transaksi lewat admin atau rekber, lu tetep maksa transaksi sendiri diem-diem. Terus ketipu. Terus teriak-teriak di grup. <b>Ya mampus, salah sendiri.</b>",
+          "internal": "Udah dibilang transaksi lewat admin atau rekber, lu tetep maksa jalan sendiri diem-diem. Terus ketipu. Terus teriak-teriak di grup nyari simpati. <b>Ya mampus goblok, salah lu sendiri.</b>"
+        },
+        {
+          "type": "no",
+          "public": "Aturannya udah dipajang gede-gede dari awal. Lu ga baca, lu ga nurut, terus lu nyalahin grup. Otak dipake dong.",
+          "internal": "Aturannya udah dipajang gede-gede dari awal. Lu ga baca, lu ga nurut, terus lu nyalahin grup. Otak tuh dipake, jangan cuma dibawa nongkrong."
+        },
+        { "type": "no", "public": "Dilarang spam curhat ketipu di grup. Bikin panik member lain dan ga nyelesain masalah lu sama sekali." },
+        {
+          "type": "no",
+          "public": "Dilarang nyalahin admin atas transaksi yang admin sendiri ga tau. Admin bukan babysitter lu.",
+          "internal": "Dilarang nyalahin admin atas transaksi yang admin sendiri ga tau menau. Admin bukan babysitter lu, bukan bapak lu, bukan asuransi lu."
+        },
+        { "type": "no", "public": "Dilarang bikin tuduhan tanpa bukti chat dan bukti transfer. Kalau ga ada bukti, diem." },
+        { "type": "no", "public": "Dilarang nyeret nama grup atau nama XyCloud ke masalah pribadi lu di luar." },
+        { "type": "ok", "public": "Kalau beneran ketipu: <b>japri admin, bawa bukti lengkap</b>. Pelakunya kita kick, blacklist, dan sebar ke grup lain." },
+        { "type": "ok", "public": "Kalau nominalnya besar dan buktinya kuat, urus ke polisi. Grup WhatsApp bukan pengadilan." }
+      ],
+      "note": {
+        "type": "keras",
+        "public": "Ditegasin sekali lagi: <b>transaksi di luar admin, risiko ditanggung sendiri.</b> Admin tetap bantu proses kick dan blacklist pelaku, tapi jangan harap duit lu balik. Aturan udah dikasih, lu yang milih ngelanggar.",
+        "internal": "Ditegasin sekali lagi biar nyantol: <b>transaksi di luar admin, risiko tanggung sendiri.</b> Admin tetep bantu kick dan blacklist pelakunya, tapi jangan harap duit lu balik. Aturan udah dikasih gratis, lu sendiri yang milih ngelanggar. Nangis boleh, tapi jangan di grup."
+      }
+    },
+    {
+      "id": "member-batu",
+      "title": "Buat Member Batu & Keras Kepala",
+      "sub": "Yang udah ditegur berkali-kali tapi tetep ngeyel.",
+      "items": [
+        {
+          "type": "no",
+          "public": "Ditegur sekali masih ngulang, ditegur dua kali masih ngulang. Berarti lu emang ga niat jadi member, cuma niat jadi masalah.",
+          "internal": "Ditegur sekali masih ngulang, ditegur dua kali masih ngulang. Lu ini bukan lupa, lu emang bebal. Ga niat jadi member, cuma niat jadi masalah."
+        },
+        { "type": "no", "public": "Sok ngatur admin padahal lu cuma tamu di sini. Tau diri, ini bukan grup lu." },
+        {
+          "type": "no",
+          "public": "Ngeyel debat aturan yang udah jelas hitam di atas putih. Ga bakal dilayani, langsung kick.",
+          "internal": "Ngeyel debat aturan yang udah jelas hitam di atas putih. Ga bakal dilayani. Lu bukan pinter, lu cuma berisik. Langsung kick."
+        },
+        { "type": "no", "public": "Ngaku-ngaku admin, ngaku dekat sama admin, atau ngatasnamakan grup. Kick plus diumumkan biar semua tau." },
+        { "type": "no", "public": "Bikin drama, adu domba antar member, atau kompor-komporin. Grup ini bukan sinetron." },
+        { "type": "no", "public": "Udah dikick masih bikin grup tandingan buat jelek-jelekin. Silakan, tapi jangan harap diterima balik selamanya." },
+        { "type": "no", "public": "Nanya hal yang sama tiap hari padahal udah dijawab dan udah ditulis di web ini." },
+        { "type": "ok", "public": "Kalau lu ngerasa aturannya terlalu ketat, pintu keluar selalu terbuka. Ga ada yang nahan." }
+      ],
+      "note": {
+        "type": "keras",
+        "public": "Grup ini ga butuh member banyak. Grup ini butuh member yang bisa baca dan bisa nurut. Kalau dua hal itu susah buat lu, mending out sekarang daripada nyusahin semua orang.",
+        "internal": "Grup ini ga butuh member banyak. Grup ini butuh member yang bisa baca dan bisa nurut. Kalau dua hal sesimpel itu aja susah buat lu, mending out sekarang. Serius. Daripada bikin repot satu grup gara-gara satu kepala batu."
+      }
+    },
+    {
+      "id": "larangan",
+      "title": "Larangan Keras",
+      "sub": "Sekali langgar, langsung kick. Ga ada peringatan.",
+      "items": [
+        { "type": "no", "public": "SARA, rasisme, penghinaan agama, dan ujaran kebencian." },
+        { "type": "no", "public": "Pornografi, konten dewasa, dan link vulgar dalam bentuk apa pun." },
+        { "type": "no", "public": "Judi online, situs slot, dan segala turunannya." },
+        { "type": "no", "public": "Link phising, APK penyadap, script hack, dan file berbahaya." },
+        { "type": "no", "public": "Doxing atau sebar data pribadi member lain." },
+        { "type": "no", "public": "Ngancam member atau admin, baik bercanda maupun serius." },
+        { "type": "no", "public": "Screenshot chat grup terus disebar keluar tanpa izin. Itu pengkhianat." },
+        { "type": "no", "public": "Nipu member. Ini pelanggaran paling berat di grup ini." }
+      ]
+    },
+    {
+      "id": "sanksi",
+      "title": "Sanksi & Penegakan",
+      "sub": "Berlaku ke semua orang. Ga pandang bulu, ga pandang senior.",
+      "items": [
+        { "type": "ok", "public": "Pelanggaran pertama: ditegur terbuka di grup. Malu dikit biar inget." },
+        { "type": "ok", "public": "Pelanggaran kedua: peringatan keras dari admin dan namanya dicatat." },
+        { "type": "no", "public": "Pelanggaran ketiga: kick permanen. Ga bisa balik selamanya." },
+        { "type": "no", "public": "Pelanggaran berat (scam, SARA, porno, judi, link jahat): kick di detik itu juga tanpa peringatan." },
+        { "type": "no", "public": "Penipu: kick, blacklist, nomor dan buktinya diumumkan ke grup dan komunitas lain." },
+        { "type": "ok", "public": "Member lama ga punya kekebalan. Lama di grup bukan alasan buat seenaknya." }
+      ],
+      "note": {
+        "type": "keras",
+        "public": "Keputusan admin bersifat <b>FINAL dan MENGIKAT</b>. Mau protes silakan, tapi hasilnya tetap sama."
+      }
+    },
+    {
+      "id": "saluran",
+      "title": "Aturan Saluran (Channel)",
+      "sub": "Berlaku khusus di Saluran resmi XyCloud | Official.",
+      "items": [
+        { "type": "ok", "public": "Saluran adalah kanal <b>satu arah</b>. Hanya admin yang boleh posting." },
+        { "type": "ok", "public": "Semua pengumuman resmi, harga, promo, dan info maintenance keluar dari Saluran." },
+        { "type": "ok", "public": "Info yang ga ada di Saluran atau ga dikonfirmasi admin, anggap hoax." },
+        { "type": "no", "public": "Dilarang spam reaksi atau komentar sampah di postingan Saluran." },
+        { "type": "no", "public": "Dilarang copy postingan Saluran terus diklaim jadi jasa sendiri." },
+        { "type": "no", "public": "Dilarang bikin Saluran tiruan yang ngatasnamakan XyCloud. Bakal dilaporin." },
+        { "type": "ok", "public": "Keluar dari Saluran bebas dan boleh join lagi. Kebijakan permanen hanya berlaku di GRUP." }
+      ],
+      "note": {
+        "type": "info",
+        "public": "Bedakan baik-baik: <b>Saluran</b> boleh keluar-masuk. <b>Grup</b> tidak. Jangan sampai ketuker terus nyesel."
+      }
+    },
+    {
+      "id": "privasi",
+      "title": "Privasi & Data Member",
+      "sub": "Bagian ini serius, jangan main-main.",
+      "items": [
+        { "type": "ok", "public": "Nomor member cuma dipake buat keperluan grup dan transaksi yang disepakati." },
+        { "type": "no", "public": "Dilarang nyimpen, nyebar, atau jual kontak member lain ke pihak mana pun." },
+        { "type": "no", "public": "Dilarang sebar foto, chat pribadi, atau identitas member tanpa izin." },
+        { "type": "no", "public": "Dilarang sebar data login atau akun orang lain. Itu ranah pidana, bukan bercanda." },
+        { "type": "ok", "public": "Admin <b>TIDAK PERNAH</b> minta OTP, PIN, password, atau data rekening. Kalau ada yang minta, itu penipu, langsung lapor." },
+        { "type": "ok", "public": "Bukti transaksi yang dilaporkan ke admin dipakai murni buat proses penanganan kasus." },
+        { "type": "ok", "public": "Website ini tidak memakai cookie tracking, tidak menyimpan data pribadi, dan tidak menjalankan iklan." }
+      ]
+    },
+    {
+      "id": "admin",
+      "title": "Hak & Wewenang Admin",
+      "sub": "Biar ga ada yang nanya \"emang admin siapa\".",
+      "items": [
+        { "type": "ok", "public": "Admin berhak menegur, menghapus pesan, dan mengeluarkan member kapan saja." },
+        { "type": "ok", "public": "Admin berhak menolak calon member tanpa harus kasih alasan." },
+        { "type": "ok", "public": "Admin berhak mengubah, menambah, atau menghapus aturan sewaktu-waktu." },
+        { "type": "ok", "public": "Admin berhak menutup grup sementara kalau situasi udah ga kondusif." },
+        { "type": "ok", "public": "Admin bukan customer service pribadi. Hormati waktu istirahat admin." },
+        { "type": "no", "public": "Admin ga bertanggung jawab atas transaksi yang dilakukan di luar sepengetahuan admin." }
+      ]
+    }
+  ],
+
+  "faq": [
+    {
+      "q": "Gua out ga sengaja, bisa balik ga?",
+      "a": "Bisa, TAPI cuma kalau lu lapor admin maksimal 1x24 jam dan alasannya masuk akal plus ada bukti. Lewat dari itu, kebijakan permanen jalan. Ga usah maksa, ga bakal berubah."
+    },
+    {
+      "q": "Kenapa yang udah out ga boleh masuk lagi?",
+      "a": "Karena grup ini bukan terminal, bukan tempat keluar-masuk sesuka hati. Yang suka out-in biasanya buat kabur dari sanksi, spam, atau bikin drama. Kita jaga grup tetap bersih buat yang serius."
+    },
+    {
+      "q": "Bedanya aturan Grup sama Saluran apa?",
+      "a": "Saluran itu satu arah, cuma admin yang posting, dan lu bebas keluar-masuk kapan aja. Grup itu dua arah dan kebijakan permanennya berlaku: keluar sekali, ga bisa balik."
+    },
+    {
+      "q": "Gua mau ganti nomor HP, gimana?",
+      "a": "Lapor admin DULU sebelum ganti. Nomor baru lu bakal didaftarin sebagai pengganti. Kalau lu langsung out tanpa bilang apa-apa, jangan protes pas ga bisa balik."
+    },
+    {
+      "q": "Boleh promosi jualan di grup ga?",
+      "a": "Boleh, tapi WAJIB izin admin dulu, maksimal 1 kali per hari, dan sesuai topik grup. Promosi grup lain, jasa kompetitor, judol, atau pinjol langsung kick tanpa debat."
+    },
+    {
+      "q": "Gua ketipu member, admin ganti rugi ga?",
+      "a": "Ga. Kalau transaksi lewat admin atau rekber, kita jamin sampai tuntas. Kalau lu maksa transaksi sendiri padahal aturannya udah jelas, itu risiko lu sendiri. Pelakunya tetap kita kick dan blacklist, tapi duit lu urusan lu."
+    },
+    {
+      "q": "Kenapa gua ga boleh curhat ketipu di grup?",
+      "a": "Karena ga nyelesain apa-apa, cuma bikin grup ribut dan member lain panik. Bawa bukti lengkap ke japri admin, itu cara yang bener. Teriak-teriak di grup ga bikin duit lu balik."
+    },
+    {
+      "q": "Gua ngerasa di-kick tanpa alasan, gimana?",
+      "a": "Japri admin buat klarifikasi, kita jelasin. Tapi kalau keputusannya udah final, terima dengan lapang dada. Jangan bikin drama atau grup tandingan, itu cuma nutup pintu lu selamanya."
+    },
+    {
+      "q": "Member lama boleh melanggar dikit-dikit kan?",
+      "a": "Ga. Lama di grup bukan lisensi buat seenaknya. Aturan berlaku sama buat semua orang, dari member baru sampai yang udah dari awal."
+    },
+    {
+      "q": "Boleh ga gua pakai kebijakan ini buat grup atau website gua sendiri?",
+      "a": "Boleh banget, gratis, dan open source lisensi MIT. Syaratnya cuma dua: minta izin dulu ke admin XyCloud, dan cantumkan kredit balik ke rules.xyc.my.id. Lu juga bisa langsung tarik isinya lewat API publik di /api/policy."
+    },
+    {
+      "q": "Aturan ini bisa berubah?",
+      "a": "Bisa, kapan aja, tanpa pemberitahuan panjang lebar. Perubahan diumumkan di Grup dan Saluran, dan langsung berlaku saat itu juga. Tugas lu cuma satu: ikutin."
+    }
+  ],
+
+  "footer": {
+    "public": "Masih berada di dalam grup berarti lu <b>udah baca dan setuju</b> sama seluruh aturan di atas. Ga ada alasan \"gua ga tau\" atau \"gua ga baca\".",
+    "internal": "Masih nongkrong di dalam grup berarti lu <b>udah baca dan setuju</b> sama seluruh aturan di atas. Ga ada alasan \"gua ga tau\", ga ada alasan \"gua ga baca\". Itu bukan alasan, itu kemalasan."
+  }
+}
