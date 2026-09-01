@@ -24,6 +24,16 @@ function shape(version) {
       attribution: 'Wajib cantumkan kredit ke https://rules.xyc.my.id',
       docs: `${policy.meta.url}/docs`
     },
+    tldr: policy.tldr ? {
+      title: policy.tldr.title,
+      points: policy.tldr.points,
+      closing: policy.tldr.closing
+    } : null,
+    why: policy.why ? {
+      title: policy.why.title,
+      subtitle: policy.why.sub,
+      paragraphs: policy.why.paras
+    } : null,
     alert: {
       title: policy.alert.title,
       paragraphs: policy.alert.paras.map(p => strip(pick(p, version)))
@@ -49,8 +59,17 @@ function toMarkdown(d) {
   L.push(`# ${d.meta.title} — ${d.meta.name}`, '');
   L.push(`> ${d.meta.tagline}`, '');
   L.push(`**Versi ${d.meta.version} · Update ${d.meta.updated}**`, '');
+  if (d.tldr) {
+    L.push(`## ${d.tldr.title}`, '');
+    d.tldr.points.forEach((p, i) => L.push(`${i + 1}. ${p}`));
+    L.push('', `_${d.tldr.closing}_`, '');
+  }
   L.push(`## ⚠ ${d.alert.title}`, '');
   d.alert.paragraphs.forEach(p => L.push(p, ''));
+  if (d.why) {
+    L.push(`## ${d.why.title}`, '', `_${d.why.subtitle}_`, '');
+    d.why.paragraphs.forEach(p => L.push(p, ''));
+  }
   d.sections.forEach(s => {
     L.push(`## ${s.number}. ${s.title}`, '', `_${s.subtitle}_`, '');
     s.items.forEach(it => L.push(`- ${it.type === 'prohibited' ? '❌' : '✅'} ${it.text}`));
@@ -78,6 +97,7 @@ ${s.note ? `<div class="xyc-note xyc-${s.note.level}">${esc(s.note.text)}</div>`
   const faq = d.faq.map(f => `<details class="xyc-faq"><summary>${esc(f.q)}</summary><p>${esc(f.a)}</p></details>`).join('\n');
   return `<div class="xyc-policy" data-version="${d.meta.version}">
 <header class="xyc-head"><h1>${esc(d.meta.title)}</h1><p class="xyc-grup">${d.meta.nameStyled}</p><p class="xyc-meta">Versi ${d.meta.version} · Update ${d.meta.updated}</p></header>
+${d.tldr ? `<div class="xyc-tldr"><h2>${esc(d.tldr.title)}</h2><ol>${d.tldr.points.map(p => `<li>${esc(p)}</li>`).join('')}</ol><p class="xyc-tldr-cl">${esc(d.tldr.closing)}</p></div>` : ''}
 <div class="xyc-alert"><h2>${esc(d.alert.title)}</h2>${d.alert.paragraphs.map(p => `<p>${esc(p)}</p>`).join('')}</div>
 ${sec}
 <h2 class="xyc-faq-title">FAQ</h2>

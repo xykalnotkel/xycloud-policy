@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Demo Gate Popup — Kebijakan Grup XyCloud</title>
+<meta name="description" content="Demo popup persetujuan kebijakan grup XyCloud. Pasang di link bio, orang harus baca dan pencet setuju dulu sebelum link WhatsApp kebuka.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://rules.xyc.my.id/demo">
+<meta name="theme-color" content="#075e54">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="XyCloud | Official">
+<meta property="og:locale" content="id_ID">
+<meta property="og:url" content="https://rules.xyc.my.id/demo">
+<meta property="og:title" content="Demo Gate Popup — Kebijakan Grup XyCloud">
+<meta property="og:description" content="Pasang di link bio: orang harus baca kebijakan dan pencet setuju dulu sebelum link WhatsApp kebuka.">
+<meta property="og:image" content="https://rules.xyc.my.id/og-docs.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Demo Gate Popup — Kebijakan Grup XyCloud">
+<meta name="twitter:description" content="Orang harus baca kebijakan dan pencet setuju dulu sebelum link WhatsApp kebuka.">
+<meta name="twitter:image" content="https://rules.xyc.my.id/og-docs.png">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:#0d1418;color:#e9edef;line-height:1.7;min-height:100vh}
+.top{background:#111b21;border-bottom:1px solid #2a3942;padding:20px;text-align:center}
+.top h1{font-size:17px;color:#25d366;margin-bottom:5px}
+.top p{font-size:13px;color:#8696a0}
+.top a{color:#25d366}
+.wrap{max-width:420px;margin:0 auto;padding:34px 18px 60px}
+
+.bio{background:#111b21;border:1px solid #2a3942;border-radius:20px;padding:30px 24px;text-align:center}
+.av{width:82px;height:82px;border-radius:50%;margin:0 auto 14px;background:linear-gradient(160deg,#075e54,#25d366);display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:800;color:#fff;letter-spacing:-1px}
+.bio h2{font-size:19px;margin-bottom:4px}
+.bio .h{font-size:13.5px;color:#8696a0;margin-bottom:4px}
+.bio .d{font-size:13px;color:#667781;margin-bottom:22px}
+.lnk{display:block;background:#1f2c33;border:1px solid #2a3942;border-radius:13px;padding:15px 18px;margin-bottom:11px;color:#e9edef;text-decoration:none;font-size:14.5px;font-weight:600;text-align:left;transition:.15s;position:relative}
+.lnk:hover{background:#2a3942;border-color:#25d366;transform:translateY(-2px)}
+.lnk small{display:block;font-weight:400;font-size:12px;color:#8696a0;margin-top:2px}
+.lnk .tag{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:#25d366;color:#053b34;font-size:9.5px;font-weight:800;padding:3px 8px;border-radius:999px;letter-spacing:.4px}
+.lnk.plain .tag{background:#2a3942;color:#8696a0}
+
+.info{background:#111b21;border:1px solid #2a3942;border-radius:14px;padding:20px;margin-top:24px}
+.info h3{font-size:14px;color:#25d366;margin-bottom:10px}
+.info ol{list-style:none;counter-reset:n}
+.info li{counter-increment:n;position:relative;padding-left:28px;margin-bottom:9px;font-size:13.5px;color:#c8d2d7}
+.info li:before{content:counter(n);position:absolute;left:0;top:1px;width:19px;height:19px;border-radius:50%;background:#25d366;color:#053b34;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center}
+pre{background:#0a1114;border:1px solid #2a3942;color:#c8f5d8;padding:14px;border-radius:10px;overflow-x:auto;font-size:11.8px;line-height:1.65;margin-top:14px;font-family:ui-monospace,Menlo,monospace}
+.reset{display:block;width:100%;margin-top:14px;background:transparent;border:1.5px dashed #2a3942;color:#8696a0;border-radius:10px;padding:11px;font-size:13px;cursor:pointer;font-family:inherit;transition:.15s}
+.reset:hover{border-color:#25d366;color:#25d366}
+.foot{text-align:center;font-size:12px;color:#667781;margin-top:26px}
+.foot a{color:#8696a0}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <h1>Demo: link bio pakai Gate Popup</h1>
+  <p>Pencet link WhatsApp di bawah — kebijakan bakal muncul dulu. <a href="/">Balik ke kebijakan</a></p>
+</div>
+
+<div class="wrap">
+
+  <div class="bio">
+    <div class="av">XY</div>
+    <h2>XyCloud | Official</h2>
+    <div class="h">Cloud Game · Sewa PC · Jual Beli Akun</div>
+    <div class="d">Pilih mau ke mana</div>
+
+    <a class="lnk" href="https://whatsapp.com/channel/0029VbB7nwuJZg3ym6UQ4Z1L" target="_blank" rel="noopener" data-xyc-gate>
+      Saluran Resmi
+      <small>Info harga, promo, dan pengumuman</small>
+      <span class="tag">GATE</span>
+    </a>
+
+    <a class="lnk" href="https://wa.me/6283116632566" target="_blank" rel="noopener" data-xyc-gate>
+      Japri Admin
+      <small>Order, rekber, atau lapor masalah</small>
+      <span class="tag">GATE</span>
+    </a>
+
+    <a class="lnk plain" href="/" data-xyc-gate-skip>
+      Baca Kebijakan Lengkap
+      <small>Versi web, bisa dibaca santai</small>
+      <span class="tag">BEBAS</span>
+    </a>
+  </div>
+
+  <div class="info">
+    <h3>Cara kerjanya</h3>
+    <ol>
+      <li>Orang pencet link WhatsApp di link bio lu.</li>
+      <li>Popup kebijakan muncul, isinya ditarik live dari API.</li>
+      <li>Tombol Setuju baru nyala setelah discroll sampai bawah.</li>
+      <li>Pencet setuju, baru link WhatsApp-nya kebuka.</li>
+      <li>Persetujuannya diinget 30 hari, jadi ga nanya terus.</li>
+    </ol>
+    <pre>&lt;script src="https://rules.xyc.my.id/gate.js" defer&gt;&lt;/script&gt;
+
+&lt;a href="https://wa.me/6283116632566" data-xyc-gate&gt;
+  Japri Admin
+&lt;/a&gt;</pre>
+    <button class="reset" onclick="XycGate.reset();this.textContent='Udah direset, coba pencet link lagi'">Reset persetujuan (buat nyoba ulang)</button>
+  </div>
+
+  <p class="foot">
+    <a href="/docs">Dokumentasi lengkap</a> ·
+    <a href="https://github.com/xykalnotkel/xycloud-policy" target="_blank" rel="noopener">Source code</a>
+  </p>
+
+</div>
+
+<script src="/gate.js" data-remember="30" data-require="scroll" defer></script>
+</body>
+</html>

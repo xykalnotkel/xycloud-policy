@@ -19,6 +19,8 @@ export default function handler(req, res) {
       html: '/api/policy?format=html',
       text: '/api/policy?format=text',
       embed: '/embed.js',
+      gate: '/gate.js',
+      feedback: 'POST /api/feedback',
       docs: '/docs'
     },
     license: 'MIT',

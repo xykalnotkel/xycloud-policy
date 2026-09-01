@@ -17,16 +17,16 @@
 <meta property="og:url" content="https://rules.xyc.my.id/docs">
 <meta property="og:title" content="Dokumentasi API Kebijakan Grup - XyCloud | Official">
 <meta property="og:description" content="API publik gratis tanpa key. Tarik tata tertib grup dalam JSON, HTML, Markdown, atau teks, atau tempel widget satu baris di website mana pun.">
-<meta property="og:image" content="https://rules.xyc.my.id/og.png">
+<meta property="og:image" content="https://rules.xyc.my.id/og-docs.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Banner API Kebijakan Grup XyCloud">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Dokumentasi API Kebijakan Grup - XyCloud | Official">
 <meta name="twitter:description" content="API publik gratis tanpa key. JSON, HTML, Markdown, teks, plus widget embed satu baris.">
-<meta name="twitter:image" content="https://rules.xyc.my.id/og.png">
+<meta name="twitter:image" content="https://rules.xyc.my.id/og-docs.png">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Dokumentasi API Kebijakan Grup XyCloud","description":"API publik gratis untuk mengambil tata tertib grup XyCloud dalam berbagai format.","inLanguage":"id-ID","datePublished":"2026-09-01","dateModified":"2026-09-01","author":{"@type":"Organization","name":"XyCloud | Official","url":"https://rules.xyc.my.id"},"image":"https://rules.xyc.my.id/og.png","license":"https://opensource.org/licenses/MIT"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Dokumentasi API Kebijakan Grup XyCloud","description":"API publik gratis untuk mengambil tata tertib grup XyCloud dalam berbagai format.","inLanguage":"id-ID","datePublished":"2026-09-01","dateModified":"2026-09-01","author":{"@type":"Organization","name":"XyCloud | Official","url":"https://rules.xyc.my.id"},"image":"https://rules.xyc.my.id/og-docs.png","license":"https://opensource.org/licenses/MIT"}</script>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -95,7 +95,9 @@ footer a{color:#075e54}
       <tr><td><span class="m">GET</span></td><td><code>/api/policy?format=index</code></td><td>Daftar section saja (ringan)</td></tr>
       <tr><td><span class="m">GET</span></td><td><code>/api/policy?section=promosi</code></td><td>Satu section spesifik</td></tr>
       <tr><td><span class="m">GET</span></td><td><code>/api/health</code></td><td>Status service &amp; daftar endpoint</td></tr>
-      <tr><td><span class="m">GET</span></td><td><code>/embed.js</code></td><td>Widget siap tempel</td></tr>
+      <tr><td><span class="m">GET</span></td><td><code>/embed.js</code></td><td>Widget kebijakan siap tempel</td></tr>
+      <tr><td><span class="m">GET</span></td><td><code>/gate.js</code></td><td>Popup persetujuan buat link bio</td></tr>
+      <tr><td><span class="m">POST</span></td><td><code>/api/feedback</code></td><td>Kirim masukan ke email admin</td></tr>
     </table>
 
     <h3>Query Parameter</h3>
@@ -108,7 +110,7 @@ footer a{color:#075e54}
     </table>
 
     <h3>ID Section</h3>
-    <p><code>keluar-masuk</code> &middot; <code>aturan-harian</code> &middot; <code>promosi</code> &middot; <code>transaksi</code> &middot; <code>ketipu</code> &middot; <code>member-batu</code> &middot; <code>larangan</code> &middot; <code>sanksi</code> &middot; <code>saluran</code> &middot; <code>privasi</code> &middot; <code>admin</code></p>
+    <p><code>keluar-masuk</code> &middot; <code>kelakuan</code> &middot; <code>promosi</code> &middot; <code>transaksi</code> &middot; <code>ketipu</code> &middot; <code>ngeyel</code> &middot; <code>larangan</code> &middot; <code>sanksi</code> &middot; <code>saluran</code> &middot; <code>privasi</code> &middot; <code>admin</code></p>
   </div>
 
   <div class="card">
@@ -214,6 +216,72 @@ curl -s "https://rules.xyc.my.id/api/policy?format=markdown"</code></pre>
     <div class="note">Output <code>format=html</code> memakai class ber-prefix <code>xyc-</code> tanpa CSS bawaan, jadi lu bebas styling sendiri biar nyatu sama tema web lu.</div>
   </div>
 
+
+  <div class="card" id="gate">
+    <h2>Gate Popup — Wajib Baca Sebelum Lanjut</h2>
+    <p>Fitur andalan. Pasang di link bio atau website lu: begitu orang pencet link WhatsApp, kebijakan muncul dulu sebagai popup. Tombol <b>Setuju</b> baru nyala setelah discroll sampai bawah, dan link-nya baru kebuka setelah dipencet.</p>
+    <p><a class="btn" href="/demo">Coba Demo Langsung</a></p>
+
+    <h3>Pemakaian dasar</h3>
+    <pre><code>&lt;script src="https://rules.xyc.my.id/gate.js" defer&gt;&lt;/script&gt;
+
+&lt;a href="https://wa.me/6283116632566" data-xyc-gate&gt;Japri Admin&lt;/a&gt;
+&lt;a href="https://chat.whatsapp.com/xxxx" data-xyc-gate&gt;Join Grup&lt;/a&gt;</code></pre>
+
+    <h3>Mode otomatis</h3>
+    <p>Semua link WhatsApp di halaman ikut ke-gate tanpa perlu ditandai satu-satu:</p>
+    <pre><code>&lt;script src="https://rules.xyc.my.id/gate.js" data-auto="wa" defer&gt;&lt;/script&gt;</code></pre>
+    <p>Mau ada link yang dikecualikan? Kasih <code>data-xyc-gate-skip</code> di link itu.</p>
+
+    <h3>Opsi</h3>
+    <table>
+      <tr><th>Atribut</th><th>Nilai</th><th>Default</th><th>Fungsi</th></tr>
+      <tr><td><code>data-auto</code></td><td>off, wa, all</td><td>off</td><td>Intercept otomatis</td></tr>
+      <tr><td><code>data-theme</code></td><td>light, dark</td><td>light</td><td>Tema popup</td></tr>
+      <tr><td><code>data-remember</code></td><td>angka hari</td><td>30</td><td>Lama ingat persetujuan. <code>0</code> = tanya terus</td></tr>
+      <tr><td><code>data-require</code></td><td>scroll, check, both, none</td><td>scroll</td><td>Syarat tombol Setuju aktif</td></tr>
+      <tr><td><code>data-accent</code></td><td>warna CSS</td><td>#25d366</td></tr>
+    </table>
+    <div class="note">Mode <code>both</code> paling ketat: orang harus scroll sampai bawah <b>dan</b> centang kotak pernyataan. Cocok kalau lu mau bukti kuat kalau member emang udah baca.</div>
+
+    <h3>Panggil dari kode</h3>
+    <pre><code>// Buka popup manual, dapat hasilnya sebagai Promise
+XycGate.open('https://wa.me/6283116632566')
+  .then(setuju =&gt; {
+    if (setuju) console.log('dia setuju, link kebuka');
+    else        console.log('dia batal');
+  });
+
+XycGate.agreed();   // true kalau udah pernah setuju & belum expired
+XycGate.reset();    // hapus persetujuan tersimpan</code></pre>
+    <div class="note">Popup dirender di dalam <b>Shadow DOM</b>, jadi CSS website lu ga bakal bentrok sama tampilan popup, dan sebaliknya.</div>
+  </div>
+
+  <div class="card" id="feedback">
+    <h2>Endpoint Feedback</h2>
+    <p>Halaman kebijakan punya tombol suka/kurang. Kalau dipencet, muncul popup pilihan alasan plus kolom pesan, dan hasilnya langsung dikirim ke email admin.</p>
+    <pre><code>POST /api/feedback
+Content-Type: application/json
+
+{
+  "vote": "dislike",              // "like" atau "dislike" (wajib)
+  "reasons": ["Kepanjangan"],     // array, opsional
+  "message": "Bagian promosi ga jelas",
+  "contact": "6283116632566",     // opsional, buat dibales
+  "page": "/",
+  "version": "3.0.0"
+}</code></pre>
+    <p>Balasan sukses:</p>
+    <pre><code>{ "ok": true, "id": "49c70341-...", "message": "Makasih, masukannya udah masuk ke admin." }</code></pre>
+    <table>
+      <tr><th>Kode</th><th>Arti</th></tr>
+      <tr><td><code>400</code></td><td><code>vote_wajib</code> atau <code>alasan_atau_pesan_wajib</code></td></tr>
+      <tr><td><code>429</code></td><td><code>kebanyakan_kirim</code> — maksimal 5 kiriman per 10 menit per IP</td></tr>
+      <tr><td><code>502</code></td><td>Layanan email lagi bermasalah</td></tr>
+    </table>
+    <div class="note">Kalau lu self host, set env <code>RESEND_API_KEY</code>, <code>FEEDBACK_TO</code>, dan <code>FEEDBACK_FROM</code>. Tanpa itu endpointnya balikin <code>email_belum_dikonfigurasi</code>.</div>
+  </div>
+
   <div class="card">
     <h2>Error &amp; Caching</h2>
     <table>
@@ -239,7 +307,7 @@ npm run build      # regenerate index.html + internal.html + sitemap</code></pre
   </div>
 
   <footer>
-    <p><a href="/">&larr; Balik ke halaman kebijakan</a></p>
+    <p><a href="/">&larr; Balik ke kebijakan</a> &middot; <a href="/demo">Demo gate popup</a></p>
     <p style="margin-top:8px">&copy; 2026 <b>XyCloud | Official</b> &middot; MIT License &middot; <a href="https://github.com/xykalnotkel/xycloud-policy" target="_blank" rel="noopener">GitHub</a></p>
   </footer>
 

@@ -17,6 +17,9 @@ http.createServer(async (req, res) => {
     const name = u.pathname.replace('/api/', '').replace(/\/$/, '') || 'health';
     const file = path.join(root, 'api', name + '.js');
     if (!fs.existsSync(file)) { res.writeHead(404).end('no api'); return; }
+    if (req.method === 'POST') {
+      req.body = await new Promise(r => { let b=''; req.on('data',c=>b+=c); req.on('end',()=>{ try{r(JSON.parse(b||'{}'))}catch{r({})} }); });
+    }
     const mod = await import(pathToFileURL(file).href + '?t=' + Date.now());
     res.setHeader = res.setHeader.bind(res);
     res.status = (c) => { res.statusCode = c; return res; };

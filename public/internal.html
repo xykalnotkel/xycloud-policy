@@ -3,41 +3,65 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>[INTERNAL] Tata Tertib Grup - XyCloud | Official</title>
+  <title>[INTERNAL] Kebijakan Grup - XyCloud | Official</title>
   <meta name="theme-color" content="#075e54">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="/og.png">
+  <link rel="apple-touch-icon" href="https://rules.xyc.my.id/og-internal.png">
   <link rel="manifest" href="/site.webmanifest">
   <meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
   <meta name="googlebot" content="noindex,nofollow">
+  <meta property="og:title" content="[INTERNAL] Kebijakan Grup - XyCloud | Official">
+  <meta property="og:description" content="Versi internal tanpa sensor. Khusus member grup XyCloud | Official.">
+  <meta property="og:image" content="https://rules.xyc.my.id/og-internal.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <style>*{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:#ece5dd;color:#111b21;line-height:1.7;-webkit-font-smoothing:antialiased}
 .wrap{max-width:780px;margin:0 auto;padding:0 18px 60px}
+
+#bar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#25d366,#128c7e);z-index:60;transition:width .1s linear}
+
 header{background:linear-gradient(160deg,#075e54 0%,#128c7e 100%);color:#fff;padding:46px 18px 40px;text-align:center}
 .badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);padding:5px 14px;border-radius:999px;font-size:12px;letter-spacing:.5px;text-transform:uppercase;margin-bottom:14px}
 .badge.warn{background:#d92d20;border-color:#f97066}
-header h1{font-size:27px;line-height:1.3;font-weight:700;max-width:620px;margin:0 auto}
-header .grup{font-size:19px;font-weight:700;margin-top:12px;letter-spacing:.5px}
-header p.meta{margin-top:14px;opacity:.85;font-size:13.5px}
+header h1{font-size:30px;line-height:1.25;font-weight:800;letter-spacing:-.5px}
+header .grup{font-size:18px;font-weight:700;margin-top:10px}
+header p.meta{margin-top:14px;opacity:.85;font-size:13px}
 .tags{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
 .tag{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);padding:4px 12px;border-radius:999px;font-size:12.5px}
-.alert{background:#fff;border-left:6px solid #d92d20;border-radius:12px;padding:22px 24px;margin:-24px 0 26px;box-shadow:0 6px 22px rgba(0,0,0,.10)}
+
+.tldr{background:#075e54;color:#fff;border-radius:14px;padding:24px;margin:-24px 0 18px;box-shadow:0 8px 26px rgba(7,94,84,.28)}
+.tldr h2{font-size:18px;margin-bottom:14px}
+.tldr ol{list-style:none;counter-reset:z}
+.tldr li{counter-increment:z;position:relative;padding-left:38px;margin-bottom:11px;font-size:15.5px}
+.tldr li::before{content:counter(z);position:absolute;left:0;top:2px;width:24px;height:24px;border-radius:50%;background:#25d366;color:#053b34;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+.tldr .cl{margin-top:14px;padding-top:13px;border-top:1px solid rgba(255,255,255,.2);font-size:13.5px;opacity:.88}
+
+.alert{background:#fff;border-left:6px solid #d92d20;border-radius:12px;padding:22px 24px;margin-bottom:18px;box-shadow:0 2px 10px rgba(0,0,0,.06)}
 .alert h2{font-size:17px;color:#d92d20;margin-bottom:8px}
 .alert p{font-size:15px}
 .alert p+p{margin-top:8px}
 .alert b{background:#fee4e2;padding:1px 5px;border-radius:4px}
+
+.why{background:#fff;border-radius:12px;padding:24px;margin-bottom:18px;box-shadow:0 2px 10px rgba(0,0,0,.06);border-top:4px solid #25d366}
+.why h2{font-size:17px;color:#075e54;margin-bottom:3px}
+.why .sub{font-size:13.5px;color:#54656f;margin-bottom:14px}
+.why p{font-size:15px;margin-bottom:12px}
+.why p:last-child{margin-bottom:0}
+
 nav.toc{background:#fff;border-radius:12px;padding:20px 24px;margin-bottom:18px;box-shadow:0 2px 10px rgba(0,0,0,.06)}
 nav.toc h2{font-size:13px;text-transform:uppercase;letter-spacing:1px;color:#54656f;margin-bottom:12px}
-nav.toc ol{list-style:none;counter-reset:t;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:6px}
+nav.toc ol{list-style:none;counter-reset:t;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:4px}
 nav.toc li{counter-increment:t;padding-left:0;margin:0}
 nav.toc li::before{display:none}
 nav.toc a{color:#075e54;text-decoration:none;font-size:14.5px;display:block;padding:5px 0}
 nav.toc a::before{content:counter(t) ". ";color:#25d366;font-weight:700}
 nav.toc a:hover{text-decoration:underline}
+
 .card{background:#fff;border-radius:12px;padding:24px;margin-bottom:18px;box-shadow:0 2px 10px rgba(0,0,0,.06);scroll-margin-top:16px}
 .card h2{font-size:17px;color:#075e54;margin-bottom:14px;display:flex;align-items:center;gap:10px}
-.num{background:#25d366;color:#fff;min-width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0}
+.num{background:#25d366;color:#fff;min-width:26px;height:26px;padding:0 7px;border-radius:13px;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0}
 .sub{font-size:13.5px;color:#54656f;margin:-6px 0 14px;padding-left:36px}
 ul{list-style:none}
 li{position:relative;padding-left:26px;margin-bottom:10px;font-size:15px}
@@ -45,308 +69,475 @@ li::before{content:"";position:absolute;left:8px;top:11px;width:7px;height:7px;b
 li.no::before{background:#d92d20}
 .note{font-size:13.5px;color:#54656f;background:#f0f2f5;border-radius:8px;padding:12px 14px;margin-top:14px}
 .note.keras{background:#fef3f2;color:#912018;border:1px solid #fecdca}
+
 details{background:#fff;border-radius:10px;margin-bottom:10px;box-shadow:0 2px 8px rgba(0,0,0,.05);overflow:hidden}
 summary{cursor:pointer;padding:15px 18px;font-weight:600;font-size:15px;color:#075e54;list-style:none;display:flex;justify-content:space-between;gap:12px}
 summary::-webkit-details-marker{display:none}
 summary::after{content:"+";font-size:20px;color:#25d366;line-height:1}
 details[open] summary::after{content:"-"}
 details p{padding:0 18px 16px;font-size:14.5px;color:#3b4a54}
+
 .section-title{font-size:13px;text-transform:uppercase;letter-spacing:1px;color:#54656f;margin:30px 0 12px;font-weight:700}
 .cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
-.btn{display:inline-block;background:#25d366;color:#fff;text-decoration:none;padding:11px 20px;border-radius:8px;font-size:14.5px;font-weight:600;transition:.15s}
+.btn{display:inline-block;background:#25d366;color:#fff;text-decoration:none;padding:11px 20px;border-radius:8px;font-size:14.5px;font-weight:600;border:none;cursor:pointer;font-family:inherit;transition:.15s}
 .btn:hover{background:#1eb85a}
-.btn.alt{background:#075e54}
-.btn.alt:hover{background:#0a7168}
+.btn.alt{background:#075e54}.btn.alt:hover{background:#0a7168}
 .btn.ghost{background:transparent;color:#075e54;border:1.5px solid #075e54}
 .btn.ghost:hover{background:#075e54;color:#fff}
 code{background:#f0f2f5;padding:2px 6px;border-radius:4px;font-size:13.5px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
-pre{background:#0f1b17;color:#c8f5d8;padding:16px;border-radius:10px;overflow-x:auto;font-size:13px;line-height:1.6;margin:12px 0}
+pre{background:#0f1b17;color:#c8f5d8;padding:16px;border-radius:10px;overflow-x:auto;font-size:12.8px;line-height:1.6;margin:12px 0}
 pre code{background:none;padding:0;color:inherit}
+
+/* feedback */
+.fb{background:#fff;border-radius:12px;padding:26px 24px;margin:22px 0 18px;box-shadow:0 2px 10px rgba(0,0,0,.06);text-align:center}
+.fb h2{font-size:17px;color:#075e54;margin-bottom:5px}
+.fb p.q{font-size:14px;color:#54656f;margin-bottom:16px}
+.fb .vote{display:flex;gap:12px;justify-content:center}
+.vb{width:120px;padding:14px 10px;border-radius:12px;border:2px solid #d1d7db;background:#fff;cursor:pointer;font-family:inherit;font-size:14.5px;font-weight:600;color:#54656f;transition:.15s;display:flex;flex-direction:column;align-items:center;gap:6px}
+.vb:hover{border-color:#25d366;color:#075e54;transform:translateY(-2px)}
+.vb svg{width:26px;height:26px;fill:currentColor}
+.vb.up:hover{border-color:#25d366;color:#25d366}
+.vb.down:hover{border-color:#d92d20;color:#d92d20}
+.fb .done{display:none;font-size:15px;color:#075e54;font-weight:600;padding:12px}
+
+/* modal */
+.mask{position:fixed;inset:0;background:rgba(6,20,17,.72);backdrop-filter:blur(3px);z-index:70;display:none;align-items:center;justify-content:center;padding:18px}
+.mask.on{display:flex}
+.modal{background:#fff;border-radius:16px;width:100%;max-width:460px;max-height:88vh;overflow-y:auto;padding:26px;box-shadow:0 24px 60px rgba(0,0,0,.4);animation:pop .22s ease}
+@keyframes pop{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
+.modal h3{font-size:18px;color:#075e54;margin-bottom:4px}
+.modal .mp{font-size:13.5px;color:#54656f;margin-bottom:16px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.chip{padding:8px 14px;border-radius:999px;border:1.5px solid #d1d7db;background:#fff;cursor:pointer;font-family:inherit;font-size:13.5px;color:#3b4a54;transition:.13s}
+.chip:hover{border-color:#075e54}
+.chip.sel{background:#075e54;border-color:#075e54;color:#fff}
+.modal label{display:block;font-size:13px;font-weight:600;color:#54656f;margin-bottom:6px}
+.modal textarea,.modal input{width:100%;border:1.5px solid #d1d7db;border-radius:9px;padding:11px 13px;font-family:inherit;font-size:14.5px;color:#111b21;margin-bottom:14px;resize:vertical}
+.modal textarea{min-height:96px}
+.modal textarea:focus,.modal input:focus{outline:none;border-color:#25d366}
+.mact{display:flex;gap:10px;margin-top:4px}
+.mact .btn{flex:1;text-align:center}
+.msg{font-size:13.5px;padding:11px 13px;border-radius:8px;margin-bottom:12px;display:none}
+.msg.ok{display:block;background:#ecfdf3;color:#027a48;border:1px solid #a6f4c5}
+.msg.err{display:block;background:#fef3f2;color:#912018;border:1px solid #fecdca}
+.close{position:absolute}
+
 footer{text-align:center;font-size:13px;color:#54656f;padding-top:26px;border-top:1px solid #d1d7db;margin-top:30px}
 footer b{color:#075e54}
 footer a{color:#075e54}
 .switch{text-align:center;margin:22px 0 4px}
 .switch a{font-size:13px;color:#54656f}
-@media(max-width:520px){header h1{font-size:22px}.card{padding:20px 18px}}</style>
+@media(max-width:520px){header h1{font-size:24px}.card,.why,.tldr{padding:20px 18px}.vb{width:auto;flex:1}}</style>
 </head>
 <body>
 
+<div id="bar"></div>
+
 <header>
   <div class="badge warn">Versi Internal - Tanpa Sensor</div>
-  <h1>Tata Tertib &amp; Kebijakan Grup</h1>
+  <h1>Kebijakan Grup</h1>
   <div class="grup">𝙓𝙮𝘾𝙡𝙤𝙪𝙙 𝙡 𝙊𝙛𝙛𝙞𝙘𝙞𝙖𝙡</div>
   <div class="tags">
     <span class="tag">Cloud Game</span>
     <span class="tag">Sewa PC</span>
     <span class="tag">Jual Akun Rockstar</span>
     <span class="tag">Jual Beli Akun Game</span>
-    <span class="tag">Diskusi &amp; Candaan</span>
+    <span class="tag">Nongkrong &amp; Candaan</span>
   </div>
-  <p class="meta">Versi 2.0.0 &middot; Berlaku untuk SEMUA member tanpa kecuali &middot; Update: 2026-09-01</p>
+  <p class="meta">Versi 3.0.0 &middot; Update 2026-09-01 &middot; Baca santai 4 menit</p>
 </header>
 
 <div class="wrap">
 
-    <div class="alert">
-      <h2>BACA DULU SAMPAI HABIS, JANGAN SOK JAGO</h2>
-      <p>Yang udah <b>OUT sendiri</b> atau <b>di-KICK admin</b>, <b>GA BAKAL BISA MASUK LAGI</b>. Titik. Ga ada nego, ga ada drama, ga ada "bang maaf bang khilaf" sambil ngirim stiker nangis.</p>
-      <p>Mau balik pake nomor kedua? Kedetect, tendang lagi. Jadi mikir dulu sebelum pencet tombol Keluar dari Grup. Jari lu sendiri yang mencet, jangan nyalahin orang lain.</p>
-      <p>Aturan ini bukan pajangan doang. Yang males baca terus melanggar, terus nangis pas namanya ilang dari daftar member, itu goblok namanya. Bukan salah admin.</p>
+    <div class="tldr">
+      <h2>Males baca panjang? Nih intinya</h2>
+      <ol>
+        <li>Keluar dari grup = selesai. Ga bisa balik. Mau pake nomor baru pun percuma.</li>
+        <li>Transaksi wajib lewat admin atau rekber. Nekat sendiri terus ketipu, itu urusan lu.</li>
+        <li>Promosi harus izin dulu. Nyelonong jualan langsung tendang.</li>
+      </ol>
+      <div class="cl">Udah, tiga itu doang yang paling sering bikin orang kena tendang. Sisanya di bawah, empat menit kelar.</div>
     </div>
 
+    <div class="alert">
+      <h2>Satu hal yang paling penting</h2>
+      <p>Kalau lu <b>keluar sendiri</b> atau <b>ditendang admin</b>, ya udah, <b>selesai</b>. Ga bisa balik. Ga ada nego, ga ada "bang maaf bang khilaf" sambil ngirim stiker nangis, ga ada acara nyuruh temen jadi juru bicara.</p>
+      <p>Nyoba masuk pake nomor kedua juga percuma, ketauan kok, dan malah bikin lu keliatan makin desperate. Mikir dulu sebelum pencet tombol keluar. Jari lu sendiri yang mencet, jangan nyalahin sinyal.</p>
+      <p>Kedengeran kejam? Emang. Tapi baca dulu alasannya di bawah sebelum lu ngegas. Kalau udah baca dan masih ga terima, ya udah, pintu keluar ga dikunci.</p>
+    </div>
+
+    <section class="why" id="kenapa">
+      <h2>Kenapa Aturan Ini Ada</h2>
+      <div class="sub">Bukan buat sok galak. Ada sebabnya.</div>
+      <p>Jujur aja, grup ini dibikin santai. Awalnya ga ada aturan sama sekali. Terus mulai ada pola yang aneh: orang join, diem lima menit, terus keluar gitu aja. Besoknya join lagi. Keluar lagi. Ga ngomong apa-apa, ga ada masalah apa-apa, cuma keluar-masuk kayak lagi nyoba fitting baju.</p>
+      <p>Kelihatannya sepele. Tapi kalau sehari ada sepuluh orang begitu, chat grup penuh sama notifikasi &quot;si anu keluar&quot;, &quot;si anu masuk&quot;, dan member yang beneran serius jadi ilfeel duluan. Belum lagi yang keluar-masuk itu sering banget ternyata cuma mau ngintip kontak, nyolong list member buat dispam, atau kabur setelah bikin masalah terus balik lagi pura-pura orang baru.</p>
+      <p>Jadi ya udah, dibikin tegas sekalian: sekali keluar, selesai. Bukan karena kita benci sama lu, tapi karena capek ngurusin pintu yang dibuka-tutup terus. Grup ini isinya orang yang emang mau di sini, bukan orang yang lagi iseng.</p>
+      <p>Sisanya di halaman ini cuma turunan dari satu prinsip itu. Pikir dulu sebelum masuk, dan pikir seribu kali sebelum keluar.</p>
+    </section>
+
     <nav class="toc" aria-label="Daftar isi">
-      <h2>Daftar Isi</h2>
+      <h2>Loncat ke bagian</h2>
       <ol>
-        <li><a href="#keluar-masuk">Kebijakan Out &amp; Masuk Grup</a></li>
-        <li><a href="#aturan-harian">Aturan Main Harian</a></li>
-        <li><a href="#promosi">Aturan Promosi</a></li>
-        <li><a href="#transaksi">Aturan Jual Beli, Sewa &amp; Transaksi</a></li>
-        <li><a href="#ketipu">Buat Yang Ketipu Tapi Ngeluh di Grup</a></li>
-        <li><a href="#member-batu">Buat Member Batu &amp; Keras Kepala</a></li>
-        <li><a href="#larangan">Larangan Keras</a></li>
-        <li><a href="#sanksi">Sanksi &amp; Penegakan</a></li>
-        <li><a href="#saluran">Aturan Saluran (Channel)</a></li>
-        <li><a href="#privasi">Privasi &amp; Data Member</a></li>
-        <li><a href="#admin">Hak &amp; Wewenang Admin</a></li>
+        <li><a href="#keluar-masuk">Keluar Masuk Grup</a></li>
+        <li><a href="#kelakuan">Kelakuan di Grup</a></li>
+        <li><a href="#promosi">Promosi &amp; Jualan</a></li>
+        <li><a href="#transaksi">Transaksi, Sewa &amp; Jual Beli</a></li>
+        <li><a href="#ketipu">Kalau Lu Ketipu</a></li>
+        <li><a href="#ngeyel">Buat Yang Susah Dibilangin</a></li>
+        <li><a href="#larangan">Yang Langsung Ditendang</a></li>
+        <li><a href="#sanksi">Konsekuensinya Apa</a></li>
+        <li><a href="#saluran">Aturan Saluran</a></li>
+        <li><a href="#privasi">Privasi &amp; Data</a></li>
+        <li><a href="#admin">Soal Admin</a></li>
       </ol>
     </nav>
 
     <section class="card" id="keluar-masuk">
-      <h2><span class="num">1</span> Kebijakan Out &amp; Masuk Grup</h2>
-      <div class="sub">Aturan paling utama. Ga ada tawar-menawar di sini.</div>
+      <h2><span class="num">1</span> Keluar Masuk Grup</h2>
+      <div class="sub">Bagian yang paling sering bikin orang kaget. Baca pelan-pelan.</div>
       <ul>
-        <li class="no">Out sendiri sama dengan resign permanen. Selesai. Ga usah balik lagi.</li>
-        <li class="no">Kena kick karena melanggar sama dengan masuk blacklist selamanya.</li>
-        <li class="no">Request join lagi otomatis ditolak. Mau lewat link, mau lewat orang dalam, sama aja.</li>
-        <li class="no">Nyoba masuk pake nomor kedua atau akun cadangan? Ketauan langsung tendang tanpa ngomong.</li>
-        <li class="no">Nitip temen buat bujuk admin cuma bikin lu makin dikunci. Buang-buang waktu, dan bikin temen lu ikut keliatan bego.</li>
-        <li class="no">Ngemis di japri admin berkali-kali sama dengan diblokir sekalian. Punya harga diri dikit napa.</li>
-        <li class="">Yang stay dari awal dan ga bikin ulah, aman. Yang labil, mending out sekarang biar ga ganggu.</li>
+        <li class="no">Keluar sendiri itu dihitung mundur teratur. Permanen. Ga usah nanya lagi bisa balik apa engga.</li>
+        <li class="no">Ditendang karena melanggar? Namanya masuk daftar hitam, dan daftar itu ga pernah dihapus.</li>
+        <li class="no">Request join lagi bakal ditolak otomatis. Mau lewat link, mau lewat temen yang kenal admin, sama aja.</li>
+        <li class="no">Nomor kedua, nomor kantor, nomor pacar, semua kedetect. Masuk lagi ya ditendang lagi.</li>
+        <li class="no">Nyuruh orang lain buat bujuk admin cuma bikin posisi lu makin ga enak, dan bikin temen lu ikut kena getahnya. Jangan.</li>
+        <li class="no">Japri admin berkali-kali sambil ngemis cuma bikin lu diblokir sekalian. Punya harga diri dikit lah.</li>
+        <li class="">Yang dari awal stay dan ga bikin ribet, aman-aman aja. Aturan ini ga bakal kena lu.</li>
       </ul>
-      <div class="note ">Satu-satunya pengecualian: out karena error teknis (ganti HP, akun ke-reset, WA bermasalah). Syaratnya <b>lapor admin maksimal 1x24 jam plus bukti</b>. Lewat dari itu, kebijakan permanen jalan dan ga bisa diganggu gugat.</div>
+      <div class="note ">Pengecualiannya cuma satu: keluar gara-gara masalah teknis. HP ilang, akun ke-reset, WA error, hal-hal yang emang di luar kendali lu. Syaratnya <b>lapor admin maksimal 1x24 jam plus bukti</b>. Lewat dari itu, ya udah, ikut aturan umum.</div>
     </section>
 
-    <section class="card" id="aturan-harian">
-      <h2><span class="num">2</span> Aturan Main Harian</h2>
-      <div class="sub">Standar minimal biar grup ga jadi kandang.</div>
+    <section class="card" id="kelakuan">
+      <h2><span class="num">2</span> Kelakuan di Grup</h2>
+      <div class="sub">Standar minimal biar enak dibaca semua orang.</div>
       <ul>
-        <li class="">Pake nama jelas. Jangan nama alay penuh simbol yang bikin admin pusing pas absen.</li>
-        <li class="">Santai boleh, sopan wajib. Grup ini santai, bukan liar.</li>
-        <li class="">Candaan bebas, tapi jangan bawa fisik, keluarga, agama, atau kondisi ekonomi orang.</li>
-        <li class="">Nanya langsung to the point. Jangan cuma kirim "P" doang terus ngilang. Ini grup, bukan kode morse.</li>
-        <li class="">Scroll dan baca chat atas dulu sebelum nanya. Hampir semua pertanyaan lu udah kejawab di situ. Males scroll tapi ga males ngetik, tolol.</li>
-        <li class="no">Jangan nge-tag all atau spam mention admin buat hal ga penting.</li>
-        <li class="">Jam 22.00 sampai 06.00 mode tenang. Kecuali urusan order atau server down.</li>
-        <li class="no">Voice note panjang lebar buat hal yang bisa diketik tiga baris, jangan.</li>
+        <li class="">Pake nama yang kebaca. Nama penuh simbol aneh bikin susah pas admin nyari orang.</li>
+        <li class="">Santai bebas, tapi jangan sampai bikin orang lain ga nyaman. Bedanya tipis, tapi lu pasti tau.</li>
+        <li class="">Bercanda silakan, cuma jangan bawa fisik, keluarga, agama, atau kondisi ekonomi orang. Itu bukan lucu, itu nyebelin.</li>
+        <li class="">Nanya langsung aja isinya apa. Kirim "P" doang terus ngilang itu ga bikin siapa-siapa jawab lebih cepet.</li>
+        <li class="">Scroll dulu sebelum nanya. Hampir semua pertanyaan lu udah kejawab di atas. Males scroll tapi ga males ngetik itu lucu sih, tapi ga lucu-lucu amat.</li>
+        <li class="no">Tag all buat hal yang ga urgent. Itu bikin puluhan orang buka HP buat hal yang ga penting.</li>
+        <li class="">Jam 10 malam sampai 6 pagi mode tenang. Kecuali server down atau ada order masuk, ya beda cerita.</li>
+        <li class="no">Voice note tiga menit buat hal yang bisa diketik dua baris. Ga semua orang lagi bisa dengerin.</li>
       </ul>
     </section>
 
     <section class="card" id="promosi">
-      <h2><span class="num">3</span> Aturan Promosi</h2>
-      <div class="sub">Ini yang paling sering dilanggar. Baca pelan-pelan.</div>
+      <h2><span class="num">3</span> Promosi &amp; Jualan</h2>
+      <div class="sub">Ini juara satu pelanggaran paling sering. Ga bercanda.</div>
       <ul>
-        <li class="no">Promosi apa pun <b>WAJIB izin admin dulu</b>. Nekat posting tanpa izin sama dengan kick, ga pake peringatan.</li>
-        <li class="no">Dilarang keras promosi grup lain, channel lain, atau komunitas sebelah. Cari member di kandang sendiri.</li>
-        <li class="no">Dilarang promosi jasa kompetitor cloud game atau sewa PC. Numpang grup orang buat nyari duit sendiri itu bangsat namanya. Bikin grup sendiri sana.</li>
-        <li class="no">Dilarang promo judi online, pinjol, investasi bodong, MLM, dan sejenisnya. Langsung kick permanen.</li>
-        <li class="no">Dilarang sebar link pendek yang ga jelas isinya, APK modifan, atau file mencurigakan.</li>
-        <li class="no">Dilarang japri member satu-satu buat nawarin dagangan. Itu namanya nyolong database grup.</li>
-        <li class="no">Dilarang copy paste promo yang sama berulang-ulang tiap hari. Sekali cukup, ga usah dispam.</li>
-        <li class="">Promosi yang diizinkan maksimal <b>1 kali per hari</b>, format rapi, dan sesuai topik grup.</li>
-        <li class="">Format promo wajib jelas: nama produk, harga, spesifikasi, dan kontak. Jangan cuma "minat japri".</li>
-        <li class="">Promosi di Saluran resmi hanya boleh dilakukan oleh admin. Member ga punya akses posting.</li>
+        <li class="no">Mau promosi apa pun, <b>izin admin dulu</b>. Sekali nyelonong tanpa izin langsung ditendang, ga pake ditegur.</li>
+        <li class="no">Promosi grup lain atau komunitas sebelah, jangan. Cari member di kandang sendiri.</li>
+        <li class="no">Jasa cloud game atau sewa PC saingan? Ya jelas jangan lah. Numpang grup orang buat nyari duit sendiri itu bangsat namanya. Bikin grup sendiri sana, gratis kok.</li>
+        <li class="no">Judol, pinjol, investasi bodong, MLM. Semua itu langsung tendang permanen tanpa basa-basi.</li>
+        <li class="no">Link pendek yang ga jelas isinya, APK modifan, file aneh. Jangan sebar di sini.</li>
+        <li class="no">Japri member satu-satu buat nawarin dagangan. Itu namanya nyolong list kontak, dan itu ketauan banget.</li>
+        <li class="no">Copy paste promo yang sama tiap hari. Sekali cukup, orang udah baca kok.</li>
+        <li class="">Yang udah diizinin: maksimal <b>sehari sekali</b>, formatnya rapi, dan nyambung sama topik grup.</li>
+        <li class="">Tulis lengkap: apa barangnya, berapa harganya, spesifikasinya gimana, kontaknya ke mana. Jangan cuma "minat japri".</li>
+        <li class="">Di Saluran cuma admin yang bisa posting. Member emang ga punya aksesnya, jadi ga usah nanya.</li>
       </ul>
-      <div class="note keras">Admin punya hak penuh hapus promo lu tanpa penjelasan apa pun. Ga usah sok nanya "kenapa dihapus bang" pake nada nyolot. Kalau dihapus berarti lu melanggar. Baca ulang aturannya, jangan malah ngajak ribut.</div>
+      <div class="note keras">Admin bisa hapus promo lu kapan aja tanpa jelasin apa pun. Kalau kehapus berarti lu melanggar, titik. Ga usah nanya "kenapa dihapus bang" pake nada nyolot, baca ulang aja bagian ini.</div>
     </section>
 
     <section class="card" id="transaksi">
-      <h2><span class="num">4</span> Aturan Jual Beli, Sewa &amp; Transaksi</h2>
-      <div class="sub">Berlaku buat Cloud Game, Sewa PC, dan Jual Beli Akun.</div>
+      <h2><span class="num">4</span> Transaksi, Sewa &amp; Jual Beli</h2>
+      <div class="sub">Berlaku buat Cloud Game, Sewa PC, dan jual beli akun.</div>
       <ul>
-        <li class="">Semua negosiasi dan transaksi <b>WAJIB japri</b>. Jangan bikin grup jadi pasar berisik.</li>
-        <li class="">Transaksi nominal besar <b>WAJIB lewat admin atau rekber</b>. Aman lebih penting daripada buru-buru.</li>
-        <li class="no">Dilarang jual akun hasil hack, curian, sharing ilegal, atau hasil scam. Ketauan, kick plus data lu diumumkan.</li>
-        <li class="no">Dilarang jual akun yang masih kena banned, limited, atau bermasalah tanpa dijelasin ke pembeli.</li>
-        <li class="">Penjual wajib jujur soal kondisi barang. Pembeli wajib bayar sesuai kesepakatan. Simpel.</li>
-        <li class="">Simpan semua bukti chat dan bukti transfer. Itu satu-satunya senjata lu kalau ada masalah.</li>
-        <li class="no">Dilarang minta DP terus ngilang. Itu penipuan, bukan bercanda.</li>
-        <li class="no">Dilarang review palsu atau bikin testimoni bohongan buat naikin dagangan sendiri.</li>
-        <li class="no">Dilarang nawar sadis sampai ngehina harga orang. Ga cocok ya lewat, ga usah komentar.</li>
+        <li class="">Nego dan transaksi <b>di japri</b>. Grup bukan tempat tawar-menawar berjam-jam.</li>
+        <li class="">Nominal gede? <b>Lewat admin atau rekber.</b> Nunggu setengah jam jauh lebih enak daripada kehilangan uang.</li>
+        <li class="no">Jual akun hasil hack, curian, atau hasil nipu orang. Ketauan langsung tendang dan datanya diumumin.</li>
+        <li class="no">Jual akun yang lagi kena banned atau limited tanpa bilang ke pembeli. Itu nipu, bukan strategi jualan.</li>
+        <li class="">Penjual jujur soal kondisi barang, pembeli bayar sesuai kesepakatan. Sesimpel itu sebenernya.</li>
+        <li class="">Simpen semua bukti chat dan bukti transfer. Kalau nanti ada apa-apa, cuma itu yang bisa nyelametin lu.</li>
+        <li class="no">Minta DP terus ilang. Itu bukan "lagi sibuk", itu penipuan.</li>
+        <li class="no">Bikin testimoni palsu atau nyuruh temen review bohongan. Ketauan kok, dan malunya lama.</li>
+        <li class="no">Nawar sampe ngehina harga orang. Ga cocok ya udah lewat aja, ga usah komentar.</li>
       </ul>
-      <div class="note ">Admin menjamin transaksi yang lewat admin atau rekber resmi. Selebihnya di luar tanggung jawab grup.</div>
+      <div class="note ">Transaksi yang lewat admin atau rekber resmi, kita jamin sampai beres. Di luar itu, kita ga bisa jamin apa-apa.</div>
     </section>
 
     <section class="card" id="ketipu">
-      <h2><span class="num">5</span> Buat Yang Ketipu Tapi Ngeluh di Grup</h2>
-      <div class="sub">Section khusus. Dibaca berkali-kali kalau perlu.</div>
+      <h2><span class="num">5</span> Kalau Lu Ketipu</h2>
+      <div class="sub">Ada cara yang bener, dan ada cara yang cuma bikin ribut.</div>
       <ul>
-        <li class="no">Udah dibilang transaksi lewat admin atau rekber, lu tetep maksa jalan sendiri diem-diem. Terus ketipu. Terus teriak-teriak di grup nyari simpati. <b>Ya mampus goblok, salah lu sendiri.</b></li>
-        <li class="no">Aturannya udah dipajang gede-gede dari awal. Lu ga baca, lu ga nurut, terus lu nyalahin grup. Otak tuh dipake, jangan cuma dibawa nongkrong.</li>
-        <li class="no">Dilarang spam curhat ketipu di grup. Bikin panik member lain dan ga nyelesain masalah lu sama sekali.</li>
-        <li class="no">Dilarang nyalahin admin atas transaksi yang admin sendiri ga tau menau. Admin bukan babysitter lu, bukan bapak lu, bukan asuransi lu.</li>
-        <li class="no">Dilarang bikin tuduhan tanpa bukti chat dan bukti transfer. Kalau ga ada bukti, diem.</li>
-        <li class="no">Dilarang nyeret nama grup atau nama XyCloud ke masalah pribadi lu di luar.</li>
-        <li class="">Kalau beneran ketipu: <b>japri admin, bawa bukti lengkap</b>. Pelakunya kita kick, blacklist, dan sebar ke grup lain.</li>
-        <li class="">Kalau nominalnya besar dan buktinya kuat, urus ke polisi. Grup WhatsApp bukan pengadilan.</li>
+        <li class="no">Udah dibilang lewat rekber, lu tetep jalan sendiri diem-diem, terus ketipu, terus teriak-teriak di grup nyari simpati. <b>Ya mampus goblok, salah lu sendiri.</b></li>
+        <li class="no">Aturannya udah dipajang gede-gede dari awal. Lu skip, lu ga nurut, terus lu nyalahin grup. Otak tuh dipake, jangan cuma dibawa nongkrong.</li>
+        <li class="no">Spam curhat di grup ga bikin uang lu balik. Yang ada member lain jadi panik dan grup jadi ga enak.</li>
+        <li class="no">Nyalahin admin buat transaksi yang admin sendiri ga tau menau. Admin bukan babysitter lu, bukan bapak lu, dan jelas bukan asuransi lu.</li>
+        <li class="no">Nuduh orang tanpa bukti chat dan bukti transfer. Kalau belum ada bukti, tahan dulu.</li>
+        <li class="no">Nyeret nama grup atau nama XyCloud ke masalah pribadi lu di luar.</li>
+        <li class="">Cara yang bener: <b>japri admin, bawa bukti lengkap.</b> Pelakunya kita tendang, blacklist, dan sebar ke komunitas lain.</li>
+        <li class="">Kalau nominalnya gede dan buktinya kuat, lanjut ke polisi. Grup WhatsApp ga punya kuasa nagih uang.</li>
       </ul>
-      <div class="note keras">Ditegasin sekali lagi biar nyantol: <b>transaksi di luar admin, risiko tanggung sendiri.</b> Admin tetep bantu kick dan blacklist pelakunya, tapi jangan harap duit lu balik. Aturan udah dikasih gratis, lu sendiri yang milih ngelanggar. Nangis boleh, tapi jangan di grup.</div>
+      <div class="note keras">Sekali lagi biar nyantol: <b>transaksi di luar admin, risiko tanggung sendiri.</b> Kita tetep bantu tendang dan blacklist pelakunya, tapi jangan ngarep duit lu balik. Aturannya udah dikasih gratis dari awal, lu sendiri yang milih ngelanggar. Nangis boleh, tapi jangan di grup.</div>
     </section>
 
-    <section class="card" id="member-batu">
-      <h2><span class="num">6</span> Buat Member Batu &amp; Keras Kepala</h2>
-      <div class="sub">Yang udah ditegur berkali-kali tapi tetep ngeyel.</div>
+    <section class="card" id="ngeyel">
+      <h2><span class="num">6</span> Buat Yang Susah Dibilangin</h2>
+      <div class="sub">Ditegur berkali-kali tapi tetep jalan terus.</div>
       <ul>
-        <li class="no">Ditegur sekali masih ngulang, ditegur dua kali masih ngulang. Lu ini bukan lupa, lu emang bebal. Ga niat jadi member, cuma niat jadi masalah.</li>
-        <li class="no">Sok ngatur admin padahal lu cuma tamu di sini. Tau diri, ini bukan grup lu.</li>
-        <li class="no">Ngeyel debat aturan yang udah jelas hitam di atas putih. Ga bakal dilayani. Lu bukan pinter, lu cuma berisik. Langsung kick.</li>
-        <li class="no">Ngaku-ngaku admin, ngaku dekat sama admin, atau ngatasnamakan grup. Kick plus diumumkan biar semua tau.</li>
-        <li class="no">Bikin drama, adu domba antar member, atau kompor-komporin. Grup ini bukan sinetron.</li>
-        <li class="no">Udah dikick masih bikin grup tandingan buat jelek-jelekin. Silakan, tapi jangan harap diterima balik selamanya.</li>
-        <li class="no">Nanya hal yang sama tiap hari padahal udah dijawab dan udah ditulis di web ini.</li>
-        <li class="">Kalau lu ngerasa aturannya terlalu ketat, pintu keluar selalu terbuka. Ga ada yang nahan.</li>
+        <li class="no">Ditegur sekali ngulang, ditegur dua kali ngulang lagi. Itu bukan lupa, lu emang bebal. Ga niat jadi member, cuma niat jadi masalah.</li>
+        <li class="no">Sok ngatur admin padahal statusnya tamu. Ini grup orang, bukan grup lu.</li>
+        <li class="no">Debat aturan yang udah tertulis jelas hitam di atas putih. Ga bakal dilayanin. Lu bukan kritis, lu cuma berisik.</li>
+        <li class="no">Ngaku-ngaku admin atau ngaku deket sama admin buat dapet perlakuan khusus. Malah cepet ketendangnya.</li>
+        <li class="no">Adu domba antar member atau kompor-komporin. Grup ini bukan sinetron azab.</li>
+        <li class="no">Udah ditendang terus bikin grup tandingan buat jelek-jelekin. Silakan aja, tapi pintu ke sini tutup selamanya.</li>
+        <li class="no">Nanya hal yang sama tiap hari padahal udah dijawab dan udah ada di halaman ini.</li>
+        <li class="">Ngerasa aturannya kelewat ketat? Pintu keluarnya ga dikunci kok. Ga ada yang bakal nahan.</li>
       </ul>
-      <div class="note keras">Grup ini ga butuh member banyak. Grup ini butuh member yang bisa baca dan bisa nurut. Kalau dua hal sesimpel itu aja susah buat lu, mending out sekarang. Serius. Daripada bikin repot satu grup gara-gara satu kepala batu.</div>
+      <div class="note keras">Kita ga ngejar jumlah member. Yang dicari cuma orang yang bisa baca dan bisa nurut. Kalau dua hal sesimpel itu aja berat buat lu, mending keluar sekarang. Serius, daripada satu grup repot gara-gara satu kepala batu.</div>
     </section>
 
     <section class="card" id="larangan">
-      <h2><span class="num">7</span> Larangan Keras</h2>
-      <div class="sub">Sekali langgar, langsung kick. Ga ada peringatan.</div>
+      <h2><span class="num">7</span> Yang Langsung Ditendang</h2>
+      <div class="sub">Sekali kena, langsung keluar. Ga ada peringatan.</div>
       <ul>
-        <li class="no">SARA, rasisme, penghinaan agama, dan ujaran kebencian.</li>
-        <li class="no">Pornografi, konten dewasa, dan link vulgar dalam bentuk apa pun.</li>
-        <li class="no">Judi online, situs slot, dan segala turunannya.</li>
-        <li class="no">Link phising, APK penyadap, script hack, dan file berbahaya.</li>
-        <li class="no">Doxing atau sebar data pribadi member lain.</li>
-        <li class="no">Ngancam member atau admin, baik bercanda maupun serius.</li>
-        <li class="no">Screenshot chat grup terus disebar keluar tanpa izin. Itu pengkhianat.</li>
-        <li class="no">Nipu member. Ini pelanggaran paling berat di grup ini.</li>
+        <li class="no">SARA, rasisme, ngehina agama, ujaran kebencian.</li>
+        <li class="no">Konten dewasa dan link vulgar dalam bentuk apa pun.</li>
+        <li class="no">Judi online, situs slot, dan semua turunannya.</li>
+        <li class="no">Link phising, APK penyadap, script hack, file berbahaya.</li>
+        <li class="no">Sebar data pribadi member lain tanpa izin.</li>
+        <li class="no">Ngancam member atau admin. Mau bercanda atau serius, sama aja diperlakuinnya.</li>
+        <li class="no">Screenshot chat grup terus disebar keluar. Itu ngerusak kepercayaan semua orang.</li>
+        <li class="no">Nipu member. Ini yang paling berat, dan konsekuensinya paling ga enak.</li>
       </ul>
     </section>
 
     <section class="card" id="sanksi">
-      <h2><span class="num">8</span> Sanksi &amp; Penegakan</h2>
-      <div class="sub">Berlaku ke semua orang. Ga pandang bulu, ga pandang senior.</div>
+      <h2><span class="num">8</span> Konsekuensinya Apa</h2>
+      <div class="sub">Berlaku ke semua orang, ga peduli udah berapa lama di sini.</div>
       <ul>
-        <li class="">Pelanggaran pertama: ditegur terbuka di grup. Malu dikit biar inget.</li>
-        <li class="">Pelanggaran kedua: peringatan keras dari admin dan namanya dicatat.</li>
-        <li class="no">Pelanggaran ketiga: kick permanen. Ga bisa balik selamanya.</li>
-        <li class="no">Pelanggaran berat (scam, SARA, porno, judi, link jahat): kick di detik itu juga tanpa peringatan.</li>
-        <li class="no">Penipu: kick, blacklist, nomor dan buktinya diumumkan ke grup dan komunitas lain.</li>
-        <li class="">Member lama ga punya kekebalan. Lama di grup bukan alasan buat seenaknya.</li>
+        <li class="">Pertama kali: ditegur di grup. Rada malu emang, tapi biar inget.</li>
+        <li class="">Kedua kali: peringatan keras dan namanya dicatat admin.</li>
+        <li class="no">Ketiga kali: keluar permanen. Dan permanen di sini beneran permanen.</li>
+        <li class="no">Pelanggaran berat (nipu, SARA, konten dewasa, judol, link jahat): ditendang detik itu juga.</li>
+        <li class="no">Khusus penipu: ditendang, di-blacklist, nomornya diumumin ke grup dan komunitas lain.</li>
+        <li class="">Member lama ga punya kekebalan. Lama di sini bukan tiket buat seenaknya.</li>
       </ul>
-      <div class="note keras">Keputusan admin bersifat <b>FINAL dan MENGIKAT</b>. Mau protes silakan, tapi hasilnya tetap sama.</div>
+      <div class="note keras">Keputusan admin <b>final</b>. Mau protes boleh, didengerin juga, tapi hasilnya kemungkinan besar tetep sama.</div>
     </section>
 
     <section class="card" id="saluran">
-      <h2><span class="num">9</span> Aturan Saluran (Channel)</h2>
-      <div class="sub">Berlaku khusus di Saluran resmi XyCloud | Official.</div>
+      <h2><span class="num">9</span> Aturan Saluran</h2>
+      <div class="sub">Khusus di Saluran resmi, beda sama grup.</div>
       <ul>
-        <li class="">Saluran adalah kanal <b>satu arah</b>. Hanya admin yang boleh posting.</li>
-        <li class="">Semua pengumuman resmi, harga, promo, dan info maintenance keluar dari Saluran.</li>
-        <li class="">Info yang ga ada di Saluran atau ga dikonfirmasi admin, anggap hoax.</li>
-        <li class="no">Dilarang spam reaksi atau komentar sampah di postingan Saluran.</li>
-        <li class="no">Dilarang copy postingan Saluran terus diklaim jadi jasa sendiri.</li>
-        <li class="no">Dilarang bikin Saluran tiruan yang ngatasnamakan XyCloud. Bakal dilaporin.</li>
-        <li class="">Keluar dari Saluran bebas dan boleh join lagi. Kebijakan permanen hanya berlaku di GRUP.</li>
+        <li class="">Saluran itu <b>satu arah</b>. Cuma admin yang posting, member tinggal baca.</li>
+        <li class="">Semua pengumuman resmi, update harga, promo, dan info maintenance keluarnya dari sini.</li>
+        <li class="">Info yang ga ada di Saluran dan ga dikonfirmasi admin, anggap aja hoax sampai terbukti sebaliknya.</li>
+        <li class="no">Spam reaksi atau komentar sampah di postingan Saluran.</li>
+        <li class="no">Copy postingan Saluran terus diklaim jadi jasa sendiri.</li>
+        <li class="no">Bikin Saluran tiruan yang ngatasnamain XyCloud. Bakal dilaporin, dan WhatsApp lumayan cepet nanggepinnya.</li>
+        <li class="">Keluar dari Saluran bebas, mau join lagi juga bebas. Aturan permanen cuma berlaku di GRUP.</li>
       </ul>
-      <div class="note ">Bedakan baik-baik: <b>Saluran</b> boleh keluar-masuk. <b>Grup</b> tidak. Jangan sampai ketuker terus nyesel.</div>
+      <div class="note ">Jangan sampai ketuker: <b>Saluran</b> bebas keluar-masuk, <b>Grup</b> engga. Banyak yang salah paham di sini terus nyesel.</div>
     </section>
 
     <section class="card" id="privasi">
-      <h2><span class="num">10</span> Privasi &amp; Data Member</h2>
-      <div class="sub">Bagian ini serius, jangan main-main.</div>
+      <h2><span class="num">10</span> Privasi &amp; Data</h2>
+      <div class="sub">Bagian ini beneran serius, bukan gaya-gayaan.</div>
       <ul>
-        <li class="">Nomor member cuma dipake buat keperluan grup dan transaksi yang disepakati.</li>
-        <li class="no">Dilarang nyimpen, nyebar, atau jual kontak member lain ke pihak mana pun.</li>
-        <li class="no">Dilarang sebar foto, chat pribadi, atau identitas member tanpa izin.</li>
-        <li class="no">Dilarang sebar data login atau akun orang lain. Itu ranah pidana, bukan bercanda.</li>
-        <li class="">Admin <b>TIDAK PERNAH</b> minta OTP, PIN, password, atau data rekening. Kalau ada yang minta, itu penipu, langsung lapor.</li>
-        <li class="">Bukti transaksi yang dilaporkan ke admin dipakai murni buat proses penanganan kasus.</li>
-        <li class="">Website ini tidak memakai cookie tracking, tidak menyimpan data pribadi, dan tidak menjalankan iklan.</li>
+        <li class="">Nomor member cuma dipake buat keperluan grup dan transaksi yang emang disepakati.</li>
+        <li class="no">Nyimpen, nyebar, atau jual kontak member lain ke siapa pun.</li>
+        <li class="no">Sebar foto, chat pribadi, atau identitas member tanpa izin orangnya.</li>
+        <li class="no">Sebar data login atau akun orang lain. Ini udah masuk ranah pidana, bukan lagi soal aturan grup.</li>
+        <li class="">Admin <b>ga pernah</b> minta OTP, PIN, password, atau data rekening. Ada yang minta? Sudah pasti penipu, langsung lapor.</li>
+        <li class="">Bukti transaksi yang lu kirim ke admin cuma dipake buat nyelesain kasusnya, ga buat yang lain.</li>
+        <li class="">Website ini ga pake cookie tracking, ga nyimpen data pribadi, ga ada iklan. Feedback yang lu kirim juga anonim kecuali lu isi kontak sendiri.</li>
       </ul>
     </section>
 
     <section class="card" id="admin">
-      <h2><span class="num">11</span> Hak &amp; Wewenang Admin</h2>
-      <div class="sub">Biar ga ada yang nanya &quot;emang admin siapa&quot;.</div>
+      <h2><span class="num">11</span> Soal Admin</h2>
+      <div class="sub">Biar jelas siapa yang mutusin apa.</div>
       <ul>
-        <li class="">Admin berhak menegur, menghapus pesan, dan mengeluarkan member kapan saja.</li>
-        <li class="">Admin berhak menolak calon member tanpa harus kasih alasan.</li>
-        <li class="">Admin berhak mengubah, menambah, atau menghapus aturan sewaktu-waktu.</li>
-        <li class="">Admin berhak menutup grup sementara kalau situasi udah ga kondusif.</li>
-        <li class="">Admin bukan customer service pribadi. Hormati waktu istirahat admin.</li>
-        <li class="no">Admin ga bertanggung jawab atas transaksi yang dilakukan di luar sepengetahuan admin.</li>
+        <li class="">Admin bisa negur, hapus pesan, dan ngeluarin member kapan aja.</li>
+        <li class="">Admin bisa nolak calon member tanpa harus jelasin alasannya.</li>
+        <li class="">Admin bisa ngubah atau nambah aturan sewaktu-waktu, dan itu langsung berlaku.</li>
+        <li class="">Admin bisa nutup grup sementara kalau lagi ga kondusif.</li>
+        <li class="">Admin bukan CS 24 jam. Dibales kalau lagi sempet, sabar dikit.</li>
+        <li class="no">Admin ga nanggung transaksi yang dilakuin di luar sepengetahuan admin. Ini yang paling sering disalahpahami.</li>
       </ul>
     </section>
 
-  <h2 class="section-title">FAQ - Biar Ga Nanya Berulang-ulang</h2>
+  <h2 class="section-title">Yang sering ditanyain</h2>
     <details>
-      <summary>Gua out ga sengaja, bisa balik ga?</summary>
-      <p>Bisa, TAPI cuma kalau lu lapor admin maksimal 1x24 jam dan alasannya masuk akal plus ada bukti. Lewat dari itu, kebijakan permanen jalan. Ga usah maksa, ga bakal berubah.</p>
+      <summary>Gua keluar ga sengaja, beneran ga bisa balik?</summary>
+      <p>Bisa, tapi cuma kalau lu lapor maksimal 1x24 jam dan alasannya emang teknis, plus ada buktinya. Lewat dari itu ya udah, aturan umum yang jalan. Ga usah maksa, hasilnya bakal sama aja.</p>
     </details>
     <details>
-      <summary>Kenapa yang udah out ga boleh masuk lagi?</summary>
-      <p>Karena grup ini bukan terminal, bukan tempat keluar-masuk sesuka hati. Yang suka out-in biasanya buat kabur dari sanksi, spam, atau bikin drama. Kita jaga grup tetap bersih buat yang serius.</p>
+      <summary>Kenapa sih segitunya soal keluar-masuk?</summary>
+      <p>Karena dulu tiap hari ada aja yang join terus keluar dalam hitungan menit tanpa alasan. Notifikasinya ganggu, dan ternyata banyak yang cuma mau ngintip kontak member atau kabur habis bikin masalah. Daripada nyaring satu-satu, ya dibikin tegas sekalian.</p>
     </details>
     <details>
-      <summary>Bedanya aturan Grup sama Saluran apa?</summary>
-      <p>Saluran itu satu arah, cuma admin yang posting, dan lu bebas keluar-masuk kapan aja. Grup itu dua arah dan kebijakan permanennya berlaku: keluar sekali, ga bisa balik.</p>
+      <summary>Bedanya Grup sama Saluran apa?</summary>
+      <p>Saluran itu satu arah, cuma admin yang posting, dan lu bebas keluar-masuk kapan aja. Grup itu dua arah dan aturan permanennya berlaku di situ: sekali keluar, ga bisa balik.</p>
     </details>
     <details>
-      <summary>Gua mau ganti nomor HP, gimana?</summary>
-      <p>Lapor admin DULU sebelum ganti. Nomor baru lu bakal didaftarin sebagai pengganti. Kalau lu langsung out tanpa bilang apa-apa, jangan protes pas ga bisa balik.</p>
+      <summary>Gua mau ganti nomor, gimana?</summary>
+      <p>Kabarin admin dulu sebelum ganti, nanti nomor barunya didaftarin sebagai pengganti. Kalau lu keluar duluan tanpa ngomong, ya susah, soalnya dari sisi admin keliatannya sama aja kayak orang keluar biasa.</p>
     </details>
     <details>
-      <summary>Boleh promosi jualan di grup ga?</summary>
-      <p>Boleh, tapi WAJIB izin admin dulu, maksimal 1 kali per hari, dan sesuai topik grup. Promosi grup lain, jasa kompetitor, judol, atau pinjol langsung kick tanpa debat.</p>
+      <summary>Boleh jualan di grup?</summary>
+      <p>Boleh, asal izin admin dulu, sehari maksimal sekali, dan nyambung sama topik grup. Yang ga boleh itu promosi grup lain, jasa saingan, judol, sama pinjol.</p>
     </details>
     <details>
-      <summary>Gua ketipu member, admin ganti rugi ga?</summary>
-      <p>Ga. Kalau transaksi lewat admin atau rekber, kita jamin sampai tuntas. Kalau lu maksa transaksi sendiri padahal aturannya udah jelas, itu risiko lu sendiri. Pelakunya tetap kita kick dan blacklist, tapi duit lu urusan lu.</p>
+      <summary>Gua ketipu member, admin ganti rugi?</summary>
+      <p>Engga. Kalau transaksinya lewat admin atau rekber, kita urus sampai beres. Kalau lu jalan sendiri padahal udah diingetin, itu risiko lu. Pelakunya tetep kita tendang dan blacklist, tapi soal uang, kita ga bisa apa-apa.</p>
     </details>
     <details>
-      <summary>Kenapa gua ga boleh curhat ketipu di grup?</summary>
-      <p>Karena ga nyelesain apa-apa, cuma bikin grup ribut dan member lain panik. Bawa bukti lengkap ke japri admin, itu cara yang bener. Teriak-teriak di grup ga bikin duit lu balik.</p>
+      <summary>Kenapa ga boleh cerita di grup kalau ketipu?</summary>
+      <p>Karena ga nyelesain apa-apa. Yang ada grup jadi ribut dan member lain ikut panik. Bawa buktinya ke japri admin, itu yang beneran ada hasilnya.</p>
     </details>
     <details>
-      <summary>Gua ngerasa di-kick tanpa alasan, gimana?</summary>
-      <p>Japri admin buat klarifikasi, kita jelasin. Tapi kalau keputusannya udah final, terima dengan lapang dada. Jangan bikin drama atau grup tandingan, itu cuma nutup pintu lu selamanya.</p>
+      <summary>Gua ditendang tapi ngerasa ga salah, gimana?</summary>
+      <p>Japri admin, minta penjelasan. Kita jelasin kok. Tapi kalau keputusannya udah final ya diterima aja. Bikin drama atau grup tandingan cuma nutup pintu yang tadinya masih agak kebuka.</p>
     </details>
     <details>
-      <summary>Member lama boleh melanggar dikit-dikit kan?</summary>
-      <p>Ga. Lama di grup bukan lisensi buat seenaknya. Aturan berlaku sama buat semua orang, dari member baru sampai yang udah dari awal.</p>
+      <summary>Member lama boleh santai dikit kan?</summary>
+      <p>Engga juga. Lama di sini bukan lisensi. Aturannya sama buat semua orang, dan justru member lama yang harusnya paling ngerti.</p>
     </details>
     <details>
-      <summary>Boleh ga gua pakai kebijakan ini buat grup atau website gua sendiri?</summary>
-      <p>Boleh banget, gratis, dan open source lisensi MIT. Syaratnya cuma dua: minta izin dulu ke admin XyCloud, dan cantumkan kredit balik ke rules.xyc.my.id. Lu juga bisa langsung tarik isinya lewat API publik di /api/policy.</p>
+      <summary>Boleh gua pake kebijakan ini buat grup atau web gua?</summary>
+      <p>Boleh banget, gratis, open source lisensi MIT. Cuma dua syaratnya: kabarin admin XyCloud dulu, dan cantumin kredit balik ke rules.xyc.my.id. Lu juga bisa tarik langsung isinya lewat API di /api/policy, atau pasang popup persetujuan pakai gate.js.</p>
     </details>
     <details>
-      <summary>Aturan ini bisa berubah?</summary>
-      <p>Bisa, kapan aja, tanpa pemberitahuan panjang lebar. Perubahan diumumkan di Grup dan Saluran, dan langsung berlaku saat itu juga. Tugas lu cuma satu: ikutin.</p>
+      <summary>Aturannya bisa berubah?</summary>
+      <p>Bisa, kapan aja. Perubahan diumumin di Grup dan Saluran, dan langsung berlaku hari itu juga. Halaman ini selalu versi paling baru, jadi kalau ragu ya balik ke sini.</p>
     </details>
 
+
+    <div class="fb" id="fb">
+      <div id="fbAsk">
+        <h2>Menurut lu kebijakan ini gimana?</h2>
+        <p class="q">Jujur aja, ga usah sungkan. Masukannya langsung masuk ke admin.</p>
+        <div class="vote">
+          <button class="vb up" type="button" data-vote="like">
+            <svg viewBox="0 0 24 24"><path d="M2 21h4V9H2v12zm20-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L13.17 1 6.59 7.59C6.22 7.95 6 8.45 6 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg>
+            Bagus
+          </button>
+          <button class="vb down" type="button" data-vote="dislike">
+            <svg viewBox="0 0 24 24"><path d="M22 3h-4v12h4V3zM2 14c0 1.1.9 2 2 2h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L10.83 23l6.58-6.59c.37-.36.59-.86.59-1.41V5c0-1.1-.9-2-2-2H7c-.83 0-1.54.5-1.84 1.22L2.14 11.27c-.09.23-.14.47-.14.73v2z"/></svg>
+            Kurang
+          </button>
+        </div>
+      </div>
+      <div class="done" id="fbDone">Makasih ya, masukannya udah masuk.</div>
+    </div>
+
+    <div class="mask" id="fbMask" role="dialog" aria-modal="true" aria-labelledby="fbTitle">
+      <div class="modal">
+        <h3 id="fbTitle">Bagian mana yang bikin ganjel?</h3>
+        <p class="mp">Pilih yang paling relevan, terus ceritain dikit. Anonim kok, kecuali lu isi kontaknya sendiri.</p>
+        <div class="msg" id="fbMsg"></div>
+        <div class="chips" id="fbChips"></div>
+        <label for="fbText">Ceritain dikit</label>
+        <textarea id="fbText" placeholder="Tulis apa adanya di sini..."></textarea>
+        <label for="fbContact">Kontak (opsional, kalau mau dibales)</label>
+        <input id="fbContact" type="text" placeholder="Nomor WA atau email" autocomplete="off">
+        <div class="mact">
+          <button class="btn ghost" type="button" id="fbCancel">Batal</button>
+          <button class="btn" type="button" id="fbSend">Kirim ke Admin</button>
+        </div>
+      </div>
+    </div>
 
     <section class="card" id="kontak">
-      <h2><span class="num">?</span> Kontak &amp; Pelaporan</h2>
-      <div class="sub">Ada masalah, laporan penipuan, atau mau izin pakai kebijakan ini.</div>
+      <h2><span class="num">?</span> Kontak &amp; Lapor</h2>
+      <div class="sub">Ada masalah, mau lapor penipuan, atau mau izin pakai kebijakan ini.</div>
       <ul>
-        <li>Laporan penipuan wajib bawa <b>bukti chat + bukti transfer</b>. Tanpa bukti ga diproses.</li>
-        <li>Izin pemakaian kebijakan untuk komunitas lain juga lewat kontak yang sama.</li>
-        <li>Admin bukan CS 24 jam. Balasan menyesuaikan waktu luang.</li>
+        <li>Lapor penipuan wajib bawa <b>bukti chat plus bukti transfer</b>. Tanpa itu susah diproses.</li>
+        <li>Semua pengumuman resmi keluarnya dari Saluran. Kalau ragu, cek ke sana dulu.</li>
+        <li>Admin bukan CS 24 jam, dibales kalau lagi sempet.</li>
       </ul>
       <div class="cta">
-        <a class="btn" href="https://wa.me/6283116632566?text=Halo%20Admin%20XyCloud%2C%20saya%20mau%20melapor%20%2F%20bertanya%20soal%20tata%20tertib%20grup." target="_blank" rel="noopener">Japri Admin</a>
-        <a class="btn alt" href="https://wa.me/6283116632566?text=Halo%20Admin%20XyCloud%2C%20saya%20mau%20minta%20izin%20memakai%20kebijakan%20dari%20rules.xyc.my.id%20untuk%20komunitas%20saya." target="_blank" rel="noopener">Izin Pakai Kebijakan</a>
+        <a class="btn" href="https://wa.me/6283116632566?text=Halo%20Admin%20XyCloud%2C%20saya%20mau%20nanya%2Flapor%20soal%20kebijakan%20grup." target="_blank" rel="noopener">Japri Admin</a>
+        <a class="btn alt" href="https://whatsapp.com/channel/0029VbB7nwuJZg3ym6UQ4Z1L" target="_blank" rel="noopener">Ikuti Saluran Resmi</a>
+        <a class="btn ghost" href="https://wa.me/6283116632566?text=Halo%20Admin%20XyCloud%2C%20saya%20mau%20izin%20pakai%20kebijakan%20dari%20rules.xyc.my.id%20untuk%20komunitas%20saya." target="_blank" rel="noopener">Izin Pakai Kebijakan</a>
       </div>
     </section>
     <div class="switch"><a href="/">&larr; Balik ke versi publik</a></div>
 
   <footer>
-    <p>Masih nongkrong di dalam grup berarti lu <b>udah baca dan setuju</b> sama seluruh aturan di atas. Ga ada alasan "gua ga tau", ga ada alasan "gua ga baca". Itu bukan alasan, itu kemalasan.</p>
+    <p>Masih nongkrong di dalam grup berarti lu <b>udah baca dan setuju</b> sama semua yang di atas. Ga ada alasan "gua ga tau", apalagi "gua ga baca". Itu bukan alasan, itu males.</p>
     <p style="margin-top:10px">&copy; 2026 <b>𝙓𝙮𝘾𝙡𝙤𝙪𝙙 𝙡 𝙊𝙛𝙛𝙞𝙘𝙞𝙖𝙡</b> &middot; Cloud Game, Sewa PC &amp; Jual Beli Akun Game</p>
     <p style="margin-top:6px">Open source (MIT) &middot; <a href="https://github.com/xykalnotkel/xycloud-policy" target="_blank" rel="noopener">GitHub</a> &middot; <a href="/api/policy">API</a> &middot; <a href="/docs">Docs</a></p>
   </footer>
 
 </div>
+
+<script>
+(function(){
+  var bar=document.getElementById('bar');
+  addEventListener('scroll',function(){
+    var h=document.documentElement,max=h.scrollHeight-h.clientHeight;
+    bar.style.width=(max>0?(h.scrollTop/max)*100:0)+'%';
+  },{passive:true});
+
+  var REASONS=['Kepanjangan','Bahasanya kasar','Terlalu ketat','Ada yang ga jelas','Ga setuju sama aturan keluar-masuk','Lainnya'];
+  var mask=document.getElementById('fbMask'),chips=document.getElementById('fbChips'),
+      msg=document.getElementById('fbMsg'),vote='',sel=[];
+
+  REASONS.forEach(function(r){
+    var b=document.createElement('button');
+    b.type='button';b.className='chip';b.textContent=r;
+    b.onclick=function(){
+      var i=sel.indexOf(r);
+      if(i<0){sel.push(r);b.classList.add('sel')}else{sel.splice(i,1);b.classList.remove('sel')}
+    };
+    chips.appendChild(b);
+  });
+
+  function open(v){
+    vote=v;
+    document.getElementById('fbTitle').textContent = v==='like'
+      ? 'Mantap, bagian mana yang paling kena?'
+      : 'Bagian mana yang bikin ganjel?';
+    mask.classList.add('on');
+    document.body.style.overflow='hidden';
+  }
+  function close(){mask.classList.remove('on');document.body.style.overflow=''}
+
+  document.querySelectorAll('.vb').forEach(function(b){
+    b.onclick=function(){open(b.dataset.vote)};
+  });
+  document.getElementById('fbCancel').onclick=close;
+  mask.onclick=function(e){if(e.target===mask)close()};
+  addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+
+  document.getElementById('fbSend').onclick=function(){
+    var btn=this,text=document.getElementById('fbText').value.trim();
+    if(!sel.length && !text){
+      msg.className='msg err';msg.textContent='Pilih minimal satu alasan atau tulis sesuatu dulu.';return;
+    }
+    btn.disabled=true;btn.textContent='Ngirim...';
+    fetch('/api/feedback',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        vote:vote,reasons:sel,message:text,
+        contact:document.getElementById('fbContact').value.trim(),
+        page:location.pathname,version:'3.0.0'
+      })
+    }).then(function(r){return r.json()}).then(function(d){
+      if(!d.ok)throw new Error(d.error||'gagal');
+      close();
+      document.getElementById('fbAsk').style.display='none';
+      document.getElementById('fbDone').style.display='block';
+      try{localStorage.setItem('xyc_fb','1')}catch(e){}
+    }).catch(function(e){
+      msg.className='msg err';
+      msg.textContent='Gagal ngirim ('+e.message+'). Coba lagi atau japri admin langsung.';
+      btn.disabled=false;btn.textContent='Kirim ke Admin';
+    });
+  };
+
+  try{
+    if(localStorage.getItem('xyc_fb')){
+      document.getElementById('fbAsk').style.display='none';
+      document.getElementById('fbDone').style.display='block';
+    }
+  }catch(e){}
+})();
+</script>
 </body>
 </html>

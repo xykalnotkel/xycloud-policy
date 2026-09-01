@@ -2,19 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://rules.xyc.my.id/</loc>
-    <lastmod>2026-09-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-    <image:image>
-      <image:loc>https://rules.xyc.my.id/og.png</image:loc>
-      <image:title>Tata Tertib &amp; Kebijakan Grup XyCloud | Official</image:title>
-    </image:image>
+    <loc>https://rules.xyc.my.id/</loc><lastmod>2026-09-01</lastmod><changefreq>monthly</changefreq><priority>1.0</priority>
+    <image:image><image:loc>https://rules.xyc.my.id/og.png</image:loc><image:title>Kebijakan Grup XyCloud | Official</image:title></image:image>
   </url>
   <url>
-    <loc>https://rules.xyc.my.id/docs</loc>
-    <lastmod>2026-09-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <loc>https://rules.xyc.my.id/docs</loc><lastmod>2026-09-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority>
+    <image:image><image:loc>https://rules.xyc.my.id/og-docs.png</image:loc><image:title>API Docs XyCloud | Official</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://rules.xyc.my.id/demo</loc><lastmod>2026-09-01</lastmod><changefreq>monthly</changefreq><priority>0.5</priority>
   </url>
 </urlset>
