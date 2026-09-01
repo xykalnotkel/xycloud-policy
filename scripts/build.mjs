@@ -11,9 +11,24 @@ const pick = (o, v) => (v === 'internal' && o.internal ? o.internal : o.public);
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const wa = (t) => `https://wa.me/${M.adminPhone}?text=${encodeURIComponent(t)}`;
 
+// Meta OG & article:* minta timestamp ISO 8601 lengkap. Data cuma punya YYYY-MM-DD,
+// dan sebagian validator menolak nilai tanggal polos di properti ini.
+const isoDate = (d) => (/^\d{4}-\d{2}-\d{2}$/.test(String(d)) ? `${d}T00:00:00+08:00` : String(d));
+
+// Teks kebijakan boleh pakai <b> buat penekanan, dan itu sengaja.
+// Tapi sebelumnya isi policy.json disisipkan ke HTML mentah-mentah tanpa disaring:
+// satu <script> atau <img onerror=...> yang nyelip ke JSON langsung jalan di browser.
+// Cara amannya: escape dulu semuanya, baru buka lagi khusus <b>. Tag lain tetap mati.
+const rich = (s) => esc(s)
+  .replace(/&lt;b&gt;/g, '<b>')
+  .replace(/&lt;\/b&gt;/g, '</b>');
+
 const CSS = `
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+.skip{position:absolute;left:-9999px;top:0;background:#075e54;color:#fff;padding:10px 16px;border-radius:0 0 8px 0;font-size:14px;font-weight:600;z-index:80}
+.skip:focus{left:0}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:#ece5dd;color:#111b21;line-height:1.7;-webkit-font-smoothing:antialiased}
 .wrap{max-width:780px;margin:0 auto;padding:0 18px 60px}
 
@@ -118,6 +133,7 @@ pre code{background:none;padding:0;color:inherit}
 .msg.ok{display:block;background:#ecfdf3;color:#027a48;border:1px solid #a6f4c5}
 .msg.err{display:block;background:#fef3f2;color:#912018;border:1px solid #fecdca}
 .close{position:absolute}
+:focus-visible{outline:3px solid #25d366;outline-offset:2px}
 
 footer{text-align:center;font-size:13px;color:#54656f;padding-top:26px;border-top:1px solid #d1d7db;margin-top:30px}
 footer b{color:#075e54}
@@ -129,8 +145,8 @@ footer a{color:#075e54}
 
 function renderSections(v) {
   return policy.sections.map((s, i) => {
-    const items = s.items.map(it => `        <li class="${it.type === 'no' ? 'no' : ''}">${pick(it, v)}</li>`).join('\n');
-    const note = s.note ? `\n      <div class="note ${s.note.type === 'keras' ? 'keras' : ''}">${pick(s.note, v)}</div>` : '';
+    const items = s.items.map(it => `        <li class="${it.type === 'no' ? 'no' : ''}">${rich(pick(it, v))}</li>`).join('\n');
+    const note = s.note ? `\n      <div class="note ${s.note.type === 'keras' ? 'keras' : ''}">${rich(pick(s.note, v))}</div>` : '';
     return `    <section class="card" id="${s.id}">
       <h2><span class="num">${i + 1}</span> ${esc(s.title)}</h2>
       <div class="sub">${esc(s.sub)}</div>
@@ -167,7 +183,7 @@ function jsonLd() {
       mainEntity: policy.faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
     { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Beranda', item: M.url },
-      { '@type': 'ListItem', position: 2, name: M.title, item: `${M.url}/#keluar-masuk` }] }
+      { '@type': 'ListItem', position: 2, name: M.title }] }
   ];
   return d.map(x => `<script type="application/ld+json">${JSON.stringify(x)}</script>`).join('\n  ');
 }
@@ -179,8 +195,13 @@ function buildPage(v) {
   const ogImg = internal ? `${M.url}/og-internal.png` : `${M.url}/og.png`;
 
   const seo = internal ? `
+  <meta name="description" content="${esc(pageDesc)}">
   <meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
   <meta name="googlebot" content="noindex,nofollow">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="${esc(M.name)}">
+  <meta property="og:locale" content="id_ID">
+  <meta property="og:url" content="${M.url}/internal">
   <meta property="og:title" content="${esc(pageTitle)}">
   <meta property="og:description" content="${esc(pageDesc)}">
   <meta property="og:image" content="${ogImg}">
@@ -199,7 +220,6 @@ function buildPage(v) {
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="${esc(M.name)}">
   <meta property="og:locale" content="id_ID">
-  <meta property="og:locale:alternate" content="en_US">
   <meta property="og:url" content="${M.url}/">
   <meta property="og:title" content="${esc(pageTitle)}">
   <meta property="og:description" content="${esc(pageDesc)}">
@@ -209,9 +229,9 @@ function buildPage(v) {
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Banner ${esc(M.title)} ${esc(M.name)}">
-  <meta property="og:updated_time" content="${M.updated}">
-  <meta property="article:published_time" content="${M.effective}">
-  <meta property="article:modified_time" content="${M.updated}">
+  <meta property="og:updated_time" content="${isoDate(M.updated)}">
+  <meta property="article:published_time" content="${isoDate(M.effective)}">
+  <meta property="article:modified_time" content="${isoDate(M.updated)}">
 
   <!-- Twitter / X -->
   <meta name="twitter:card" content="summary_large_image">
@@ -243,7 +263,7 @@ ${policy.why.paras.map(p => `      <p>${esc(p)}</p>`).join('\n')}
 
   const alert = `    <div class="alert">
       <h2>${esc(policy.alert.title)}</h2>
-${policy.alert.paras.map(p => `      <p>${pick(p, v)}</p>`).join('\n')}
+${policy.alert.paras.map(p => `      <p>${rich(pick(p, v))}</p>`).join('\n')}
     </div>`;
 
   const apiCard = internal ? '' : `
@@ -289,10 +309,10 @@ ${policy.alert.paras.map(p => `      <p>${pick(p, v)}</p>`).join('\n')}
       <div class="done" id="fbDone">Makasih ya, masukannya udah masuk.</div>
     </div>
 
-    <div class="mask" id="fbMask" role="dialog" aria-modal="true" aria-labelledby="fbTitle">
+    <div class="mask" id="fbMask" role="dialog" aria-modal="true" aria-labelledby="fbTitle" aria-describedby="fbDesc">
       <div class="modal">
         <h3 id="fbTitle">Bagian mana yang bikin ganjel?</h3>
-        <p class="mp">Pilih yang paling relevan, terus ceritain dikit. Anonim kok, kecuali lu isi kontaknya sendiri.</p>
+        <p class="mp" id="fbDesc">Pilih yang paling relevan, terus ceritain dikit. Anonim kok, kecuali lu isi kontaknya sendiri.</p>
         <div class="msg" id="fbMsg"></div>
         <div class="chips" id="fbChips"></div>
         <label for="fbText">Ceritain dikit</label>
@@ -349,22 +369,43 @@ ${policy.alert.paras.map(p => `      <p>${pick(p, v)}</p>`).join('\n')}
     chips.appendChild(b);
   });
 
+  var lastFocus=null;
+  function focusables(){
+    return Array.prototype.slice.call(
+      mask.querySelectorAll('button,textarea,input,[href],[tabindex]:not([tabindex="-1"])')
+    ).filter(function(el){return !el.disabled && el.offsetParent!==null});
+  }
   function open(v){
     vote=v;
     document.getElementById('fbTitle').textContent = v==='like'
       ? 'Mantap, bagian mana yang paling kena?'
       : 'Bagian mana yang bikin ganjel?';
+    lastFocus=document.activeElement;
     mask.classList.add('on');
     document.body.style.overflow='hidden';
+    var f=focusables();
+    if(f.length) f[f.length-1].focus();
   }
-  function close(){mask.classList.remove('on');document.body.style.overflow=''}
+  function close(){
+    mask.classList.remove('on');
+    document.body.style.overflow='';
+    if(lastFocus && lastFocus.focus) lastFocus.focus();
+  }
 
   document.querySelectorAll('.vb').forEach(function(b){
     b.onclick=function(){open(b.dataset.vote)};
   });
   document.getElementById('fbCancel').onclick=close;
   mask.onclick=function(e){if(e.target===mask)close()};
-  addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+  addEventListener('keydown',function(e){
+    if(e.key==='Escape'){close();return}
+    if(e.key!=='Tab' || !mask.classList.contains('on')) return;
+    var f=focusables();
+    if(!f.length) return;
+    var first=f[0],last=f[f.length-1];
+    if(e.shiftKey && document.activeElement===first){e.preventDefault();last.focus()}
+    else if(!e.shiftKey && document.activeElement===last){e.preventDefault();first.focus()}
+  });
 
   document.getElementById('fbSend').onclick=function(){
     var btn=this,text=document.getElementById('fbText').value.trim();
@@ -409,13 +450,15 @@ ${policy.alert.paras.map(p => `      <p>${pick(p, v)}</p>`).join('\n')}
   <title>${esc(pageTitle)}</title>
   <meta name="theme-color" content="#075e54">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="${ogImg}">
+  <link rel="apple-touch-icon" href="/icon-180.png">
+  <link rel="mask-icon" href="/favicon.svg" color="#075e54">
   <link rel="manifest" href="/site.webmanifest">${seo}
   <style>${CSS}</style>
 </head>
 <body>
 
-<div id="bar"></div>
+<a class="skip" href="#isi">Lewati ke isi</a>
+<div id="bar" aria-hidden="true"></div>
 
 <header>
   <div class="badge${internal ? ' warn' : ''}">${internal ? 'Versi Internal - Tanpa Sensor' : 'Grup &amp; Saluran Resmi'}</div>
@@ -427,7 +470,7 @@ ${M.tags.map(t => `    <span class="tag">${esc(t)}</span>`).join('\n')}
   <p class="meta">Versi ${M.version} &middot; Update ${M.updated} &middot; Baca santai ${M.readMinutes} menit</p>
 </header>
 
-<div class="wrap">
+<div class="wrap" id="isi">
 
 ${tldr}
 
@@ -447,7 +490,7 @@ ${contact}
 ${switcher}
 
   <footer>
-    <p>${pick(policy.footer, v)}</p>
+    <p>${rich(pick(policy.footer, v))}</p>
     <p style="margin-top:10px">&copy; 2026 <b>${M.nameStyled}</b> &middot; ${esc(M.tagline)}</p>
     <p style="margin-top:6px">Open source (MIT) &middot; <a href="${M.repo}" target="_blank" rel="noopener">GitHub</a> &middot; <a href="/api/policy">API</a> &middot; <a href="/docs">Docs</a> &middot; <a href="/status">Status</a></p>
   </footer>
@@ -471,6 +514,8 @@ Disallow: /internal.html
 
 User-agent: GPTBot
 Allow: /
+Disallow: /internal
+Disallow: /internal.html
 
 Sitemap: ${M.url}/sitemap.xml
 `);
@@ -495,13 +540,47 @@ fs.writeFileSync(path.join(pub, 'sitemap.xml'), `<?xml version="1.0" encoding="U
 </urlset>
 `);
 
+const FAVICON_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#075e54"/><path d="M32 12l16 6v13c0 11-7 19-16 21-9-2-16-10-16-21V18l16-6z" fill="none" stroke="#25d366" stroke-width="4" stroke-linejoin="round"/><circle cx="32" cy="34" r="5" fill="#25d366"/></svg>`;
+fs.writeFileSync(path.join(pub, 'favicon.svg'), FAVICON_SVG);
+
+// Ikon persegi buat PWA & iOS. Sebelumnya manifest & apple-touch-icon sama-sama
+// menunjuk og.png 1200x630: rasio salah, dan Chrome menolak ikon non-persegi
+// untuk instalasi. PNG di-render dari vektor yang sama, jadi tidak perlu aset baru.
+const ICON_SIZES = [180, 192, 512];
+let iconsDone = [];
+try {
+  const { execFileSync } = await import('node:child_process');
+  const hasRenderer = (() => {
+    try { execFileSync('magick', ['-version'], { stdio: 'ignore' }); return 'magick'; }
+    catch { try { execFileSync('convert', ['-version'], { stdio: 'ignore' }); return 'convert'; } catch { return null; } }
+  })();
+  if (hasRenderer) {
+    const tmpSvg = path.join(pub, '.icon-src.svg');
+    fs.writeFileSync(tmpSvg, FAVICON_SVG);
+    for (const n of ICON_SIZES) {
+      const out = path.join(pub, `icon-${n}.png`);
+      execFileSync(hasRenderer, ['-background', 'none', '-density', '384', tmpSvg,
+        '-resize', `${n}x${n}!`, '-strip', '-define', 'png:include-chunk=none', out]);
+      iconsDone.push(n);
+    }
+    fs.rmSync(tmpSvg);
+  }
+} catch (e) {
+  console.warn('[build] ikon PNG dilewati (' + e.message.split('\n')[0] + ') — pakai favicon.svg saja');
+}
+
+const iconList = iconsDone.filter(n => n !== 180).map(n => ({
+  src: `/icon-${n}.png`, sizes: `${n}x${n}`, type: 'image/png', purpose: 'any'
+}));
+// og.png tetap dipakai sebagai ikon besar; tetap sah sebagai entri tambahan
+if (!iconList.length) iconList.push({ src: '/og.png', sizes: '1200x630', type: 'image/png', purpose: 'any' });
+
 fs.writeFileSync(path.join(pub, 'site.webmanifest'), JSON.stringify({
   name: `${M.title} - ${M.name}`, short_name: 'Kebijakan XyCloud',
   description: M.description, start_url: '/', display: 'standalone',
   background_color: '#ece5dd', theme_color: '#075e54', lang: 'id',
-  icons: [{ src: '/og.png', sizes: '1200x630', type: 'image/png', purpose: 'any' }]
+  icons: iconList
 }, null, 2));
 
-fs.writeFileSync(path.join(pub, 'favicon.svg'), `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#075e54"/><path d="M32 12l16 6v13c0 11-7 19-16 21-9-2-16-10-16-21V18l16-6z" fill="none" stroke="#25d366" stroke-width="4" stroke-linejoin="round"/><circle cx="32" cy="34" r="5" fill="#25d366"/></svg>`);
-
-console.log('[build] index, internal, robots, sitemap, manifest, favicon -> public/');
+console.log('[build] index, internal, robots, sitemap, manifest, favicon' +
+  (iconsDone.length ? `, icon-${iconsDone.join('/')} -> public/` : ' -> public/'));

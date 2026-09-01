@@ -8,9 +8,8 @@
  * Opsi lewat atribut data-* pada tag <script>:
  *   data-target="#selector"   elemen tujuan          (default: #xyc-policy)
  *   data-theme="light|dark|auto"                     (default: auto)
- *   data-version="public|internal"                   (default: public)
  *   data-section="promosi"    tampilkan 1 section    (default: semua)
- *   data-accent="#25d366"     warna aksen
+ *   data-accent="#25d366"     warna aksen (hex/nama warna CSS saja)
  *   data-credit="true|false"  tampilkan kredit       (default: true, mohon jangan dimatikan)
  *
  * Lisensi MIT. Wajib mencantumkan kredit ke https://rules.xyc.my.id
@@ -31,11 +30,20 @@
   var opt = {
     target: D.target || '#xyc-policy',
     theme: D.theme || 'auto',
-    version: D.version === 'internal' ? 'internal' : 'public',
     section: D.section || '',
-    accent: D.accent || '#25d366',
+    accent: safeAccent(D.accent),
     credit: D.credit !== 'false'
   };
+
+  // data-accent masuk mentah ke dalam <style>. Tanpa disaring, nilai seperti
+  // "red;}body{display:none" bisa menutup blok CSS dan menyuntik aturan lain.
+  function safeAccent(v) {
+    if (typeof v !== 'string') return '#25d366';
+    var t = v.trim();
+    if (/^#[0-9a-fA-F]{3,8}$/.test(t)) return t;
+    if (/^[a-zA-Z]{3,20}$/.test(t)) return t;
+    return '#25d366';
+  }
 
   var STYLE_ID = 'xyc-policy-style';
 
@@ -143,7 +151,8 @@
 
     host.innerHTML = '<div class="xyc-w"><div class="xyc-ld">Memuat kebijakan&hellip;</div></div>';
 
-    var url = origin + '/api/policy?version=' + opt.version + (opt.section ? '&section=' + encodeURIComponent(opt.section) : '');
+    // Selalu versi publik. Versi internal tidak lagi bisa ditarik dari widget.
+    var url = origin + '/api/policy' + (opt.section ? '?section=' + encodeURIComponent(opt.section) : '');
 
     fetch(url, { mode: 'cors' })
       .then(function (r) {

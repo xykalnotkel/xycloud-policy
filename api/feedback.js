@@ -17,6 +17,23 @@ function limited(ip) {
 const esc = (s) => String(s == null ? '' : s)
   .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
+// Kontak dipakai buat dua hal: jadi reply_to, dan jadi link WhatsApp.
+// Keduanya harus divalidasi dulu, kalau tidak:
+//  - reply_to bisa diisi string aneh asal mengandung "@" (admin membalas ke alamat tak terduga)
+//  - link WhatsApp jadi "https://wa.me/" kosong begitu kontak bukan nomor
+const isEmail = (s) => /^[^\s@,;<>()[\]\\]+@[^\s@,;<>()[\]\\]+\.[^\s@,;<>()[\]\\]{2,}$/.test(s);
+const waNumber = (s) => {
+  const d = String(s).replace(/\D/g, '');
+  return d.length >= 8 && d.length <= 15 ? d : '';
+};
+
+// Di Vercel, x-forwarded-for diisi proxy jadi bisa dipercaya. Di luar itu header ini
+// bebas dipalsukan, jadi fallback ke socket address supaya rate limit tidak gampang dilewati.
+function clientIp(req) {
+  const xf = (req.headers['x-forwarded-for'] || '').split(',')[0].trim();
+  return xf || (req.socket && req.socket.remoteAddress) || 'unknown';
+}
+
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST,OPTIONS');
@@ -26,7 +43,7 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') return res.status(405).json({ ok: false, error: 'method_not_allowed' });
 
-  const ip = (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || 'unknown';
+  const ip = clientIp(req);
   if (limited(ip)) return res.status(429).json({ ok: false, error: 'kebanyakan_kirim' });
 
   let body = req.body;
@@ -46,6 +63,9 @@ export default async function handler(req, res) {
 
   const key = process.env.RESEND_API_KEY;
   if (!key) return res.status(500).json({ ok: false, error: 'email_belum_dikonfigurasi' });
+
+  const waNum = waNumber(contact);
+  const replyEmail = isEmail(contact) ? contact : null;
 
   const positive = vote === 'like';
   const accent = positive ? '#25d366' : '#d92d20';
@@ -69,7 +89,7 @@ export default async function handler(req, res) {
     </table>
     ${message ? `<div style="margin-top:18px"><div style="font-size:12px;color:#54656f;text-transform:uppercase;letter-spacing:.5px;margin-bottom:7px">Pesan</div>
     <div style="background:#f0f2f5;border-left:4px solid ${accent};border-radius:8px;padding:14px 16px;font-size:14.5px;line-height:1.65;white-space:pre-wrap">${esc(message)}</div></div>` : ''}
-    ${contact ? `<div style="margin-top:18px"><a href="https://wa.me/${esc(contact.replace(/[^0-9]/g, ''))}" style="display:inline-block;background:#25d366;color:#fff;text-decoration:none;padding:11px 20px;border-radius:8px;font-size:14px;font-weight:600">Bales via WhatsApp</a></div>` : ''}
+    ${waNum ? `<div style="margin-top:18px"><a href="https://wa.me/${waNum}" style="display:inline-block;background:#25d366;color:#fff;text-decoration:none;padding:11px 20px;border-radius:8px;font-size:14px;font-weight:600">Bales via WhatsApp</a></div>` : ''}
   </div>
   <div style="padding:16px 24px;border-top:1px solid #e4e7ec;font-size:12px;color:#8696a0;text-align:center">
     Email otomatis dari <b style="color:#075e54">XyCloud Policy</b> &middot; <a href="https://rules.xyc.my.id" style="color:#075e54">rules.xyc.my.id</a>
@@ -95,7 +115,7 @@ export default async function handler(req, res) {
         from: FROM, to: [TO],
         subject: `[${label}] Feedback Kebijakan Grup XyCloud${reasons.length ? ' — ' + reasons[0] : ''}`,
         html, text,
-        ...(contact && contact.includes('@') ? { reply_to: contact } : {})
+        ...(replyEmail ? { reply_to: replyEmail } : {})
       })
     });
     const out = await r.json().catch(() => ({}));

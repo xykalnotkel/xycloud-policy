@@ -1,5 +1,19 @@
 import policy from '../data/policy.json' with { type: 'json' };
 
+// Versi "internal" isinya blak-blakan dan niatnya cuma buat member grup.
+// Sebelumnya ?version=internal terbuka buat siapa saja (CORS *), dan embed.js
+// malah bisa menempelkannya di website pihak ketiga. Sekarang default-nya ditutup:
+// baru bisa dibuka kalau POLICY_INTERNAL_KEY diset di environment dan pemanggil
+// mengirim kunci yang sama lewat header X-Policy-Internal-Key atau ?key=.
+// Halaman /internal sendiri tidak terpengaruh karena di-generate statis saat build.
+const INTERNAL_KEY = process.env.POLICY_INTERNAL_KEY || '';
+
+function internalAllowed(req, url) {
+  if (!INTERNAL_KEY) return false;
+  const got = req.headers['x-policy-internal-key'] || url.searchParams.get('key') || '';
+  return typeof got === 'string' && got.length > 0 && got === INTERNAL_KEY;
+}
+
 const pick = (o, v) => (v === 'internal' && o.internal ? o.internal : o.public);
 const strip = (s) => String(s).replace(/<[^>]+>/g, '');
 
@@ -115,8 +129,21 @@ export default function handler(req, res) {
 
   const url = new URL(req.url, `https://${req.headers.host || policy.meta.domain}`);
   const q = url.searchParams;
-  const version = q.get('version') === 'internal' ? 'internal' : 'public';
   const format = (q.get('format') || 'json').toLowerCase();
+
+  if (q.get('version') === 'internal' && !internalAllowed(req, url)) {
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
+    return res.status(403).json({
+      ok: false,
+      error: 'internal_terkunci',
+      message: INTERNAL_KEY
+        ? 'Versi internal butuh kunci. Kirim header X-Policy-Internal-Key atau parameter ?key=.'
+        : 'Versi internal tidak dibuka lewat API. Set POLICY_INTERNAL_KEY di environment untuk membukanya.',
+      hint: 'Baca versi publik di /api/policy, atau halaman lengkapnya di /internal.'
+    });
+  }
+
+  const version = q.get('version') === 'internal' ? 'internal' : 'public';
   const sectionId = q.get('section');
   const pretty = q.get('pretty') === '1' || q.get('pretty') === 'true';
 

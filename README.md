@@ -86,7 +86,7 @@ curl "https://rules.xyc.my.id/api/policy?format=text"              # teks polos 
 curl "https://rules.xyc.my.id/api/health"                          # status
 ```
 
-**Parameter:** `format` (json·html·markdown·text·index) · `section` (id/nomor) · `version` (public·internal) · `pretty` (1)
+**Parameter:** `format` (json·html·markdown·text·index) · `section` (id/nomor) · `version` (public·internal, internal terkunci — lihat Environment) · `pretty` (1)
 
 **Section:** `keluar-masuk` `kelakuan` `promosi` `transaksi` `ketipu` `ngeyel` `larangan` `sanksi` `saluran` `privasi` `admin`
 
@@ -140,7 +140,13 @@ Hanya dibutuhkan untuk endpoint feedback:
 RESEND_API_KEY=re_xxx
 FEEDBACK_TO=email@tujuan.com
 FEEDBACK_FROM=Nama <noreply@domain-kamu.com>
+POLICY_INTERNAL_KEY=rahasia-kalau-mau-buka-versi-internal
 ```
+
+`POLICY_INTERNAL_KEY` opsional. Kalau tidak diset, `?version=internal` di API menolak
+dengan 403 (versi internal dianggap rahasia dan tidak boleh bocor lewat API publik atau
+widget embed). Kalau diset, pemanggil harus mengirim kunci yang sama lewat header
+`X-Policy-Internal-Key` atau parameter `?key=`.
 
 ## Deploy
 

@@ -8,9 +8,20 @@ function cors(res) {
   res.setHeader('Cache-Control', 'no-store, max-age=0');
 }
 
+// Endpoint ini publik, tanpa rate limit, dan terdaftar di sitemap.
+// Sebelumnya setiap request memanggil GET https://api.resend.com/domains,
+// jadi trafik bot langsung memakan kuota API Resend akun admin.
+// Hasilnya di-cache sebentar; angka 60 detik cukup buat halaman status.
+const RESEND_TTL = 60_000;
+let resendCache = { at: 0, data: null };
+
 async function checkResend() {
   const key = process.env.RESEND_API_KEY;
   if (!key) return { status: 'down', detail: 'RESEND_API_KEY belum diset' };
+  const now = Date.now();
+  if (resendCache.data && now - resendCache.at < RESEND_TTL) {
+    return { ...resendCache.data, cached: true, cacheAgeMs: now - resendCache.at };
+  }
   const t = Date.now();
   try {
     const ctrl = new AbortController();
@@ -20,20 +31,25 @@ async function checkResend() {
     });
     clearTimeout(to);
     const ms = Date.now() - t;
-    if (!r.ok) return { status: 'degraded', latency: ms, detail: `HTTP ${r.status}` };
+    if (!r.ok) return cache({ status: 'degraded', latency: ms, detail: `HTTP ${r.status}` });
     const d = await r.json().catch(() => ({}));
     const list = d.data || [];
     const dom = list.find(x => x.name === 'xyc.my.id');
-    if (!dom) return { status: 'degraded', latency: ms, detail: 'domain xyc.my.id tidak ditemukan' };
-    return {
+    if (!dom) return cache({ status: 'degraded', latency: ms, detail: 'domain xyc.my.id tidak ditemukan' });
+    return cache({
       status: dom.status === 'verified' ? 'operational' : 'degraded',
       latency: ms,
       detail: `domain ${dom.name} · ${dom.status}`,
       sender: process.env.FEEDBACK_FROM || null
-    };
+    });
   } catch (e) {
-    return { status: 'down', latency: Date.now() - t, detail: e.name === 'AbortError' ? 'timeout 4s' : 'tidak bisa dihubungi' };
+    return cache({ status: 'down', latency: Date.now() - t, detail: e.name === 'AbortError' ? 'timeout 4s' : 'tidak bisa dihubungi' });
   }
+}
+
+function cache(data) {
+  resendCache = { at: Date.now(), data };
+  return data;
 }
 
 function checkData() {

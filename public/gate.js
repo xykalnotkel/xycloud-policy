@@ -40,8 +40,26 @@
     theme: D.theme === 'dark' ? 'dark' : 'light',
     remember: D.remember === undefined ? 30 : parseInt(D.remember, 10) || 0,
     require: D.require || 'scroll',
-    accent: D.accent || '#25d366'
+    accent: safeAccent(D.accent)
   };
+
+  // data-accent disuntik ke dalam <style>; tanpa disaring bisa menutup blok CSS.
+  function safeAccent(v) {
+    if (typeof v !== 'string') return '#25d366';
+    var t = v.trim();
+    if (/^#[0-9a-fA-F]{3,8}$/.test(t)) return t;
+    if (/^[a-zA-Z]{3,20}$/.test(t)) return t;
+    return '#25d366';
+  }
+
+  // href dipakai untuk navigasi (location.href / window.open). Tanpa cek protokol,
+  // XycGate.open('javascript:...') bisa menjalankan kode di halaman pemasang.
+  function safeHref(href) {
+    if (typeof href !== 'string') return '';
+    var t = href.trim();
+    if (!/^(https?:|mailto:|tel:)/i.test(t)) return '';
+    return t;
+  }
 
   var KEY = 'xyc_gate_ok';
   var cache = null, pending = null, host = null, shadow = null;
@@ -257,30 +275,51 @@
   }
 
   function open(href, target) {
+    var dest = safeHref(href);
+    if (href && !dest) {
+      console.warn('[xyc-gate] href ditolak, protokol tidak diizinkan:', href);
+      return Promise.resolve(false);
+    }
     if (agreed()) {
-      if (href) {
-        if (target === '_blank') window.open(href, '_blank', 'noopener');
-        else location.href = href;
+      if (dest) {
+        if (target === '_blank') window.open(dest, '_blank', 'noopener');
+        else location.href = dest;
       }
       return Promise.resolve(true);
     }
     return new Promise(function (resolve) {
-      pending = { href: href, target: target, resolve: resolve };
+      pending = { href: dest, target: target, resolve: resolve };
       maskEl = build();
       prevOverflow = document.documentElement.style.overflow;
       document.documentElement.style.overflow = 'hidden';
       requestAnimationFrame(function () { maskEl.classList.add('on'); });
 
       fetchPolicy().then(function (d) { paint(maskEl, d); }).catch(function () {
+        // Sengaja fail-closed: kalau kebijakan tidak bisa ditampilkan, jangan
+        // tawarkan jalan pintas. Sebelumnya ada tombol "Lanjut Aja" yang tetap
+        // membuka link tanpa membaca apa pun, jadi gate-nya bisa dilewati begitu saja.
         maskEl.querySelector('.box').innerHTML =
           '<div class="hd"><h2>Gagal memuat</h2></div>' +
-          '<div class="bd"><p style="font-size:14px">Kebijakannya lagi ga bisa dimuat. Buka manual di ' +
+          '<div class="bd"><p style="font-size:14px;line-height:1.6">Kebijakannya lagi ga bisa dimuat, jadi gate-nya ga bisa dibuka dulu. ' +
+          'Coba lagi sebentar, atau baca kebijakannya langsung di ' +
           '<a href="' + ORIGIN + '" target="_blank" rel="noopener" style="color:' + CFG.accent + '">' +
-          ORIGIN.replace(/^https?:\/\//, '') + '</a></p></div>' +
-          '<div class="ft"><div class="row"><button class="b no" id="no">Tutup</button>' +
-          '<button class="b ok" id="ok">Lanjut Aja</button></div></div>';
+          ORIGIN.replace(/^https?:\/\//, '') + '</a> lalu balik lagi ke sini.</p></div>' +
+          '<div class="ft"><div class="row"><button class="b no" id="no" style="flex:1">Tutup</button>' +
+          '<button class="b ok" id="retry" style="flex:1">Coba Lagi</button></div></div>';
         maskEl.querySelector('#no').onclick = function () { finish(false); };
-        maskEl.querySelector('#ok').onclick = function () { finish(true); };
+        maskEl.querySelector('#retry').onclick = function () {
+          var m = maskEl;
+          m.querySelector('.box').innerHTML = '<div class="ld">Memuat kebijakan&hellip;</div>';
+          fetchPolicy().then(function (d) { paint(m, d); }).catch(function () {
+            m.querySelector('.box').innerHTML =
+              '<div class="hd"><h2>Masih gagal</h2></div>' +
+              '<div class="bd"><p style="font-size:14px;line-height:1.6">Belum bisa dimuat juga. Baca langsung di ' +
+              '<a href="' + ORIGIN + '" target="_blank" rel="noopener" style="color:' + CFG.accent + '">' +
+              ORIGIN.replace(/^https?:\/\//, '') + '</a>.</p></div>' +
+              '<div class="ft"><div class="row"><button class="b no" id="no" style="flex:1">Tutup</button></div></div>';
+            m.querySelector('#no').onclick = function () { finish(false); };
+          });
+        };
       });
     });
   }

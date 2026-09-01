@@ -11,6 +11,20 @@ const MIME = { '.html':'text/html; charset=utf-8', '.js':'application/javascript
   '.json':'application/json; charset=utf-8', '.png':'image/png', '.svg':'image/svg+xml',
   '.xml':'application/xml; charset=utf-8', '.txt':'text/plain; charset=utf-8', '.webmanifest':'application/manifest+json' };
 
+// Cache modul per file dan invalidasi lewat mtime.
+// Sebelumnya URL-nya ditempeli '?t=' + Date.now() sehingga modul di-import ulang
+// setiap request: state di dalam modul (misalnya Map rate limiter di api/feedback.js)
+// selalu lahir baru, jadi pembatasan laju tidak pernah terlihat aktif di lokal.
+const modCache = new Map();
+async function loadApi(file) {
+  const st = fs.statSync(file);
+  const hit = modCache.get(file);
+  if (hit && hit.mtimeMs === st.mtimeMs && hit.size === st.size) return hit.mod;
+  const mod = await import(pathToFileURL(file).href);
+  modCache.set(file, { mtimeMs: st.mtimeMs, size: st.size, mod });
+  return mod;
+}
+
 http.createServer(async (req, res) => {
   const u = new URL(req.url, `http://${req.headers.host}`);
   if (u.pathname.startsWith('/api/')) {
@@ -20,7 +34,7 @@ http.createServer(async (req, res) => {
     if (req.method === 'POST') {
       req.body = await new Promise(r => { let b=''; req.on('data',c=>b+=c); req.on('end',()=>{ try{r(JSON.parse(b||'{}'))}catch{r({})} }); });
     }
-    const mod = await import(pathToFileURL(file).href + '?t=' + Date.now());
+    const mod = await loadApi(file);
     res.setHeader = res.setHeader.bind(res);
     res.status = (c) => { res.statusCode = c; return res; };
     res.json = (o) => { res.setHeader('Content-Type','application/json; charset=utf-8'); res.end(JSON.stringify(o)); };

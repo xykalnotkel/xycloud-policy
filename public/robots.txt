@@ -5,5 +5,7 @@ Disallow: /internal.html
 
 User-agent: GPTBot
 Allow: /
+Disallow: /internal
+Disallow: /internal.html
 
 Sitemap: https://rules.xyc.my.id/sitemap.xml

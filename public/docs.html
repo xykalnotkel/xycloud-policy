@@ -106,7 +106,7 @@ footer a{color:#075e54}
       <tr><th>Param</th><th>Nilai</th><th>Default</th><th>Fungsi</th></tr>
       <tr><td><code>format</code></td><td>json, html, markdown, text, index</td><td>json</td><td>Format output</td></tr>
       <tr><td><code>section</code></td><td>id atau nomor section</td><td>semua</td><td>Filter satu section</td></tr>
-      <tr><td><code>version</code></td><td>public, internal</td><td>public</td><td>Varian bahasa</td></tr>
+      <tr><td><code>version</code></td><td>public, internal</td><td>public</td><td>Varian bahasa. <b>internal ditutup</b> kecuali server menyetel <code>POLICY_INTERNAL_KEY</code> dan request membawa header <code>X-Policy-Internal-Key</code> atau parameter <code>key</code> yang sama. Halaman <code>/internal</code> tetap bisa dibuka langsung (noindex).</td></tr>
       <tr><td><code>pretty</code></td><td>1</td><td>0</td><td>JSON diformat rapi</td></tr>
     </table>
 
