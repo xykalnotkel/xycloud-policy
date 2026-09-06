@@ -109,6 +109,26 @@
       "permanent": true
     },
     {
+      "source": "/en/",
+      "destination": "/en",
+      "permanent": true
+    },
+    {
+      "source": "/en/rules",
+      "destination": "/en",
+      "permanent": true
+    },
+    {
+      "source": "/en/aturan",
+      "destination": "/en",
+      "permanent": true
+    },
+    {
+      "source": "/en/tos",
+      "destination": "/en",
+      "permanent": true
+    },
+    {
       "source": "/api",
       "destination": "/api/health",
       "permanent": false

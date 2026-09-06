@@ -29,12 +29,13 @@ Aturan intinya satu: **member yang keluar atau dikeluarkan dari Grup tidak bisa 
 | | |
 |---|---|
 | **Dua versi** | `/` versi publik (SEO-friendly) dan `/internal` versi blak-blakan (`noindex`) |
-| **Satu sumber data** | Semua teks ada di [`data/policy.json`](data/policy.json). Edit di situ, jalankan build, semua ikut berubah |
+| **Dua bahasa** | `/` Bahasa Indonesia dan `/en` English, lengkap dengan deteksi bahasa browser + tombol ID/EN. Widget & gate ikut dua bahasa |
+| **Satu sumber data** | Semua teks ada di [`data/policy.json`](data/policy.json) (id) + [`data/policy.en.json`](data/policy.en.json) (en). Edit di situ, jalankan build, semua ikut berubah |
 | **API publik** | JSON, HTML, Markdown, dan teks polos. Tanpa API key, CORS terbuka |
 | **Widget embed** | Satu baris `<script>` untuk menempelkan kebijakan di website mana pun |
 | **Gate popup** | Pasang di link bio — orang harus baca & pencet setuju sebelum link WhatsApp kebuka |
 | **Feedback** | Tombol suka/kurang, popup alasan, kiriman langsung masuk email admin via Resend |
-| **SEO lengkap** | Canonical, hreflang, robots, sitemap, dan 5 blok JSON-LD (WebSite, WebPage, Organization, FAQPage, BreadcrumbList) |
+| **SEO lengkap** | Canonical, hreflang id/en/x-default, robots, sitemap dengan alternates, dan 5 blok JSON-LD (WebSite, WebPage, Organization, FAQPage, BreadcrumbList) |
 | **Open Graph penuh** | Banner 1200×630 untuk WhatsApp, Facebook, X, Telegram, Discord, LinkedIn, Threads, Pinterest |
 | **Nol dependensi** | Tidak ada `node_modules`. HTML, CSS, dan JS murni |
 
@@ -42,7 +43,8 @@ Aturan intinya satu: **member yang keluar atau dikeluarkan dari Grup tidak bisa 
 
 ```
 xycloud-policy/
-├── data/policy.json        # sumber kebenaran — edit di sini
+├── data/policy.json        # sumber kebenaran (id) — edit di sini
+├── data/policy.en.json     # sumber kebenaran (en) — struktur identik, id section disamakan
 ├── scripts/
 │   ├── build.mjs           # generator HTML, sitemap, robots, manifest, favicon
 │   └── serve.mjs           # dev server lokal + emulasi /api
@@ -53,6 +55,8 @@ xycloud-policy/
 ├── public/                 # hasil build + aset statis
 │   ├── index.html          # (generated) versi publik
 │   ├── internal.html       # (generated) versi internal
+│   ├── en/index.html       # (generated) versi publik English (/en)
+│   ├── en/internal.html    # (generated) versi internal English (/en/internal)
 │   ├── docs.html           # dokumentasi API
 │   ├── embed.js            # widget kebijakan
 │   ├── gate.js             # popup persetujuan
@@ -78,7 +82,8 @@ npm run build    # build saja
 Base URL: `https://rules.xyc.my.id`
 
 ```bash
-curl "https://rules.xyc.my.id/api/policy"                          # semua, JSON
+curl "https://rules.xyc.my.id/api/policy"                          # semua, JSON (id)
+curl "https://rules.xyc.my.id/api/policy?lang=en"                  # semua, JSON (English)
 curl "https://rules.xyc.my.id/api/policy?format=index"             # daftar section
 curl "https://rules.xyc.my.id/api/policy?section=promosi"          # satu section
 curl "https://rules.xyc.my.id/api/policy?format=markdown"          # Markdown
@@ -86,7 +91,9 @@ curl "https://rules.xyc.my.id/api/policy?format=text"              # teks polos 
 curl "https://rules.xyc.my.id/api/health"                          # status
 ```
 
-**Parameter:** `format` (json·html·markdown·text·index) · `section` (id/nomor) · `version` (public·internal, internal terkunci — lihat Environment) · `pretty` (1)
+**Parameter:** `lang` (id·en, default `id`) · `format` (json·html·markdown·text·index) · `section` (id/nomor) · `version` (public·internal, internal terkunci — lihat Environment) · `pretty` (1)
+
+Bahasa yang diminta tercermin di header `X-Policy-Language` dan `meta.requestedLanguage` / `meta.availableLanguages`.
 
 **Section:** `keluar-masuk` `kelakuan` `promosi` `transaksi` `ketipu` `ngeyel` `larangan` `sanksi` `saluran` `privasi` `admin`
 
@@ -103,6 +110,21 @@ Pasang di link bio. Orang pencet link WhatsApp → kebijakan muncul dulu → tom
 
 Mode otomatis untuk semua link WhatsApp: `data-auto="wa"`. Dirender di Shadow DOM jadi CSS tidak bentrok. [Demo](https://rules.xyc.my.id/demo)
 
+## Dua Bahasa (ID / EN)
+
+Website, API, widget, dan gate semuanya dua bahasa:
+
+- **Halaman:** `/` (Indonesia) dan `/en` (English), masing-masing punya pasangan `/internal` dan `/en/internal`. Kedua bahasa saling terhubung lewat hreflang + sitemap alternates, jadi Google mengindeks keduanya.
+- **Deteksi otomatis:** kunjungan pertama (sebelum pengunjung memilih manual) dicek bahasa browsernya — `id` → versi Indonesia, selain itu → versi English. Bot crawler dan social scraper dikecualikan supaya SEO/OG tiap URL tetap utuh.
+- **Tombol ID/EN** di pojok header: pilihan manual, disimpan di `localStorage` (`xyc_lang`) dan menang atas deteksi otomatis selamanya.
+- **API:** `?lang=en` (default tetap `id`, jadi pemanggil lama tidak berubah).
+- **Widget & gate:** `data-lang="id|en|auto"` di tag `<script>` (default `auto` — ikut bahasa browser pembacanya). Gate juga bisa per-panggilan: `XycGate.open(url, '_blank', { lang: 'en' })`.
+
+```html
+<!-- gate selalu English, apa pun bahasa browser pengunjung -->
+<script src="https://rules.xyc.my.id/gate.js" data-lang="en" defer></script>
+```
+
 ## Widget
 
 ```html
@@ -118,6 +140,7 @@ Dengan opsi:
         data-theme="dark"
         data-section="promosi"
         data-accent="#00ff88"
+        data-lang="auto"
         defer></script>
 ```
 
@@ -130,7 +153,7 @@ Boleh, gratis, lisensi MIT. Dua syarat:
 1. **Minta izin dulu** ke [Admin XyCloud](https://wa.me/6283116632566) sebelum dipakai.
 2. **Cantumkan kredit** balik ke `rules.xyc.my.id`. Widget sudah otomatis menambahkannya — mohon jangan dimatikan.
 
-Kalau mau fork total, cukup ubah blok `meta` di `data/policy.json` (nama, domain, nomor admin, tag, keyword), lalu `npm run build`.
+Kalau mau fork total, cukup ubah blok `meta` di `data/policy.json` (nama, domain, nomor admin, tag, keyword), lalu `npm run build`. Mau bahasa lain? Terjemahkan `data/policy.en.json` jadi bahasa apa pun (jaga `id` section tetap sama), atau hapus file itu + dua baris `POLICIES` di `scripts/build.mjs` dan `api/policy.js` kalau mau balik satu bahasa.
 
 ## Environment
 

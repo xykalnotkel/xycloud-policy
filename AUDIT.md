@@ -87,3 +87,29 @@ unit tes fungsi, render ulang build). Yang tidak kebukti **dicoret** dan dicatat
 
 - Tidak ada CSP header — bisa dipertimbangkan, tapi `X-Frame-Options: SAMEORIGIN` + `nosniff` sudah ada dan tidak ada konten user yang dirender sebagai HTML.
 - `vercel.json` tetap tanpa `rewrites`; clean URL ditangani host (sudah jalan di production).
+
+---
+
+## E. Dukungan dua bahasa (id / en) — 2026-09-06
+
+Konten tetap satu sumber per bahasa: `data/policy.json` (id) + `data/policy.en.json` (en).
+Struktur identik, **id section disamakan** supaya `?section=` dan filter gate.js bekerja
+sama untuk kedua bahasa. Field mati `meta.titleEn` dihapus (tidak pernah dirujuk;
+judul EN sekarang `meta.title` di file en).
+
+| Aspek | Keputusan | Alasan |
+|---|---|---|
+| URL | `/` (id) ↔ `/en` (en), `/internal` ↔ `/en/internal` | Statis, indexable, canonical jelas per bahasa |
+| Deteksi otomatis | Client-side, baca `navigator.languages`: ada `id` → id, selain itu → en. Simpan pilihan manual di `localStorage.xyc_lang` (toggle ID/EN di header) menang selamanya | Deteksi "device/negara" (geo-IP) mahal & salah terus; bahasa UI browser adalah sinyal yang paling bisa dipercaya |
+| Crawler | Bot regex (Googlebot, bingpreview, WhatsApp/FB/TG/Discord/Twitter scraper, headless) **tidak** di-redirect | Googlebot dirender locale en-US; kalau ikut redirect, `/` berisiko hilang dari indeks dan scraper OG salah ambil banner |
+| Loop redirect | Mustahil secara struktural: tiap halaman hanya redirect ke arah "bahasa pas"-nya dan kondisinya saling eksklusif; query + hash ikut dibawa | — |
+| SEO | hreflang `id`/`en`/`x-default`, canonical per bahasa, og:locale id_ID/en_US, JSON-LD `inLanguage`, sitemap `xhtml:link` alternates untuk `/` dan `/en` | Kedua bahasa setara di mata mesin pencari |
+| Internal | `/en/internal` ikut `noindex` + `Disallow` di robots (kedua blok UA) | Paritas dengan `/internal` |
+| API | `?lang=id|en`, default `id` — pemanggil lama tidak berubah. Header `X-Policy-Language`, meta `requestedLanguage`/`availableLanguages`. Cache per-URL penuh jadi aman di CDN | Kompatibilitas mundur |
+| Widget/gate | `data-lang="id|en|auto"` (default `auto` = deteksi browser pembaca); `XycGate.open(href, target, {lang})` opsional; cache kebijakan per bahasa | Pemasang (mis. bio-link) tidak perlu ubah apa pun; pengunjung luar otomatis dapat EN |
+| Build | `public/en/index.html` + `public/en/internal.html` di-generate bersama; CI memvalidasi kedua JSON + sinkronisasi id section | — |
+
+Diverifikasi lokal (`npm run dev`): `/` dan `/en` 200 dengan `<html lang>` benar;
+`/internal` dan `/en/internal` 200; `?lang=en` mengembalikan konten EN + header
+`X-Policy-Language: en`; `?section=keluar-masuk&lang=en` tetap jalan; format markdown/html
+ikut bahasa; robots memblokir kedua internal; sitemap memuat alternates.

@@ -1,0 +1,289 @@
+{
+  "meta": {
+    "id": "xycloud-official",
+    "name": "XyCloud | Official",
+    "nameStyled": "𝙓𝙮𝘾𝙡𝙤𝙪𝙙 𝙡 𝙊𝙛𝙛𝙞𝙘𝙞𝙖𝙡",
+    "title": "Group Policy",
+    "tagline": "Cloud Gaming, PC Rental & Game Account Trading",
+    "description": "The official policy of the XyCloud Official WhatsApp Group & Channel. Cloud gaming, PC rental, game account trading. Leave the group and it's over — no coming back.",
+    "version": "3.1.0",
+    "locale": "en",
+    "updated": "2026-09-06",
+    "effective": "2026-09-01",
+    "readMinutes": 4,
+    "domain": "rules.xyc.my.id",
+    "url": "https://rules.xyc.my.id",
+    "adminPhone": "6283116632566",
+    "adminLabel": "XyCloud Admin",
+    "channelUrl": "https://whatsapp.com/channel/0029VbB7nwuJZg3ym6UQ4Z1L",
+    "channelLabel": "XyCloud Channel | Official",
+    "license": "MIT",
+    "repo": "https://github.com/xykalnotkel/xycloud-policy",
+    "tags": ["Cloud Gaming", "PC Rental", "Game Account Trading", "Buy & Sell Game Accounts", "Hangout & Banter"],
+    "keywords": [
+      "whatsapp group rules",
+      "group policy whatsapp",
+      "whatsapp group policy template",
+      "cloud gaming community rules",
+      "game account trading rules",
+      "pc rental terms",
+      "whatsapp channel rules",
+      "community rules english",
+      "open source group policy",
+      "xycloud official"
+    ]
+  },
+
+  "tldr": {
+    "title": "Can't be bothered to read it all? Here's the gist",
+    "points": [
+      "Leaving the group = done. No coming back. A brand-new number won't help either.",
+      "Transactions must go through admin or escrow. Go solo and get scammed — that's on you.",
+      "Promotion needs permission first. Post an ad without asking and you're out."
+    ],
+    "closing": "That's it — those three are what get people kicked the most. The rest is below, four minutes tops."
+  },
+
+  "why": {
+    "title": "Why These Rules Exist",
+    "sub": "Not strict for the fun of it. There's a reason.",
+    "paras": [
+      "Honestly, this group was built to be chill. At first there were no rules at all. Then a weird pattern showed up: someone joins, stays silent for five minutes, then just leaves. The next day they join again. Then leave again. No words, no issue — just in and out like they're trying on clothes.",
+      "Sounds trivial. But when ten people a day do that, the chat fills up with \"so-and-so left\", \"so-and-so joined\" notifications, and the members who are actually serious get turned off first. Worse, the in-and-out crowd often turns out to be contact-farming, stealing the member list to spam, or running away after causing trouble, then coming back pretending to be a newcomer.",
+      "So we made it strict once and for all: leave once, and it's over. Not because we hate you — we're just tired of managing a door that keeps getting slammed. This group is for people who actually want to be here, not people messing around.",
+      "Everything else on this page just follows from that one principle. Think before joining, and think a thousand times before leaving."
+    ]
+  },
+
+  "alert": {
+    "title": "The single most important thing",
+    "paras": [
+      {
+        "public": "If you <b>leave on your own</b> or <b>get kicked by admin</b>, that's it, <b>done</b>. You can't come back. No negotiating, no \"bro I'm sorry, my bad\", no having friends plead your case.",
+        "internal": "If you <b>leave on your own</b> or <b>get kicked by admin</b>, that's it, <b>done</b>. No coming back. No negotiating, no \"bro I'm sorry, my bad\" with crying stickers, no sending a friend in as your spokesperson."
+      },
+      {
+        "public": "Trying to sneak back in with a second number is pointless — we notice. So think before you hit that leave button. Your own finger pressed it.",
+        "internal": "Trying to sneak back in with a second number is pointless — we notice, and it just makes you look more desperate. Think before you hit that leave button. Your own finger pressed it, don't blame the signal."
+      },
+      {
+        "public": "Sounds cruel? It is. But read the reasoning below first — you'll get it.",
+        "internal": "Sounds cruel? It is. But read the reason below before raging. If you've read it and still won't accept it, fine — the exit door isn't locked."
+      }
+    ]
+  },
+
+  "sections": [
+    {
+      "id": "keluar-masuk",
+      "title": "Leaving & Rejoining",
+      "sub": "The part that surprises people the most. Read it slowly.",
+      "items": [
+        { "type": "no", "public": "Leaving on your own counts as final. Permanent. Don't ask again whether you can come back." },
+        { "type": "no", "public": "Kicked for breaking the rules? That's the blacklist — and that list is never deleted." },
+        { "type": "no", "public": "Rejoin requests get rejected automatically. Via link, via a friend who knows admin — same result." },
+        { "type": "no", "public": "Second number, office number, partner's number — all detected. Sneak back in and you'll be kicked again." },
+        { "type": "no", "public": "Getting someone else to sweet-talk admin only makes your position worse. Seriously, don't.", "internal": "Getting someone else to sweet-talk admin only makes your position worse, and drags your friend into it too. Don't." },
+        { "type": "no", "public": "Messaging admin over and over while begging? You'll just get blocked on top of it — even more unpleasant.", "internal": "Messaging admin over and over while begging just gets you blocked on top of it. Have a little dignity." },
+        { "type": "ok", "public": "Those who stay from the start and don't cause drama are perfectly fine. This rule will never touch you." }
+      ],
+      "note": {
+        "type": "info",
+        "public": "There's exactly one exception: leaving because of a technical issue. Lost phone, reset account, WhatsApp erroring out — things genuinely out of your control. The condition: <b>report to admin within 24 hours, with proof</b>. Past that, the general rule applies."
+      }
+    },
+    {
+      "id": "kelakuan",
+      "title": "Behavior in the Group",
+      "sub": "The bare minimum so the group stays readable for everyone.",
+      "items": [
+        { "type": "ok", "public": "Use a readable name. Names full of weird symbols make it hard for admin to find you." },
+        { "type": "ok", "public": "Be as relaxed as you want, just don't make others uncomfortable. The line is thin, but you know it when you see it." },
+        { "type": "ok", "public": "Joke all you want, but never about someone's body, family, religion, or financial situation. That's not funny, that's obnoxious." },
+        { "type": "ok", "public": "When asking something, just say what it is. Sending \"P\" then disappearing doesn't make anyone answer faster." },
+        { "type": "ok", "public": "Scroll before asking. Most questions have already been answered — just a little further up.", "internal": "Scroll before asking. Almost every question you have is already answered above. Too lazy to scroll but not too lazy to type is funny — just not that funny." },
+        { "type": "no", "public": "Tag-all for non-urgent stuff. That makes dozens of people open their phones for nothing." },
+        { "type": "ok", "public": "10 PM to 6 AM is quiet mode. Unless a server is down or an order comes in — different story." },
+        { "type": "no", "public": "Three-minute voice notes for something that fits in two typed lines. Not everyone can listen right now." }
+      ]
+    },
+    {
+      "id": "promosi",
+      "title": "Promotion & Selling",
+      "sub": "The single most-violated rule. Not a joke.",
+      "items": [
+        { "type": "no", "public": "Any promotion at all, <b>admin permission first</b>. Post without asking once and you're kicked immediately — no warning stage." },
+        { "type": "no", "public": "Promoting other groups or neighboring communities: no. Find members in your own yard." },
+        { "type": "no", "public": "A rival cloud gaming or PC rental service? Obviously no. Freeloading in someone else's group to make your own money is shameless.", "internal": "A rival cloud gaming or PC rental service? Obviously no. Freeloading in someone else's group for your own profit is straight-up parasitic. Go make your own group — it's free." },
+        { "type": "no", "public": "Gambling, predatory loans, bogus investments, MLM. All of it: instant permanent kick, no discussion." },
+        { "type": "no", "public": "Shady short links, modded APKs, sketchy files. Don't spread them here." },
+        { "type": "no", "public": "DMing members one by one to pitch products. That's called stealing a contact list — and it's very noticeable." },
+        { "type": "no", "public": "Copy-pasting the same promo every day. Once is enough — people have read it." },
+        { "type": "ok", "public": "For approved promoters: at most <b>once a day</b>, tidy format, and relevant to the group's topic." },
+        { "type": "ok", "public": "Write it complete: what the item is, the price, the specs, where to contact you. Not just \"DM if interested\"." },
+        { "type": "ok", "public": "In the Channel, only admin can post. Members simply don't have that access, so don't ask." }
+      ],
+      "note": {
+        "type": "keras",
+        "public": "Admin can delete your promo at any time without explaining why. If it got deleted, something didn't fit. Re-read this section instead of asking with an attitude.",
+        "internal": "Admin can delete your promo at any time without explaining anything. If it got deleted, you broke something — end of story. Don't ask \"why was it deleted bro\" with attitude; just re-read this section."
+      }
+    },
+    {
+      "id": "transaksi",
+      "title": "Transactions, Rentals & Trading",
+      "sub": "Applies to Cloud Gaming, PC Rental, and account trading.",
+      "items": [
+        { "type": "ok", "public": "Negotiate and transact <b>in DMs</b>. The group is not the place for hours of haggling." },
+        { "type": "ok", "public": "Big amounts? <b>Go through admin or escrow.</b> Waiting half an hour is far better than losing your money." },
+        { "type": "no", "public": "Selling hacked, stolen, or scam-sourced accounts. Caught = instant kick, and your details get announced." },
+        { "type": "no", "public": "Selling banned or limited accounts without telling the buyer. That's fraud, not a sales strategy." },
+        { "type": "ok", "public": "Sellers honest about condition, buyers pay as agreed. It really is that simple." },
+        { "type": "ok", "public": "Keep every chat log and transfer receipt. If something goes wrong later, that's the only thing that can save you." },
+        { "type": "no", "public": "Taking a deposit then vanishing. That's not \"busy\" — that's a scam." },
+        { "type": "no", "public": "Faking testimonials or paying friends for bogus reviews. It gets noticed, and the embarrassment lasts." },
+        { "type": "no", "public": "Haggling to the point of insulting someone's price. Not a match? Move along — no need to comment." }
+      ],
+      "note": {
+        "type": "info",
+        "public": "Transactions that go through admin or official escrow are guaranteed until completion. Outside that, we can't guarantee anything."
+      }
+    },
+    {
+      "id": "ketipu",
+      "title": "If You Get Scammed",
+      "sub": "There's a right way to do this, and there's a way that just makes noise.",
+      "items": [
+        { "type": "no", "public": "Told to use escrow, you still went solo in silence, got scammed, then screamed in the group fishing for sympathy. <b>Tough luck — that's on you.</b>", "internal": "Told to use escrow, you still went solo in silence, got scammed, then threw a tantrum in the group fishing for sympathy. <b>Tough luck, that's entirely on you.</b>" },
+        { "type": "no", "public": "The rules were posted big and clear from day one. You skipped them, ignored them, then blame the group. Come on now.", "internal": "The rules were posted big and clear from day one. You skipped them, ignored them, then blame the group. You were given a brain — use it, don't just carry it around." },
+        { "type": "no", "public": "Spilling your sob story all over the group won't bring your money back. It just panics other members and sours the mood." },
+        { "type": "no", "public": "Blaming admin for a transaction admin knew nothing about. Admin is not your DM supervisor.", "internal": "Blaming admin for a transaction admin knew nothing about. Admin is not your babysitter, not your dad, and definitely not your insurance." },
+        { "type": "no", "public": "Accusing someone without chat logs and transfer receipts. No proof yet? Hold your horses." },
+        { "type": "no", "public": "Dragging the group's or XyCloud's name into your personal problems outside." },
+        { "type": "ok", "public": "The right way: <b>DM admin with complete evidence.</b> The culprit gets kicked, blacklisted, and shared with other communities." },
+        { "type": "ok", "public": "If the amount is big and the evidence is strong, take it to the police. A WhatsApp group has no power to recover money." }
+      ],
+      "note": {
+        "type": "keras",
+        "public": "One more time so it sticks: <b>transactions outside admin mean you carry the risk yourself.</b> We'll still help kick and blacklist the culprit, but don't expect the money back. The rules were handed to you for free from the start.",
+        "internal": "One more time so it sticks: <b>transactions outside admin mean you carry the risk yourself.</b> We'll still help kick and blacklist the culprit, but don't go hoping for your money back. The rules were free from the start — you chose to break them. Cry if you must, just not in the group."
+      }
+    },
+    {
+      "id": "ngeyel",
+      "title": "For Those Who Won't Listen",
+      "sub": "Warned repeatedly but keeps going anyway.",
+      "items": [
+        { "type": "no", "public": "Warned once, you repeat it. Warned twice, you repeat it again. That's not forgetfulness — that's deliberate.", "internal": "Warned once, you repeat it. Warned twice, again. That's not forgetfulness, you're just thick. You're not here to be a member — you're here to be a problem." },
+        { "type": "no", "public": "Acting like you run the place when you're a guest. This is someone else's group, not yours." },
+        { "type": "no", "public": "Debating rules that are written down plainly. It won't be entertained — it just wastes both sides' time.", "internal": "Debating rules written in black and white. Won't be entertained. You're not being critical, you're just being loud." },
+        { "type": "no", "public": "Pretending to be admin, or claiming to be close to admin, for special treatment. That just speeds up your kick." },
+        { "type": "no", "public": "Pitting members against each other or stirring the pot. This group is not a revenge soap opera." },
+        { "type": "no", "public": "Getting kicked, then building a rival group to talk trash. Go ahead — but the door here is closed forever." },
+        { "type": "no", "public": "Asking the same thing every single day even though it's been answered and it's right on this page." },
+        { "type": "ok", "public": "Feel the rules are too strict? The exit door isn't locked. Nobody's holding you." }
+      ],
+      "note": {
+        "type": "keras",
+        "public": "We're not chasing a member count. All we want is people who can read and follow. If those two things are too heavy for you, better leave now, while you still get to choose.",
+        "internal": "We're not chasing a member count. All we want is people who can read and follow. If even that is too heavy for you, leave now. Seriously — better than a whole group suffering over one blockhead."
+      }
+    },
+    {
+      "id": "larangan",
+      "title": "Instant-Kick Offenses",
+      "sub": "One strike and you're out. No warnings.",
+      "items": [
+        { "type": "no", "public": "Bigotry, racism, insulting religion, hate speech." },
+        { "type": "no", "public": "Adult content and vulgar links in any form." },
+        { "type": "no", "public": "Online gambling, slot sites, and everything derived from them." },
+        { "type": "no", "public": "Phishing links, spyware APKs, hack scripts, malicious files." },
+        { "type": "no", "public": "Spreading other members' personal data without consent." },
+        { "type": "no", "public": "Threatening members or admin. Joke or serious — treated exactly the same." },
+        { "type": "no", "public": "Screenshotting group chat and spreading it outside. It destroys everyone's trust." },
+        { "type": "no", "public": "Scamming members. This is the heaviest one, with the nastiest consequences." }
+      ]
+    },
+    {
+      "id": "sanksi",
+      "title": "What Happens If You Break Them",
+      "sub": "Applies to everyone, no matter how long you've been here.",
+      "items": [
+        { "type": "ok", "public": "First time: called out in the group. A little embarrassing, yes — so it sticks." },
+        { "type": "ok", "public": "Second time: hard warning, and your name goes on admin's list." },
+        { "type": "no", "public": "Third time: permanent removal. And permanent here really means permanent." },
+        { "type": "no", "public": "Severe violations (scams, bigotry, adult content, gambling, malicious links): kicked that very second." },
+        { "type": "no", "public": "For scammers specifically: kicked, blacklisted, and your number announced to the group and other communities." },
+        { "type": "ok", "public": "Long-time members get no immunity. Time served is not a license to do whatever." }
+      ],
+      "note": {
+        "type": "keras",
+        "public": "Admin's decision is <b>final</b>. You may protest, and you'll be heard — but the outcome will almost certainly stay the same."
+      }
+    },
+    {
+      "id": "saluran",
+      "title": "Channel Rules",
+      "sub": "Specific to the official Channel — different from the group.",
+      "items": [
+        { "type": "ok", "public": "The Channel is <b>one-way</b>. Only admin posts; members just read." },
+        { "type": "ok", "public": "Every official announcement, price update, promo, and maintenance notice comes from there." },
+        { "type": "ok", "public": "Info that isn't in the Channel and isn't confirmed by admin — treat it as a hoax until proven otherwise." },
+        { "type": "no", "public": "Spam reactions or trash comments on Channel posts." },
+        { "type": "no", "public": "Copying Channel posts and claiming them as your own service." },
+        { "type": "no", "public": "Setting up a fake Channel in XyCloud's name. It will be reported — and WhatsApp responds fairly quickly." },
+        { "type": "ok", "public": "Leaving the Channel is free, rejoining is free too. The permanent rule only applies to the GROUP." }
+      ],
+      "note": {
+        "type": "info",
+        "public": "Don't mix them up: the <b>Channel</b> is free to leave and rejoin, the <b>Group</b> is not. A lot of people get this wrong and end up regretting it."
+      }
+    },
+    {
+      "id": "privasi",
+      "title": "Privacy & Data",
+      "sub": "This part is dead serious — not for show.",
+      "items": [
+        { "type": "ok", "public": "Member numbers are only used for group purposes and transactions that were actually agreed to." },
+        { "type": "no", "public": "Storing, spreading, or selling other members' contacts to anyone." },
+        { "type": "no", "public": "Sharing photos, private chats, or a member's identity without their consent." },
+        { "type": "no", "public": "Spreading someone's login data or accounts. That's criminal territory — beyond group rules." },
+        { "type": "ok", "public": "Admin <b>never</b> asks for OTP, PIN, passwords, or bank details. Someone asking? That's definitely a scammer — report it immediately." },
+        { "type": "ok", "public": "Transaction evidence you send to admin is used only to resolve the case, nothing else." },
+        { "type": "ok", "public": "This website uses no tracking cookies, stores no personal data, and runs no ads. The feedback you send is anonymous unless you fill in your own contact." }
+      ]
+    },
+    {
+      "id": "admin",
+      "title": "About Admin",
+      "sub": "So it's clear who decides what.",
+      "items": [
+        { "type": "ok", "public": "Admin can call you out, delete messages, and remove members at any time." },
+        { "type": "ok", "public": "Admin can reject prospective members without having to explain why." },
+        { "type": "ok", "public": "Admin can change or add rules at any time, effective immediately." },
+        { "type": "ok", "public": "Admin can temporarily close the group when things get heated." },
+        { "type": "ok", "public": "Admin is not 24/7 support. Replies come when there's time — be a little patient." },
+        { "type": "no", "public": "Admin does not cover transactions made without admin's knowledge. This is the most misunderstood rule of all." }
+      ]
+    }
+  ],
+
+  "faq": [
+    { "q": "I left by accident — seriously can't come back?", "a": "You can, but only if you report it within 24 hours, the reason is genuinely technical, and you have proof. Past that, the general rule applies. No point pushing — the answer stays the same." },
+    { "q": "Why so strict about leaving and rejoining?", "a": "Because every single day someone would join then leave within minutes, for no reason. The notifications were noisy, and it turned out many were just contact-farming or fleeing after causing trouble. Rather than filtering people one by one, we made it strict across the board." },
+    { "q": "What's the difference between the Group and the Channel?", "a": "The Channel is one-way — only admin posts — and you're free to come and go anytime. The Group is two-way, and the permanent rule applies there: leave once, no coming back." },
+    { "q": "I want to change numbers — how does that work?", "a": "Tell admin before you switch, and the new number gets registered as your replacement. If you leave first without saying anything, it's hard — from admin's side it looks identical to an ordinary exit." },
+    { "q": "Can I sell stuff in the group?", "a": "Yes, as long as admin approves first, it's at most once a day, and it fits the group's topic. Not allowed: promoting other groups, rival services, gambling, and predatory loans." },
+    { "q": "I got scammed by a member — does admin compensate me?", "a": "No. If the transaction went through admin or escrow, we handle it to completion. If you went solo after being warned, that's your risk. The culprit still gets kicked and blacklisted — but the money is beyond us." },
+    { "q": "Why can't I talk about getting scammed in the group?", "a": "Because it solves nothing. The group just gets noisy and other members panic. Take your evidence to admin's DM — that's the route that actually goes somewhere." },
+    { "q": "I got kicked but I don't feel I did anything wrong — now what?", "a": "DM admin and ask for an explanation. We do explain. But if the decision is final, accept it. Making drama or a rival group only closes a door that was still slightly open." },
+    { "q": "Long-time members get to relax a little, right?", "a": "Nope. Time here isn't a license. The rules are the same for everyone — and long-time members should understand them best of all." },
+    { "q": "Can I use this policy for my own group or website?", "a": "Absolutely — free, open source, MIT licensed. Just two conditions: give XyCloud admin a heads-up, and include credit back to rules.xyc.my.id. You can also pull the content directly through the /api/policy API, or install the consent popup with gate.js." },
+    { "q": "Can the rules change?", "a": "Anytime. Changes are announced in the Group and Channel and take effect that same day. This page is always the latest version, so when in doubt, come back here." }
+  ],
+
+  "footer": {
+    "public": "Still being in the group means you <b>have read and agreed</b> to everything above. \"I didn't know\" is not an excuse.",
+    "internal": "Still hanging around in the group means you <b>have read and agreed</b> to everything above. No \"I didn't know\" — and especially no \"I didn't read it\". That's not a reason, that's laziness."
+  }
+}

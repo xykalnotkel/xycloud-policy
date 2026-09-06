@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>[INTERNAL] Group Policy - XyCloud | Official</title>
+  <meta name="theme-color" content="#075e54">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icon-180.png">
+  <link rel="mask-icon" href="/favicon.svg" color="#075e54">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="description" content="Uncensored internal version. For XyCloud | Official group members only.">
+  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
+  <meta name="googlebot" content="noindex,nofollow">
+  <link rel="canonical" href="https://rules.xyc.my.id/en/internal">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="XyCloud | Official">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:url" content="https://rules.xyc.my.id/en/internal">
+  <meta property="og:title" content="[INTERNAL] Group Policy - XyCloud | Official">
+  <meta property="og:description" content="Uncensored internal version. For XyCloud | Official group members only.">
+  <meta property="og:image" content="https://rules.xyc.my.id/og-internal.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+<script>
+(function(){
+  try{
+    if(localStorage.getItem('xyc_lang'))return;
+    var bot=/bot|crawl|spider|slurp|bingpreview|facebookexternalhit|whatsapp|telegram|discord|twitterbot|linkedin|pinterest|lighthouse|headless/i;
+    if(bot.test(navigator.userAgent||''))return;
+    var ls=navigator.languages&&navigator.languages.length?navigator.languages:[navigator.language||''];
+    var isId=false;
+    for(var i=0;i<ls.length;i++){if(/^id/i.test(ls[i]||'')){isId=true;break}}
+    var p=location.pathname.replace(/\/+$/,'');
+    var onEn=p==='/en'||p.indexOf('/en/')===0;
+    var q=location.search||'',h=location.hash||'';
+    if(!isId&&!onEn){location.replace('/en'+(p==='/'?'':p)+q+h)}
+    else if(isId&&onEn){location.replace((p.replace(/^\/en/,'')||'/')+q+h)}
+  }catch(e){}
+})();
+</script>
+  <style>*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+.skip{position:absolute;left:-9999px;top:0;background:#075e54;color:#fff;padding:10px 16px;border-radius:0 0 8px 0;font-size:14px;font-weight:600;z-index:80}
+.skip:focus{left:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:#ece5dd;color:#111b21;line-height:1.7;-webkit-font-smoothing:antialiased}
+.wrap{max-width:780px;margin:0 auto;padding:0 18px 60px}
+
+#bar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#25d366,#128c7e);z-index:60;transition:width .1s linear}
+
+header{background:linear-gradient(160deg,#075e54 0%,#128c7e 100%);color:#fff;padding:46px 18px 40px;text-align:center;position:relative}
+.badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);padding:5px 14px;border-radius:999px;font-size:12px;letter-spacing:.5px;text-transform:uppercase;margin-bottom:14px}
+.badge.warn{background:#d92d20;border-color:#f97066}
+header h1{font-size:30px;line-height:1.25;font-weight:800;letter-spacing:-.5px}
+header .grup{font-size:18px;font-weight:700;margin-top:10px}
+header p.meta{margin-top:14px;opacity:.85;font-size:13px}
+.tags{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.tag{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);padding:4px 12px;border-radius:999px;font-size:12.5px}
+
+.langsw{position:absolute;top:14px;right:14px;display:flex;border:1px solid rgba(255,255,255,.38);border-radius:999px;overflow:hidden;background:rgba(255,255,255,.12)}
+.langsw a{padding:5px 13px;font-size:12px;font-weight:700;color:rgba(255,255,255,.78);text-decoration:none;letter-spacing:.4px}
+.langsw a.on{background:#25d366;color:#053b34}
+.langsw a:not(.on):hover{color:#fff;background:rgba(255,255,255,.16)}
+.langsw .dot{align-self:center;width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.35)}
+
+.tldr{background:#075e54;color:#fff;border-radius:14px;padding:24px;margin:-24px 0 18px;box-shadow:0 8px 26px rgba(7,94,84,.28)}
+.tldr h2{font-size:18px;margin-bottom:14px}
+.tldr ol{list-style:none;counter-reset:z}
+.tldr li{counter-increment:z;position:relative;padding-left:38px;margin-bottom:11px;font-size:15.5px}
+.tldr li::before{content:counter(z);position:absolute;left:0;top:2px;width:24px;height:24px;border-radius:50%;background:#25d366;color:#053b34;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+.tldr .cl{margin-top:14px;padding-top:13px;border-top:1px solid rgba(255,255,255,.2);font-size:13.5px;opacity:.88}
+
+.alert{background:#fff;border-left:6px solid #d92d20;border-radius:12px;padding:22px 24px;margin-bottom:18px;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.alert h2{font-size:17px;color:#d92d20;margin-bottom:8px}
+.alert p{font-size:15px}
+.alert p+p{margin-top:8px}
+.alert b{background:#fee4e2;padding:1px 5px;border-radius:4px}
+
+.why{background:#fff;border-radius:12px;padding:24px;margin-bottom:18px;box-shadow:0 2px 10px rgba(0,0,0,.06);border-top:4px solid #25d366}
+.why h2{font-size:17px;color:#075e54;margin-bottom:3px}
+.why .sub{font-size:13.5px;color:#54656f;margin-bottom:14px}
+.why p{font-size:15px;margin-bottom:12px}
+.why p:last-child{margin-bottom:0}
+
+nav.toc{background:#fff;border-radius:12px;padding:20px 24px;margin-bottom:18px;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+nav.toc h2{font-size:13px;text-transform:uppercase;letter-spacing:1px;color:#54656f;margin-bottom:12px}
+nav.toc ol{list-style:none;counter-reset:t;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:4px}
+nav.toc li{counter-increment:t;padding-left:0;margin:0}
+nav.toc li::before{display:none}
+nav.toc a{color:#075e54;text-decoration:none;font-size:14.5px;display:block;padding:5px 0}
+nav.toc a::before{content:counter(t) ". ";color:#25d366;font-weight:700}
+nav.toc a:hover{text-decoration:underline}
+
+.card{background:#fff;border-radius:12px;padding:24px;margin-bottom:18px;box-shadow:0 2px 10px rgba(0,0,0,.06);scroll-margin-top:16px}
+.card h2{font-size:17px;color:#075e54;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.num{background:#25d366;color:#fff;min-width:26px;height:26px;padding:0 7px;border-radius:13px;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0}
+.sub{font-size:13.5px;color:#54656f;margin:-6px 0 14px;padding-left:36px}
+ul{list-style:none}
+li{position:relative;padding-left:26px;margin-bottom:10px;font-size:15px}
+li::before{content:"";position:absolute;left:8px;top:11px;width:7px;height:7px;border-radius:50%;background:#25d366}
+li.no::before{background:#d92d20}
+.note{font-size:13.5px;color:#54656f;background:#f0f2f5;border-radius:8px;padding:12px 14px;margin-top:14px}
+.note.keras{background:#fef3f2;color:#912018;border:1px solid #fecdca}
+
+details{background:#fff;border-radius:10px;margin-bottom:10px;box-shadow:0 2px 8px rgba(0,0,0,.05);overflow:hidden}
+summary{cursor:pointer;padding:15px 18px;font-weight:600;font-size:15px;color:#075e54;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:20px;color:#25d366;line-height:1}
+details[open] summary::after{content:"-"}
+details p{padding:0 18px 16px;font-size:14.5px;color:#3b4a54}
+
+.section-title{font-size:13px;text-transform:uppercase;letter-spacing:1px;color:#54656f;margin:30px 0 12px;font-weight:700}
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.btn{display:inline-block;background:#25d366;color:#fff;text-decoration:none;padding:11px 20px;border-radius:8px;font-size:14.5px;font-weight:600;border:none;cursor:pointer;font-family:inherit;transition:.15s}
+.btn:hover{background:#1eb85a}
+.btn.alt{background:#075e54}.btn.alt:hover{background:#0a7168}
+.btn.ghost{background:transparent;color:#075e54;border:1.5px solid #075e54}
+.btn.ghost:hover{background:#075e54;color:#fff}
+code{background:#f0f2f5;padding:2px 6px;border-radius:4px;font-size:13.5px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+pre{background:#0f1b17;color:#c8f5d8;padding:16px;border-radius:10px;overflow-x:auto;font-size:12.8px;line-height:1.6;margin:12px 0}
+pre code{background:none;padding:0;color:inherit}
+
+/* feedback */
+.fb{background:#fff;border-radius:12px;padding:26px 24px;margin:22px 0 18px;box-shadow:0 2px 10px rgba(0,0,0,.06);text-align:center}
+.fb h2{font-size:17px;color:#075e54;margin-bottom:5px}
+.fb p.q{font-size:14px;color:#54656f;margin-bottom:16px}
+.fb .vote{display:flex;gap:12px;justify-content:center}
+.vb{width:120px;padding:14px 10px;border-radius:12px;border:2px solid #d1d7db;background:#fff;cursor:pointer;font-family:inherit;font-size:14.5px;font-weight:600;color:#54656f;transition:.15s;display:flex;flex-direction:column;align-items:center;gap:6px}
+.vb:hover{border-color:#25d366;color:#075e54;transform:translateY(-2px)}
+.vb svg{width:26px;height:26px;fill:currentColor}
+.vb.up:hover{border-color:#25d366;color:#25d366}
+.vb.down:hover{border-color:#d92d20;color:#d92d20}
+.fb .done{display:none;font-size:15px;color:#075e54;font-weight:600;padding:12px}
+
+/* modal */
+.mask{position:fixed;inset:0;background:rgba(6,20,17,.72);backdrop-filter:blur(3px);z-index:70;display:none;align-items:center;justify-content:center;padding:18px}
+.mask.on{display:flex}
+.modal{background:#fff;border-radius:16px;width:100%;max-width:460px;max-height:88vh;overflow-y:auto;padding:26px;box-shadow:0 24px 60px rgba(0,0,0,.4);animation:pop .22s ease}
+@keyframes pop{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
+.modal h3{font-size:18px;color:#075e54;margin-bottom:4px}
+.modal .mp{font-size:13.5px;color:#54656f;margin-bottom:16px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.chip{padding:8px 14px;border-radius:999px;border:1.5px solid #d1d7db;background:#fff;cursor:pointer;font-family:inherit;font-size:13.5px;color:#3b4a54;transition:.13s}
+.chip:hover{border-color:#075e54}
+.chip.sel{background:#075e54;border-color:#075e54;color:#fff}
+.modal label{display:block;font-size:13px;font-weight:600;color:#54656f;margin-bottom:6px}
+.modal textarea,.modal input{width:100%;border:1.5px solid #d1d7db;border-radius:9px;padding:11px 13px;font-family:inherit;font-size:14.5px;color:#111b21;margin-bottom:14px;resize:vertical}
+.modal textarea{min-height:96px}
+.modal textarea:focus,.modal input:focus{outline:none;border-color:#25d366}
+.mact{display:flex;gap:10px;margin-top:4px}
+.mact .btn{flex:1;text-align:center}
+.msg{font-size:13.5px;padding:11px 13px;border-radius:8px;margin-bottom:12px;display:none}
+.msg.ok{display:block;background:#ecfdf3;color:#027a48;border:1px solid #a6f4c5}
+.msg.err{display:block;background:#fef3f2;color:#912018;border:1px solid #fecdca}
+
+footer{text-align:center;font-size:13px;color:#54656f;padding-top:26px;border-top:1px solid #d1d7db;margin-top:30px}
+footer b{color:#075e54}
+footer a{color:#075e54}
+.switch{text-align:center;margin:22px 0 4px}
+.switch a{font-size:13px;color:#54656f}</style>
+</head>
+<body>
+
+<a class="skip" href="#isi">Skip to content</a>
+<div id="bar" aria-hidden="true"></div>
+
+<header>
+
+  <div class="langsw" role="group" aria-label="Bahasa / Language">
+    <a href="/internal" hreflang="id" lang="id" class="" onclick="try{localStorage.setItem('xyc_lang','id')}catch(e){}">ID</a><span class="dot"></span><a href="/en/internal" hreflang="en" lang="en" class="on" aria-current="true" onclick="try{localStorage.setItem('xyc_lang','en')}catch(e){}">EN</a>
+  </div>
+  <div class="badge warn">Internal Version - Uncensored</div>
+  <h1>Group Policy</h1>
+  <div class="grup">𝙓𝙮𝘾𝙡𝙤𝙪𝙙 𝙡 𝙊𝙛𝙛𝙞𝙘𝙞𝙖𝙡</div>
+  <div class="tags">
+    <span class="tag">Cloud Gaming</span>
+    <span class="tag">PC Rental</span>
+    <span class="tag">Game Account Trading</span>
+    <span class="tag">Buy &amp; Sell Game Accounts</span>
+    <span class="tag">Hangout &amp; Banter</span>
+  </div>
+  <p class="meta">Version 3.1.0 &middot; Updated 2026-09-06 &middot; 4 min light reading</p>
+</header>
+
+<div class="wrap" id="isi">
+
+    <div class="tldr">
+      <h2>Can't be bothered to read it all? Here's the gist</h2>
+      <ol>
+        <li>Leaving the group = done. No coming back. A brand-new number won't help either.</li>
+        <li>Transactions must go through admin or escrow. Go solo and get scammed — that's on you.</li>
+        <li>Promotion needs permission first. Post an ad without asking and you're out.</li>
+      </ol>
+      <div class="cl">That's it — those three are what get people kicked the most. The rest is below, four minutes tops.</div>
+    </div>
+
+    <div class="alert">
+      <h2>The single most important thing</h2>
+      <p>If you <b>leave on your own</b> or <b>get kicked by admin</b>, that's it, <b>done</b>. No coming back. No negotiating, no &quot;bro I'm sorry, my bad&quot; with crying stickers, no sending a friend in as your spokesperson.</p>
+      <p>Trying to sneak back in with a second number is pointless — we notice, and it just makes you look more desperate. Think before you hit that leave button. Your own finger pressed it, don't blame the signal.</p>
+      <p>Sounds cruel? It is. But read the reason below before raging. If you've read it and still won't accept it, fine — the exit door isn't locked.</p>
+    </div>
+
+    <section class="why" id="kenapa">
+      <h2>Why These Rules Exist</h2>
+      <div class="sub">Not strict for the fun of it. There's a reason.</div>
+      <p>Honestly, this group was built to be chill. At first there were no rules at all. Then a weird pattern showed up: someone joins, stays silent for five minutes, then just leaves. The next day they join again. Then leave again. No words, no issue — just in and out like they're trying on clothes.</p>
+      <p>Sounds trivial. But when ten people a day do that, the chat fills up with &quot;so-and-so left&quot;, &quot;so-and-so joined&quot; notifications, and the members who are actually serious get turned off first. Worse, the in-and-out crowd often turns out to be contact-farming, stealing the member list to spam, or running away after causing trouble, then coming back pretending to be a newcomer.</p>
+      <p>So we made it strict once and for all: leave once, and it's over. Not because we hate you — we're just tired of managing a door that keeps getting slammed. This group is for people who actually want to be here, not people messing around.</p>
+      <p>Everything else on this page just follows from that one principle. Think before joining, and think a thousand times before leaving.</p>
+    </section>
+
+    <nav class="toc" aria-label="Table of contents">
+      <h2>Jump to a section</h2>
+      <ol>
+        <li><a href="#keluar-masuk">Leaving &amp; Rejoining</a></li>
+        <li><a href="#kelakuan">Behavior in the Group</a></li>
+        <li><a href="#promosi">Promotion &amp; Selling</a></li>
+        <li><a href="#transaksi">Transactions, Rentals &amp; Trading</a></li>
+        <li><a href="#ketipu">If You Get Scammed</a></li>
+        <li><a href="#ngeyel">For Those Who Won't Listen</a></li>
+        <li><a href="#larangan">Instant-Kick Offenses</a></li>
+        <li><a href="#sanksi">What Happens If You Break Them</a></li>
+        <li><a href="#saluran">Channel Rules</a></li>
+        <li><a href="#privasi">Privacy &amp; Data</a></li>
+        <li><a href="#admin">About Admin</a></li>
+      </ol>
+    </nav>
+
+    <section class="card" id="keluar-masuk">
+      <h2><span class="num">1</span> Leaving &amp; Rejoining</h2>
+      <div class="sub">The part that surprises people the most. Read it slowly.</div>
+      <ul>
+        <li class="no">Leaving on your own counts as final. Permanent. Don't ask again whether you can come back.</li>
+        <li class="no">Kicked for breaking the rules? That's the blacklist — and that list is never deleted.</li>
+        <li class="no">Rejoin requests get rejected automatically. Via link, via a friend who knows admin — same result.</li>
+        <li class="no">Second number, office number, partner's number — all detected. Sneak back in and you'll be kicked again.</li>
+        <li class="no">Getting someone else to sweet-talk admin only makes your position worse, and drags your friend into it too. Don't.</li>
+        <li class="no">Messaging admin over and over while begging just gets you blocked on top of it. Have a little dignity.</li>
+        <li class="">Those who stay from the start and don't cause drama are perfectly fine. This rule will never touch you.</li>
+      </ul>
+      <div class="note ">There's exactly one exception: leaving because of a technical issue. Lost phone, reset account, WhatsApp erroring out — things genuinely out of your control. The condition: <b>report to admin within 24 hours, with proof</b>. Past that, the general rule applies.</div>
+    </section>
+
+    <section class="card" id="kelakuan">
+      <h2><span class="num">2</span> Behavior in the Group</h2>
+      <div class="sub">The bare minimum so the group stays readable for everyone.</div>
+      <ul>
+        <li class="">Use a readable name. Names full of weird symbols make it hard for admin to find you.</li>
+        <li class="">Be as relaxed as you want, just don't make others uncomfortable. The line is thin, but you know it when you see it.</li>
+        <li class="">Joke all you want, but never about someone's body, family, religion, or financial situation. That's not funny, that's obnoxious.</li>
+        <li class="">When asking something, just say what it is. Sending &quot;P&quot; then disappearing doesn't make anyone answer faster.</li>
+        <li class="">Scroll before asking. Almost every question you have is already answered above. Too lazy to scroll but not too lazy to type is funny — just not that funny.</li>
+        <li class="no">Tag-all for non-urgent stuff. That makes dozens of people open their phones for nothing.</li>
+        <li class="">10 PM to 6 AM is quiet mode. Unless a server is down or an order comes in — different story.</li>
+        <li class="no">Three-minute voice notes for something that fits in two typed lines. Not everyone can listen right now.</li>
+      </ul>
+    </section>
+
+    <section class="card" id="promosi">
+      <h2><span class="num">3</span> Promotion &amp; Selling</h2>
+      <div class="sub">The single most-violated rule. Not a joke.</div>
+      <ul>
+        <li class="no">Any promotion at all, <b>admin permission first</b>. Post without asking once and you're kicked immediately — no warning stage.</li>
+        <li class="no">Promoting other groups or neighboring communities: no. Find members in your own yard.</li>
+        <li class="no">A rival cloud gaming or PC rental service? Obviously no. Freeloading in someone else's group for your own profit is straight-up parasitic. Go make your own group — it's free.</li>
+        <li class="no">Gambling, predatory loans, bogus investments, MLM. All of it: instant permanent kick, no discussion.</li>
+        <li class="no">Shady short links, modded APKs, sketchy files. Don't spread them here.</li>
+        <li class="no">DMing members one by one to pitch products. That's called stealing a contact list — and it's very noticeable.</li>
+        <li class="no">Copy-pasting the same promo every day. Once is enough — people have read it.</li>
+        <li class="">For approved promoters: at most <b>once a day</b>, tidy format, and relevant to the group's topic.</li>
+        <li class="">Write it complete: what the item is, the price, the specs, where to contact you. Not just &quot;DM if interested&quot;.</li>
+        <li class="">In the Channel, only admin can post. Members simply don't have that access, so don't ask.</li>
+      </ul>
+      <div class="note keras">Admin can delete your promo at any time without explaining anything. If it got deleted, you broke something — end of story. Don't ask &quot;why was it deleted bro&quot; with attitude; just re-read this section.</div>
+    </section>
+
+    <section class="card" id="transaksi">
+      <h2><span class="num">4</span> Transactions, Rentals &amp; Trading</h2>
+      <div class="sub">Applies to Cloud Gaming, PC Rental, and account trading.</div>
+      <ul>
+        <li class="">Negotiate and transact <b>in DMs</b>. The group is not the place for hours of haggling.</li>
+        <li class="">Big amounts? <b>Go through admin or escrow.</b> Waiting half an hour is far better than losing your money.</li>
+        <li class="no">Selling hacked, stolen, or scam-sourced accounts. Caught = instant kick, and your details get announced.</li>
+        <li class="no">Selling banned or limited accounts without telling the buyer. That's fraud, not a sales strategy.</li>
+        <li class="">Sellers honest about condition, buyers pay as agreed. It really is that simple.</li>
+        <li class="">Keep every chat log and transfer receipt. If something goes wrong later, that's the only thing that can save you.</li>
+        <li class="no">Taking a deposit then vanishing. That's not &quot;busy&quot; — that's a scam.</li>
+        <li class="no">Faking testimonials or paying friends for bogus reviews. It gets noticed, and the embarrassment lasts.</li>
+        <li class="no">Haggling to the point of insulting someone's price. Not a match? Move along — no need to comment.</li>
+      </ul>
+      <div class="note ">Transactions that go through admin or official escrow are guaranteed until completion. Outside that, we can't guarantee anything.</div>
+    </section>
+
+    <section class="card" id="ketipu">
+      <h2><span class="num">5</span> If You Get Scammed</h2>
+      <div class="sub">There's a right way to do this, and there's a way that just makes noise.</div>
+      <ul>
+        <li class="no">Told to use escrow, you still went solo in silence, got scammed, then threw a tantrum in the group fishing for sympathy. <b>Tough luck, that's entirely on you.</b></li>
+        <li class="no">The rules were posted big and clear from day one. You skipped them, ignored them, then blame the group. You were given a brain — use it, don't just carry it around.</li>
+        <li class="no">Spilling your sob story all over the group won't bring your money back. It just panics other members and sours the mood.</li>
+        <li class="no">Blaming admin for a transaction admin knew nothing about. Admin is not your babysitter, not your dad, and definitely not your insurance.</li>
+        <li class="no">Accusing someone without chat logs and transfer receipts. No proof yet? Hold your horses.</li>
+        <li class="no">Dragging the group's or XyCloud's name into your personal problems outside.</li>
+        <li class="">The right way: <b>DM admin with complete evidence.</b> The culprit gets kicked, blacklisted, and shared with other communities.</li>
+        <li class="">If the amount is big and the evidence is strong, take it to the police. A WhatsApp group has no power to recover money.</li>
+      </ul>
+      <div class="note keras">One more time so it sticks: <b>transactions outside admin mean you carry the risk yourself.</b> We'll still help kick and blacklist the culprit, but don't go hoping for your money back. The rules were free from the start — you chose to break them. Cry if you must, just not in the group.</div>
+    </section>
+
+    <section class="card" id="ngeyel">
+      <h2><span class="num">6</span> For Those Who Won't Listen</h2>
+      <div class="sub">Warned repeatedly but keeps going anyway.</div>
+      <ul>
+        <li class="no">Warned once, you repeat it. Warned twice, again. That's not forgetfulness, you're just thick. You're not here to be a member — you're here to be a problem.</li>
+        <li class="no">Acting like you run the place when you're a guest. This is someone else's group, not yours.</li>
+        <li class="no">Debating rules written in black and white. Won't be entertained. You're not being critical, you're just being loud.</li>
+        <li class="no">Pretending to be admin, or claiming to be close to admin, for special treatment. That just speeds up your kick.</li>
+        <li class="no">Pitting members against each other or stirring the pot. This group is not a revenge soap opera.</li>
+        <li class="no">Getting kicked, then building a rival group to talk trash. Go ahead — but the door here is closed forever.</li>
+        <li class="no">Asking the same thing every single day even though it's been answered and it's right on this page.</li>
+        <li class="">Feel the rules are too strict? The exit door isn't locked. Nobody's holding you.</li>
+      </ul>
+      <div class="note keras">We're not chasing a member count. All we want is people who can read and follow. If even that is too heavy for you, leave now. Seriously — better than a whole group suffering over one blockhead.</div>
+    </section>
+
+    <section class="card" id="larangan">
+      <h2><span class="num">7</span> Instant-Kick Offenses</h2>
+      <div class="sub">One strike and you're out. No warnings.</div>
+      <ul>
+        <li class="no">Bigotry, racism, insulting religion, hate speech.</li>
+        <li class="no">Adult content and vulgar links in any form.</li>
+        <li class="no">Online gambling, slot sites, and everything derived from them.</li>
+        <li class="no">Phishing links, spyware APKs, hack scripts, malicious files.</li>
+        <li class="no">Spreading other members' personal data without consent.</li>
+        <li class="no">Threatening members or admin. Joke or serious — treated exactly the same.</li>
+        <li class="no">Screenshotting group chat and spreading it outside. It destroys everyone's trust.</li>
+        <li class="no">Scamming members. This is the heaviest one, with the nastiest consequences.</li>
+      </ul>
+    </section>
+
+    <section class="card" id="sanksi">
+      <h2><span class="num">8</span> What Happens If You Break Them</h2>
+      <div class="sub">Applies to everyone, no matter how long you've been here.</div>
+      <ul>
+        <li class="">First time: called out in the group. A little embarrassing, yes — so it sticks.</li>
+        <li class="">Second time: hard warning, and your name goes on admin's list.</li>
+        <li class="no">Third time: permanent removal. And permanent here really means permanent.</li>
+        <li class="no">Severe violations (scams, bigotry, adult content, gambling, malicious links): kicked that very second.</li>
+        <li class="no">For scammers specifically: kicked, blacklisted, and your number announced to the group and other communities.</li>
+        <li class="">Long-time members get no immunity. Time served is not a license to do whatever.</li>
+      </ul>
+      <div class="note keras">Admin's decision is <b>final</b>. You may protest, and you'll be heard — but the outcome will almost certainly stay the same.</div>
+    </section>
+
+    <section class="card" id="saluran">
+      <h2><span class="num">9</span> Channel Rules</h2>
+      <div class="sub">Specific to the official Channel — different from the group.</div>
+      <ul>
+        <li class="">The Channel is <b>one-way</b>. Only admin posts; members just read.</li>
+        <li class="">Every official announcement, price update, promo, and maintenance notice comes from there.</li>
+        <li class="">Info that isn't in the Channel and isn't confirmed by admin — treat it as a hoax until proven otherwise.</li>
+        <li class="no">Spam reactions or trash comments on Channel posts.</li>
+        <li class="no">Copying Channel posts and claiming them as your own service.</li>
+        <li class="no">Setting up a fake Channel in XyCloud's name. It will be reported — and WhatsApp responds fairly quickly.</li>
+        <li class="">Leaving the Channel is free, rejoining is free too. The permanent rule only applies to the GROUP.</li>
+      </ul>
+      <div class="note ">Don't mix them up: the <b>Channel</b> is free to leave and rejoin, the <b>Group</b> is not. A lot of people get this wrong and end up regretting it.</div>
+    </section>
+
+    <section class="card" id="privasi">
+      <h2><span class="num">10</span> Privacy &amp; Data</h2>
+      <div class="sub">This part is dead serious — not for show.</div>
+      <ul>
+        <li class="">Member numbers are only used for group purposes and transactions that were actually agreed to.</li>
+        <li class="no">Storing, spreading, or selling other members' contacts to anyone.</li>
+        <li class="no">Sharing photos, private chats, or a member's identity without their consent.</li>
+        <li class="no">Spreading someone's login data or accounts. That's criminal territory — beyond group rules.</li>
+        <li class="">Admin <b>never</b> asks for OTP, PIN, passwords, or bank details. Someone asking? That's definitely a scammer — report it immediately.</li>
+        <li class="">Transaction evidence you send to admin is used only to resolve the case, nothing else.</li>
+        <li class="">This website uses no tracking cookies, stores no personal data, and runs no ads. The feedback you send is anonymous unless you fill in your own contact.</li>
+      </ul>
+    </section>
+
+    <section class="card" id="admin">
+      <h2><span class="num">11</span> About Admin</h2>
+      <div class="sub">So it's clear who decides what.</div>
+      <ul>
+        <li class="">Admin can call you out, delete messages, and remove members at any time.</li>
+        <li class="">Admin can reject prospective members without having to explain why.</li>
+        <li class="">Admin can change or add rules at any time, effective immediately.</li>
+        <li class="">Admin can temporarily close the group when things get heated.</li>
+        <li class="">Admin is not 24/7 support. Replies come when there's time — be a little patient.</li>
+        <li class="no">Admin does not cover transactions made without admin's knowledge. This is the most misunderstood rule of all.</li>
+      </ul>
+    </section>
+
+  <h2 class="section-title">Frequently asked questions</h2>
+    <details>
+      <summary>I left by accident — seriously can't come back?</summary>
+      <p>You can, but only if you report it within 24 hours, the reason is genuinely technical, and you have proof. Past that, the general rule applies. No point pushing — the answer stays the same.</p>
+    </details>
+    <details>
+      <summary>Why so strict about leaving and rejoining?</summary>
+      <p>Because every single day someone would join then leave within minutes, for no reason. The notifications were noisy, and it turned out many were just contact-farming or fleeing after causing trouble. Rather than filtering people one by one, we made it strict across the board.</p>
+    </details>
+    <details>
+      <summary>What's the difference between the Group and the Channel?</summary>
+      <p>The Channel is one-way — only admin posts — and you're free to come and go anytime. The Group is two-way, and the permanent rule applies there: leave once, no coming back.</p>
+    </details>
+    <details>
+      <summary>I want to change numbers — how does that work?</summary>
+      <p>Tell admin before you switch, and the new number gets registered as your replacement. If you leave first without saying anything, it's hard — from admin's side it looks identical to an ordinary exit.</p>
+    </details>
+    <details>
+      <summary>Can I sell stuff in the group?</summary>
+      <p>Yes, as long as admin approves first, it's at most once a day, and it fits the group's topic. Not allowed: promoting other groups, rival services, gambling, and predatory loans.</p>
+    </details>
+    <details>
+      <summary>I got scammed by a member — does admin compensate me?</summary>
+      <p>No. If the transaction went through admin or escrow, we handle it to completion. If you went solo after being warned, that's your risk. The culprit still gets kicked and blacklisted — but the money is beyond us.</p>
+    </details>
+    <details>
+      <summary>Why can't I talk about getting scammed in the group?</summary>
+      <p>Because it solves nothing. The group just gets noisy and other members panic. Take your evidence to admin's DM — that's the route that actually goes somewhere.</p>
+    </details>
+    <details>
+      <summary>I got kicked but I don't feel I did anything wrong — now what?</summary>
+      <p>DM admin and ask for an explanation. We do explain. But if the decision is final, accept it. Making drama or a rival group only closes a door that was still slightly open.</p>
+    </details>
+    <details>
+      <summary>Long-time members get to relax a little, right?</summary>
+      <p>Nope. Time here isn't a license. The rules are the same for everyone — and long-time members should understand them best of all.</p>
+    </details>
+    <details>
+      <summary>Can I use this policy for my own group or website?</summary>
+      <p>Absolutely — free, open source, MIT licensed. Just two conditions: give XyCloud admin a heads-up, and include credit back to rules.xyc.my.id. You can also pull the content directly through the /api/policy API, or install the consent popup with gate.js.</p>
+    </details>
+    <details>
+      <summary>Can the rules change?</summary>
+      <p>Anytime. Changes are announced in the Group and Channel and take effect that same day. This page is always the latest version, so when in doubt, come back here.</p>
+    </details>
+
+
+    <div class="fb" id="fb">
+      <div id="fbAsk">
+        <h2>What do you think of this policy?</h2>
+        <p class="q">Be honest, no need to hold back. Feedback goes straight to admin.</p>
+        <div class="vote">
+          <button class="vb up" type="button" data-vote="like">
+            <svg viewBox="0 0 24 24"><path d="M2 21h4V9H2v12zm20-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L13.17 1 6.59 7.59C6.22 7.95 6 8.45 6 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg>
+            Good
+          </button>
+          <button class="vb down" type="button" data-vote="dislike">
+            <svg viewBox="0 0 24 24"><path d="M22 3h-4v12h4V3zM2 14c0 1.1.9 2 2 2h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L10.83 23l6.58-6.59c.37-.36.59-.86.59-1.41V5c0-1.1-.9-2-2-2H7c-.83 0-1.54.5-1.84 1.22L2.14 11.27c-.09.23-.14.47-.14.73v2z"/></svg>
+            Needs work
+          </button>
+        </div>
+      </div>
+      <div class="done" id="fbDone">Thanks — your feedback just landed.</div>
+    </div>
+
+    <div class="mask" id="fbMask" role="dialog" aria-modal="true" aria-labelledby="fbTitle" aria-describedby="fbDesc">
+      <div class="modal">
+        <h3 id="fbTitle">Which part doesn&rsquo;t sit right?</h3>
+        <p class="mp" id="fbDesc">Pick what&rsquo;s most relevant, then tell us a bit more. It&rsquo;s anonymous — unless you fill in your own contact.</p>
+        <div class="msg" id="fbMsg"></div>
+        <div class="chips" id="fbChips"></div>
+        <label for="fbText">Tell us a bit</label>
+        <textarea id="fbText" placeholder="Write it as it is here..."></textarea>
+        <label for="fbContact">Contact (optional, if you want a reply)</label>
+        <input id="fbContact" type="text" placeholder="WhatsApp number or email" autocomplete="off">
+        <div class="mact">
+          <button class="btn ghost" type="button" id="fbCancel">Cancel</button>
+          <button class="btn" type="button" id="fbSend">Send to Admin</button>
+        </div>
+      </div>
+    </div>
+
+    <section class="card" id="kontak">
+      <h2><span class="num">?</span> Contact &amp; Report</h2>
+      <div class="sub">Got a problem, want to report a scam, or want permission to reuse this policy.</div>
+      <ul>
+        <li>Scam reports must include <b>chat logs plus transfer receipts</b>. Without those, it&rsquo;s hard to process.</li>
+        <li>Every official announcement comes from the Channel. When in doubt, check there first.</li>
+        <li>Admin is not 24/7 support — replies come when there&rsquo;s time.</li>
+      </ul>
+      <div class="cta">
+        <a class="btn" href="https://wa.me/6283116632566?text=Hello%20XyCloud%20Admin%2C%20I%20have%20a%20question%20%2F%20want%20to%20report%20something%20about%20the%20group%20policy." target="_blank" rel="noopener">Message Admin</a>
+        <a class="btn alt" href="https://whatsapp.com/channel/0029VbB7nwuJZg3ym6UQ4Z1L" target="_blank" rel="noopener">Follow the Official Channel</a>
+        <a class="btn ghost" href="https://wa.me/6283116632566?text=Hello%20XyCloud%20Admin%2C%20I%20would%20like%20permission%20to%20reuse%20the%20policy%20from%20rules.xyc.my.id%20for%20my%20community." target="_blank" rel="noopener">Request Permission to Reuse</a>
+      </div>
+    </section>
+    <div class="switch"><a href="/en">&larr; Back to public version</a></div>
+
+  <footer>
+    <p>Still hanging around in the group means you <b>have read and agreed</b> to everything above. No &quot;I didn't know&quot; — and especially no &quot;I didn't read it&quot;. That's not a reason, that's laziness.</p>
+    <p style="margin-top:10px">&copy; 2026 <b>𝙓𝙮𝘾𝙡𝙤𝙪𝙙 𝙡 𝙊𝙛𝙛𝙞𝙘𝙞𝙖𝙡</b> &middot; Cloud Gaming, PC Rental &amp; Game Account Trading</p>
+    <p style="margin-top:6px">Open source (MIT) &middot; <a href="https://github.com/xykalnotkel/xycloud-policy" target="_blank" rel="noopener">GitHub</a> &middot; <a href="/api/policy">API</a> &middot; <a href="/docs">Docs</a> &middot; <a href="/status">Status</a></p>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var bar=document.getElementById('bar');
+  addEventListener('scroll',function(){
+    var h=document.documentElement,max=h.scrollHeight-h.clientHeight;
+    bar.style.width=(max>0?(h.scrollTop/max)*100:0)+'%';
+  },{passive:true});
+
+  var REASONS=["Too long","The tone is too harsh","Too strict","Something unclear","Disagree with the leave-forever rule","Other"];
+  var mask=document.getElementById('fbMask'),chips=document.getElementById('fbChips'),
+      msg=document.getElementById('fbMsg'),vote='',sel=[];
+
+  REASONS.forEach(function(r){
+    var b=document.createElement('button');
+    b.type='button';b.className='chip';b.textContent=r;
+    b.onclick=function(){
+      var i=sel.indexOf(r);
+      if(i<0){sel.push(r);b.classList.add('sel')}else{sel.splice(i,1);b.classList.remove('sel')}
+    };
+    chips.appendChild(b);
+  });
+
+  var lastFocus=null;
+  function focusables(){
+    return Array.prototype.slice.call(
+      mask.querySelectorAll('button,textarea,input,[href],[tabindex]:not([tabindex="-1"])')
+    ).filter(function(el){return !el.disabled && el.offsetParent!==null});
+  }
+  function open(v){
+    vote=v;
+    document.getElementById('fbTitle').textContent = v==='like'
+      ? "Nice — which part hit hardest?"
+      : "Which part doesn&rsquo;t sit right?";
+    lastFocus=document.activeElement;
+    mask.classList.add('on');
+    document.body.style.overflow='hidden';
+    var f=focusables();
+    if(f.length) f[f.length-1].focus();
+  }
+  function close(){
+    mask.classList.remove('on');
+    document.body.style.overflow='';
+    if(lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  document.querySelectorAll('.vb').forEach(function(b){
+    b.onclick=function(){open(b.dataset.vote)};
+  });
+  document.getElementById('fbCancel').onclick=close;
+  mask.onclick=function(e){if(e.target===mask)close()};
+  addEventListener('keydown',function(e){
+    if(e.key==='Escape'){close();return}
+    if(e.key!=='Tab' || !mask.classList.contains('on')) return;
+    var f=focusables();
+    if(!f.length) return;
+    var first=f[0],last=f[f.length-1];
+    if(e.shiftKey && document.activeElement===first){e.preventDefault();last.focus()}
+    else if(!e.shiftKey && document.activeElement===last){e.preventDefault();first.focus()}
+  });
+
+  document.getElementById('fbSend').onclick=function(){
+    var btn=this,text=document.getElementById('fbText').value.trim();
+    if(!sel.length && !text){
+      msg.className='msg err';msg.textContent="Pick at least one reason or write something first.";return;
+    }
+    btn.disabled=true;btn.textContent="Sending...";
+    fetch('/api/feedback',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        vote:vote,reasons:sel,message:text,
+        contact:document.getElementById('fbContact').value.trim(),
+        page:location.pathname,version:'3.1.0',lang:'en'
+      })
+    }).then(function(r){return r.json()}).then(function(d){
+      if(!d.ok)throw new Error(d.error||'gagal');
+      close();
+      document.getElementById('fbAsk').style.display='none';
+      document.getElementById('fbDone').style.display='block';
+      try{localStorage.setItem('xyc_fb','1')}catch(e){}
+    }).catch(function(e){
+      msg.className='msg err';
+      msg.textContent="Failed to send ("+e.message+"). Try again or message admin directly.";
+      btn.disabled=false;btn.textContent="Send to Admin";
+    });
+  };
+
+  try{
+    if(localStorage.getItem('xyc_fb')){
+      document.getElementById('fbAsk').style.display='none';
+      document.getElementById('fbDone').style.display='block';
+    }
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

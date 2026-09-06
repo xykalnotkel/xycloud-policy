@@ -12,6 +12,7 @@
   <meta name="description" content="Versi internal tanpa sensor. Khusus member grup XyCloud | Official.">
   <meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
   <meta name="googlebot" content="noindex,nofollow">
+  <link rel="canonical" href="https://rules.xyc.my.id/internal">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="XyCloud | Official">
   <meta property="og:locale" content="id_ID">
@@ -21,6 +22,24 @@
   <meta property="og:image" content="https://rules.xyc.my.id/og-internal.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
+
+<script>
+(function(){
+  try{
+    if(localStorage.getItem('xyc_lang'))return;
+    var bot=/bot|crawl|spider|slurp|bingpreview|facebookexternalhit|whatsapp|telegram|discord|twitterbot|linkedin|pinterest|lighthouse|headless/i;
+    if(bot.test(navigator.userAgent||''))return;
+    var ls=navigator.languages&&navigator.languages.length?navigator.languages:[navigator.language||''];
+    var isId=false;
+    for(var i=0;i<ls.length;i++){if(/^id/i.test(ls[i]||'')){isId=true;break}}
+    var p=location.pathname.replace(/\/+$/,'');
+    var onEn=p==='/en'||p.indexOf('/en/')===0;
+    var q=location.search||'',h=location.hash||'';
+    if(!isId&&!onEn){location.replace('/en'+(p==='/'?'':p)+q+h)}
+    else if(isId&&onEn){location.replace((p.replace(/^\/en/,'')||'/')+q+h)}
+  }catch(e){}
+})();
+</script>
   <style>*{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
@@ -31,7 +50,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 
 #bar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#25d366,#128c7e);z-index:60;transition:width .1s linear}
 
-header{background:linear-gradient(160deg,#075e54 0%,#128c7e 100%);color:#fff;padding:46px 18px 40px;text-align:center}
+header{background:linear-gradient(160deg,#075e54 0%,#128c7e 100%);color:#fff;padding:46px 18px 40px;text-align:center;position:relative}
 .badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);padding:5px 14px;border-radius:999px;font-size:12px;letter-spacing:.5px;text-transform:uppercase;margin-bottom:14px}
 .badge.warn{background:#d92d20;border-color:#f97066}
 header h1{font-size:30px;line-height:1.25;font-weight:800;letter-spacing:-.5px}
@@ -39,6 +58,12 @@ header .grup{font-size:18px;font-weight:700;margin-top:10px}
 header p.meta{margin-top:14px;opacity:.85;font-size:13px}
 .tags{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
 .tag{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);padding:4px 12px;border-radius:999px;font-size:12.5px}
+
+.langsw{position:absolute;top:14px;right:14px;display:flex;border:1px solid rgba(255,255,255,.38);border-radius:999px;overflow:hidden;background:rgba(255,255,255,.12)}
+.langsw a{padding:5px 13px;font-size:12px;font-weight:700;color:rgba(255,255,255,.78);text-decoration:none;letter-spacing:.4px}
+.langsw a.on{background:#25d366;color:#053b34}
+.langsw a:not(.on):hover{color:#fff;background:rgba(255,255,255,.16)}
+.langsw .dot{align-self:center;width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.35)}
 
 .tldr{background:#075e54;color:#fff;border-radius:14px;padding:24px;margin:-24px 0 18px;box-shadow:0 8px 26px rgba(7,94,84,.28)}
 .tldr h2{font-size:18px;margin-bottom:14px}
@@ -129,15 +154,12 @@ pre code{background:none;padding:0;color:inherit}
 .msg{font-size:13.5px;padding:11px 13px;border-radius:8px;margin-bottom:12px;display:none}
 .msg.ok{display:block;background:#ecfdf3;color:#027a48;border:1px solid #a6f4c5}
 .msg.err{display:block;background:#fef3f2;color:#912018;border:1px solid #fecdca}
-.close{position:absolute}
-:focus-visible{outline:3px solid #25d366;outline-offset:2px}
 
 footer{text-align:center;font-size:13px;color:#54656f;padding-top:26px;border-top:1px solid #d1d7db;margin-top:30px}
 footer b{color:#075e54}
 footer a{color:#075e54}
 .switch{text-align:center;margin:22px 0 4px}
-.switch a{font-size:13px;color:#54656f}
-@media(max-width:520px){header h1{font-size:24px}.card,.why,.tldr{padding:20px 18px}.vb{width:auto;flex:1}}</style>
+.switch a{font-size:13px;color:#54656f}</style>
 </head>
 <body>
 
@@ -145,6 +167,10 @@ footer a{color:#075e54}
 <div id="bar" aria-hidden="true"></div>
 
 <header>
+
+  <div class="langsw" role="group" aria-label="Bahasa / Language">
+    <a href="/internal" hreflang="id" lang="id" class="on" aria-current="true" onclick="try{localStorage.setItem('xyc_lang','id')}catch(e){}">ID</a><span class="dot"></span><a href="/en/internal" hreflang="en" lang="en" class="" onclick="try{localStorage.setItem('xyc_lang','en')}catch(e){}">EN</a>
+  </div>
   <div class="badge warn">Versi Internal - Tanpa Sensor</div>
   <h1>Kebijakan Grup</h1>
   <div class="grup">𝙓𝙮𝘾𝙡𝙤𝙪𝙙 𝙡 𝙊𝙛𝙛𝙞𝙘𝙞𝙖𝙡</div>
@@ -155,7 +181,7 @@ footer a{color:#075e54}
     <span class="tag">Jual Beli Akun Game</span>
     <span class="tag">Nongkrong &amp; Candaan</span>
   </div>
-  <p class="meta">Versi 3.0.0 &middot; Update 2026-09-01 &middot; Baca santai 4 menit</p>
+  <p class="meta">Versi 3.1.0 &middot; Update 2026-09-06 &middot; Baca santai 4 menit</p>
 </header>
 
 <div class="wrap" id="isi">
@@ -485,7 +511,7 @@ footer a{color:#075e54}
     bar.style.width=(max>0?(h.scrollTop/max)*100:0)+'%';
   },{passive:true});
 
-  var REASONS=['Kepanjangan','Bahasanya kasar','Terlalu ketat','Ada yang ga jelas','Ga setuju sama aturan keluar-masuk','Lainnya'];
+  var REASONS=["Kepanjangan","Bahasanya kasar","Terlalu ketat","Ada yang ga jelas","Ga setuju sama aturan keluar-masuk","Lainnya"];
   var mask=document.getElementById('fbMask'),chips=document.getElementById('fbChips'),
       msg=document.getElementById('fbMsg'),vote='',sel=[];
 
@@ -508,8 +534,8 @@ footer a{color:#075e54}
   function open(v){
     vote=v;
     document.getElementById('fbTitle').textContent = v==='like'
-      ? 'Mantap, bagian mana yang paling kena?'
-      : 'Bagian mana yang bikin ganjel?';
+      ? "Mantap, bagian mana yang paling kena?"
+      : "Bagian mana yang bikin ganjel?";
     lastFocus=document.activeElement;
     mask.classList.add('on');
     document.body.style.overflow='hidden';
@@ -540,15 +566,15 @@ footer a{color:#075e54}
   document.getElementById('fbSend').onclick=function(){
     var btn=this,text=document.getElementById('fbText').value.trim();
     if(!sel.length && !text){
-      msg.className='msg err';msg.textContent='Pilih minimal satu alasan atau tulis sesuatu dulu.';return;
+      msg.className='msg err';msg.textContent="Pilih minimal satu alasan atau tulis sesuatu dulu.";return;
     }
-    btn.disabled=true;btn.textContent='Ngirim...';
+    btn.disabled=true;btn.textContent="Ngirim...";
     fetch('/api/feedback',{
       method:'POST',headers:{'Content-Type':'application/json'},
       body:JSON.stringify({
         vote:vote,reasons:sel,message:text,
         contact:document.getElementById('fbContact').value.trim(),
-        page:location.pathname,version:'3.0.0'
+        page:location.pathname,version:'3.1.0',lang:'id'
       })
     }).then(function(r){return r.json()}).then(function(d){
       if(!d.ok)throw new Error(d.error||'gagal');
@@ -558,8 +584,8 @@ footer a{color:#075e54}
       try{localStorage.setItem('xyc_fb','1')}catch(e){}
     }).catch(function(e){
       msg.className='msg err';
-      msg.textContent='Gagal ngirim ('+e.message+'). Coba lagi atau japri admin langsung.';
-      btn.disabled=false;btn.textContent='Kirim ke Admin';
+      msg.textContent="Gagal ngirim ("+e.message+"). Coba lagi atau japri admin langsung.";
+      btn.disabled=false;btn.textContent="Kirim ke Admin";
     });
   };
 

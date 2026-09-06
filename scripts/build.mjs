@@ -4,12 +4,19 @@ import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(__dirname, '..');
-const policy = JSON.parse(fs.readFileSync(path.join(root, 'data/policy.json'), 'utf8'));
-const M = policy.meta;
+
+// ===== Dua bahasa, satu struktur =====
+// policy.json  = Bahasa Indonesia (kanonik, default)
+// policy.en.json = English (struktur identik, id section disamakan
+//                  supaya hreflang & filter ?section= tetap konsisten)
+const POLICIES = {
+  id: JSON.parse(fs.readFileSync(path.join(root, 'data/policy.json'), 'utf8')),
+  en: JSON.parse(fs.readFileSync(path.join(root, 'data/policy.en.json'), 'utf8'))
+};
+const M = POLICIES.id.meta; // meta untuk robots/sitemap/manifest (netral bahasa)
 
 const pick = (o, v) => (v === 'internal' && o.internal ? o.internal : o.public);
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-const wa = (t) => `https://wa.me/${M.adminPhone}?text=${encodeURIComponent(t)}`;
 
 // Meta OG & article:* minta timestamp ISO 8601 lengkap. Data cuma punya YYYY-MM-DD,
 // dan sebagian validator menolak nilai tanggal polos di properti ini.
@@ -23,6 +30,174 @@ const rich = (s) => esc(s)
   .replace(/&lt;b&gt;/g, '<b>')
   .replace(/&lt;\/b&gt;/g, '</b>');
 
+// ===== String antarmuka halaman (chrome), per bahasa =====
+// Konten kebijakan ada di data/policy*.json; yang di sini cuma label halaman.
+const UI = {
+  id: {
+    htmlLang: 'id',
+    ogLocale: 'id_ID',
+    schemaLang: 'id-ID',
+    skip: 'Lewati ke isi',
+    tocTitle: 'Loncat ke bagian',
+    tocAria: 'Daftar isi',
+    faqTitle: 'Yang sering ditanyain',
+    badgePublic: 'Grup &amp; Saluran Resmi',
+    badgeInternal: 'Versi Internal - Tanpa Sensor',
+    internalDesc: 'Versi internal tanpa sensor. Khusus member grup XyCloud | Official.',
+    metaLine: (m) => `Versi ${m.version} &middot; Update ${m.updated} &middot; Baca santai ${m.readMinutes} menit`,
+    switchPublic: 'Versi internal (blak-blakan) &rarr;',
+    switchInternal: '&larr; Balik ke versi publik',
+    home: 'Beranda',
+    api: {
+      title: 'Mau Pakai Kebijakan Ini?',
+      sub: 'Gratis, open source, lisensi MIT. Boleh dipakai siapa aja asal izin dan cantumin kredit.',
+      items: [
+        'Tarik datanya real time lewat API publik. Format JSON, HTML, Markdown, atau teks polos.',
+        'Atau tempel satu baris script, langsung jadi halaman kebijakan lengkap di web lu.',
+        'Punya link bio? Pasang <b>gate popup</b>: orang harus baca kebijakan dan pencet setuju dulu sebelum link WhatsApp-nya kebuka.',
+        'Tanpa API key, tanpa daftar, CORS kebuka buat semua origin.'
+      ],
+      demo: 'Coba Gate Popup',
+      docs: 'Dokumentasi API',
+      src: 'Source Code'
+    },
+    fb: {
+      title: 'Menurut lu kebijakan ini gimana?',
+      q: 'Jujur aja, ga usah sungkan. Masukannya langsung masuk ke admin.',
+      up: 'Bagus',
+      down: 'Kurang',
+      done: 'Makasih ya, masukannya udah masuk.',
+      titleLike: 'Mantap, bagian mana yang paling kena?',
+      titleBad: 'Bagian mana yang bikin ganjel?',
+      desc: 'Pilih yang paling relevan, terus ceritain dikit. Anonim kok, kecuali lu isi kontaknya sendiri.',
+      textLabel: 'Ceritain dikit',
+      textPh: 'Tulis apa adanya di sini...',
+      contactLabel: 'Kontak (opsional, kalau mau dibales)',
+      contactPh: 'Nomor WA atau email',
+      cancel: 'Batal',
+      send: 'Kirim ke Admin',
+      sending: 'Ngirim...',
+      errEmpty: 'Pilih minimal satu alasan atau tulis sesuatu dulu.',
+      errFail: 'Gagal ngirim (',
+      errFail2: '). Coba lagi atau japri admin langsung.',
+      reasons: ['Kepanjangan', 'Bahasanya kasar', 'Terlalu ketat', 'Ada yang ga jelas', 'Ga setuju sama aturan keluar-masuk', 'Lainnya']
+    },
+    contact: {
+      title: 'Kontak &amp; Lapor',
+      sub: 'Ada masalah, mau lapor penipuan, atau mau izin pakai kebijakan ini.',
+      items: [
+        'Lapor penipuan wajib bawa <b>bukti chat plus bukti transfer</b>. Tanpa itu susah diproses.',
+        'Semua pengumuman resmi keluarnya dari Saluran. Kalau ragu, cek ke sana dulu.',
+        'Admin bukan CS 24 jam, dibales kalau lagi sempet.'
+      ],
+      wa1: 'Halo Admin XyCloud, saya mau nanya/lapor soal kebijakan grup.',
+      cta1: 'Japri Admin',
+      cta2: 'Ikuti Saluran Resmi',
+      wa2: 'Halo Admin XyCloud, saya mau izin pakai kebijakan dari rules.xyc.my.id untuk komunitas saya.',
+      cta3: 'Izin Pakai Kebijakan'
+    }
+  },
+  en: {
+    htmlLang: 'en',
+    ogLocale: 'en_US',
+    schemaLang: 'en',
+    skip: 'Skip to content',
+    tocTitle: 'Jump to a section',
+    tocAria: 'Table of contents',
+    faqTitle: 'Frequently asked questions',
+    badgePublic: 'Official Group &amp; Channel',
+    badgeInternal: 'Internal Version - Uncensored',
+    internalDesc: 'Uncensored internal version. For XyCloud | Official group members only.',
+    metaLine: (m) => `Version ${m.version} &middot; Updated ${m.updated} &middot; ${m.readMinutes} min light reading`,
+    switchPublic: 'Internal version (uncensored) &rarr;',
+    switchInternal: '&larr; Back to public version',
+    home: 'Home',
+    api: {
+      title: 'Want to Use This Policy?',
+      sub: 'Free, open source, MIT licensed. Anyone can use it — just ask permission and keep the credit.',
+      items: [
+        'Pull the data in real time through the public API. JSON, HTML, Markdown, or plain text.',
+        'Or paste one line of script and it becomes a full policy page on your own site.',
+        'Got a bio link? Install the <b>gate popup</b>: people must read the policy and press Agree before your WhatsApp link opens.',
+        'No API key, no sign-up, CORS open to every origin.'
+      ],
+      demo: 'Try the Gate Popup',
+      docs: 'API Docs',
+      src: 'Source Code'
+    },
+    fb: {
+      title: 'What do you think of this policy?',
+      q: 'Be honest, no need to hold back. Feedback goes straight to admin.',
+      up: 'Good',
+      down: 'Needs work',
+      done: 'Thanks — your feedback just landed.',
+      titleLike: 'Nice — which part hit hardest?',
+      titleBad: 'Which part doesn&rsquo;t sit right?',
+      desc: 'Pick what&rsquo;s most relevant, then tell us a bit more. It&rsquo;s anonymous — unless you fill in your own contact.',
+      textLabel: 'Tell us a bit',
+      textPh: 'Write it as it is here...',
+      contactLabel: 'Contact (optional, if you want a reply)',
+      contactPh: 'WhatsApp number or email',
+      cancel: 'Cancel',
+      send: 'Send to Admin',
+      sending: 'Sending...',
+      errEmpty: 'Pick at least one reason or write something first.',
+      errFail: 'Failed to send (',
+      errFail2: '). Try again or message admin directly.',
+      reasons: ['Too long', 'The tone is too harsh', 'Too strict', 'Something unclear', 'Disagree with the leave-forever rule', 'Other']
+    },
+    contact: {
+      title: 'Contact &amp; Report',
+      sub: 'Got a problem, want to report a scam, or want permission to reuse this policy.',
+      items: [
+        'Scam reports must include <b>chat logs plus transfer receipts</b>. Without those, it&rsquo;s hard to process.',
+        'Every official announcement comes from the Channel. When in doubt, check there first.',
+        'Admin is not 24/7 support — replies come when there&rsquo;s time.'
+      ],
+      wa1: 'Hello XyCloud Admin, I have a question / want to report something about the group policy.',
+      cta1: 'Message Admin',
+      cta2: 'Follow the Official Channel',
+      wa2: 'Hello XyCloud Admin, I would like permission to reuse the policy from rules.xyc.my.id for my community.',
+      cta3: 'Request Permission to Reuse'
+    }
+  }
+};
+
+// Path per (versi, bahasa) — dipakai untuk canonical, og:url, hreflang, dan switcher.
+function pagePath(v, lang) {
+  if (lang === 'en') return v === 'internal' ? '/en/internal' : '/en';
+  return v === 'internal' ? '/internal' : '/';
+}
+
+// Deteksi bahasa otomatis di sisi klien (bukan deteksi "device/negara" —
+// yang bisa dipercaya browser adalah bahasa UI-nya). Aturan main:
+//  - hanya jalan kalau pengunjung BELUM pernah milih bahasa manual (localStorage xyc_lang)
+//  - browser berbahasa Indonesia -> versi id; selain itu -> versi en
+//  - bot crawler & social scraper dikecualikan supaya hreflang/OG tiap URL tetap
+//    terbaca apa adanya (Googlebot dirender dengan locale en-US; kalau ikut
+//    di-redirect, halaman / berisiko hilang dari index)
+//  - kondisi id vs en saling eksklusif -> tidak mungkin redirect loop
+function autoLangScript(lang) {
+  return `
+<script>
+(function(){
+  try{
+    if(localStorage.getItem('xyc_lang'))return;
+    var bot=/bot|crawl|spider|slurp|bingpreview|facebookexternalhit|whatsapp|telegram|discord|twitterbot|linkedin|pinterest|lighthouse|headless/i;
+    if(bot.test(navigator.userAgent||''))return;
+    var ls=navigator.languages&&navigator.languages.length?navigator.languages:[navigator.language||''];
+    var isId=false;
+    for(var i=0;i<ls.length;i++){if(/^id/i.test(ls[i]||'')){isId=true;break}}
+    var p=location.pathname.replace(/\\/+$/,'');
+    var onEn=p==='/en'||p.indexOf('/en/')===0;
+    var q=location.search||'',h=location.hash||'';
+    if(!isId&&!onEn){location.replace('/en'+(p==='/'?'':p)+q+h)}
+    else if(isId&&onEn){location.replace((p.replace(/^\\/en/,'')||'/')+q+h)}
+  }catch(e){}
+})();
+</script>`;
+}
+
 const CSS = `
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -34,7 +209,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 
 #bar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#25d366,#128c7e);z-index:60;transition:width .1s linear}
 
-header{background:linear-gradient(160deg,#075e54 0%,#128c7e 100%);color:#fff;padding:46px 18px 40px;text-align:center}
+header{background:linear-gradient(160deg,#075e54 0%,#128c7e 100%);color:#fff;padding:46px 18px 40px;text-align:center;position:relative}
 .badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);padding:5px 14px;border-radius:999px;font-size:12px;letter-spacing:.5px;text-transform:uppercase;margin-bottom:14px}
 .badge.warn{background:#d92d20;border-color:#f97066}
 header h1{font-size:30px;line-height:1.25;font-weight:800;letter-spacing:-.5px}
@@ -42,6 +217,12 @@ header .grup{font-size:18px;font-weight:700;margin-top:10px}
 header p.meta{margin-top:14px;opacity:.85;font-size:13px}
 .tags{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
 .tag{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);padding:4px 12px;border-radius:999px;font-size:12.5px}
+
+.langsw{position:absolute;top:14px;right:14px;display:flex;border:1px solid rgba(255,255,255,.38);border-radius:999px;overflow:hidden;background:rgba(255,255,255,.12)}
+.langsw a{padding:5px 13px;font-size:12px;font-weight:700;color:rgba(255,255,255,.78);text-decoration:none;letter-spacing:.4px}
+.langsw a.on{background:#25d366;color:#053b34}
+.langsw a:not(.on):hover{color:#fff;background:rgba(255,255,255,.16)}
+.langsw .dot{align-self:center;width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.35)}
 
 .tldr{background:#075e54;color:#fff;border-radius:14px;padding:24px;margin:-24px 0 18px;box-shadow:0 8px 26px rgba(7,94,84,.28)}
 .tldr h2{font-size:18px;margin-bottom:14px}
@@ -132,21 +313,20 @@ pre code{background:none;padding:0;color:inherit}
 .msg{font-size:13.5px;padding:11px 13px;border-radius:8px;margin-bottom:12px;display:none}
 .msg.ok{display:block;background:#ecfdf3;color:#027a48;border:1px solid #a6f4c5}
 .msg.err{display:block;background:#fef3f2;color:#912018;border:1px solid #fecdca}
-.close{position:absolute}
-:focus-visible{outline:3px solid #25d366;outline-offset:2px}
 
 footer{text-align:center;font-size:13px;color:#54656f;padding-top:26px;border-top:1px solid #d1d7db;margin-top:30px}
 footer b{color:#075e54}
 footer a{color:#075e54}
 .switch{text-align:center;margin:22px 0 4px}
 .switch a{font-size:13px;color:#54656f}
-@media(max-width:520px){header h1{font-size:24px}.card,.why,.tldr{padding:20px 18px}.vb{width:auto;flex:1}}
 `.trim();
 
-function renderSections(v) {
-  return policy.sections.map((s, i) => {
+function renderSections(P, v) {
+  return P.sections.map((s, i) => {
     const items = s.items.map(it => `        <li class="${it.type === 'no' ? 'no' : ''}">${rich(pick(it, v))}</li>`).join('\n');
-    const note = s.note ? `\n      <div class="note ${s.note.type === 'keras' ? 'keras' : ''}">${rich(pick(s.note, v))}</div>` : '';
+    const note = s.note
+      ? `\n      <div class="note ${s.note.type === 'keras' ? 'keras' : ''}">${rich(pick(s.note, v))}</div>`
+      : '';
     return `    <section class="card" id="${s.id}">
       <h2><span class="num">${i + 1}</span> ${esc(s.title)}</h2>
       <div class="sub">${esc(s.sub)}</div>
@@ -157,70 +337,84 @@ ${items}
   }).join('\n\n');
 }
 
-const renderToc = () => `    <nav class="toc" aria-label="Daftar isi">
-      <h2>Loncat ke bagian</h2>
+const renderToc = (P, T) => `    <nav class="toc" aria-label="${T.tocAria}">
+      <h2>${T.tocTitle}</h2>
       <ol>
-${policy.sections.map(s => `        <li><a href="#${s.id}">${esc(s.title)}</a></li>`).join('\n')}
+${P.sections.map(s => `        <li><a href="#${s.id}">${esc(s.title)}</a></li>`).join('\n')}
       </ol>
     </nav>`;
 
-const renderFaq = () => policy.faq.map(f => `    <details>
+const renderFaq = (P) => P.faq.map(f => `    <details>
       <summary>${esc(f.q)}</summary>
       <p>${esc(f.a)}</p>
     </details>`).join('\n');
 
-function jsonLd() {
+function jsonLd(P, lang, T) {
+  const m = P.meta;
   const d = [
-    { '@context': 'https://schema.org', '@type': 'WebSite', name: `${M.title} - ${M.name}`, url: M.url, inLanguage: 'id-ID',
-      publisher: { '@type': 'Organization', name: M.name, url: M.url, logo: `${M.url}/og.png` } },
-    { '@context': 'https://schema.org', '@type': 'WebPage', name: `${M.title} - ${M.name}`, url: M.url,
-      description: M.description, inLanguage: 'id-ID', datePublished: M.effective, dateModified: M.updated,
-      primaryImageOfPage: { '@type': 'ImageObject', url: `${M.url}/og.png`, width: 1200, height: 630 } },
-    { '@context': 'https://schema.org', '@type': 'Organization', name: M.name, url: M.url, logo: `${M.url}/og.png`,
-      description: M.tagline, sameAs: [M.channelUrl].filter(Boolean),
-      contactPoint: [{ '@type': 'ContactPoint', contactType: 'customer support', telephone: `+${M.adminPhone}`, availableLanguage: ['id'] }] },
+    { '@context': 'https://schema.org', '@type': 'WebSite', name: `${m.title} - ${m.name}`, url: m.url, inLanguage: T.schemaLang,
+      publisher: { '@type': 'Organization', name: m.name, url: m.url, logo: `${m.url}/og.png` } },
+    { '@context': 'https://schema.org', '@type': 'WebPage', name: `${m.title} - ${m.name}`, url: m.url,
+      description: m.description, inLanguage: T.schemaLang, datePublished: m.effective, dateModified: m.updated,
+      primaryImageOfPage: { '@type': 'ImageObject', url: `${m.url}/og.png`, width: 1200, height: 630 } },
+    { '@context': 'https://schema.org', '@type': 'Organization', name: m.name, url: m.url, logo: `${m.url}/og.png`,
+      description: m.tagline, sameAs: [m.channelUrl].filter(Boolean),
+      contactPoint: [{ '@type': 'ContactPoint', contactType: 'customer support', telephone: `+${m.adminPhone}`, availableLanguage: ['id', 'en'] }] },
     { '@context': 'https://schema.org', '@type': 'FAQPage',
-      mainEntity: policy.faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+      mainEntity: P.faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
     { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Beranda', item: M.url },
-      { '@type': 'ListItem', position: 2, name: M.title }] }
+      { '@type': 'ListItem', position: 1, name: T.home, item: m.url },
+      { '@type': 'ListItem', position: 2, name: m.title }] }
   ];
   return d.map(x => `<script type="application/ld+json">${JSON.stringify(x)}</script>`).join('\n  ');
 }
 
-function buildPage(v) {
+function buildPage(v, lang) {
   const internal = v === 'internal';
-  const pageTitle = internal ? `[INTERNAL] ${M.title} - ${M.name}` : `${M.title} WhatsApp - ${M.name}`;
-  const pageDesc = internal ? 'Versi internal tanpa sensor. Khusus member grup XyCloud | Official.' : M.description;
-  const ogImg = internal ? `${M.url}/og-internal.png` : `${M.url}/og.png`;
+  const P = POLICIES[lang];
+  const m = P.meta;
+  const T = UI[lang];
+  const other = lang === 'id' ? 'en' : 'id';
+  const here = pagePath(v, lang);
+  const there = pagePath(v, other);
+  const wa = (t) => `https://wa.me/${m.adminPhone}?text=${encodeURIComponent(t)}`;
+
+  const pageTitle = internal ? `[INTERNAL] ${m.title} - ${m.name}` : `${m.title} WhatsApp - ${m.name}`;
+  const pageDesc = internal ? T.internalDesc : m.description;
+  const ogImg = internal ? `${m.url}/og-internal.png` : `${m.url}/og.png`;
+
+  // hreflang: kedua bahasa + x-default. Halaman internal noindex, jadi tanpa hreflang.
+  const hreflang = internal ? '' : `
+  <link rel="alternate" hreflang="id" href="${m.url}/">
+  <link rel="alternate" hreflang="en" href="${m.url}/en">
+  <link rel="alternate" hreflang="x-default" href="${m.url}/">`;
 
   const seo = internal ? `
   <meta name="description" content="${esc(pageDesc)}">
   <meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
   <meta name="googlebot" content="noindex,nofollow">
+  <link rel="canonical" href="${m.url}${here}">
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="${esc(M.name)}">
-  <meta property="og:locale" content="id_ID">
-  <meta property="og:url" content="${M.url}/internal">
+  <meta property="og:site_name" content="${esc(m.name)}">
+  <meta property="og:locale" content="${T.ogLocale}">
+  <meta property="og:url" content="${m.url}${here}">
   <meta property="og:title" content="${esc(pageTitle)}">
   <meta property="og:description" content="${esc(pageDesc)}">
   <meta property="og:image" content="${ogImg}">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">` : `
   <meta name="description" content="${esc(pageDesc)}">
-  <meta name="keywords" content="${esc(M.keywords.join(', '))}">
-  <meta name="author" content="${esc(M.name)}">
+  <meta name="keywords" content="${esc(m.keywords.join(', '))}">
+  <meta name="author" content="${esc(m.name)}">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
   <meta name="googlebot" content="index,follow">
-  <link rel="canonical" href="${M.url}/">
-  <link rel="alternate" hreflang="id" href="${M.url}/">
-  <link rel="alternate" hreflang="x-default" href="${M.url}/">
+  <link rel="canonical" href="${m.url}${here}">${hreflang}
 
   <!-- Open Graph : Facebook, WhatsApp, Threads, LinkedIn, Discord, Telegram -->
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="${esc(M.name)}">
-  <meta property="og:locale" content="id_ID">
-  <meta property="og:url" content="${M.url}/">
+  <meta property="og:site_name" content="${esc(m.name)}">
+  <meta property="og:locale" content="${T.ogLocale}">
+  <meta property="og:url" content="${m.url}${here}">
   <meta property="og:title" content="${esc(pageTitle)}">
   <meta property="og:description" content="${esc(pageDesc)}">
   <meta property="og:image" content="${ogImg}">
@@ -228,123 +422,125 @@ function buildPage(v) {
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Banner ${esc(M.title)} ${esc(M.name)}">
-  <meta property="og:updated_time" content="${isoDate(M.updated)}">
-  <meta property="article:published_time" content="${isoDate(M.effective)}">
-  <meta property="article:modified_time" content="${isoDate(M.updated)}">
+  <meta property="og:image:alt" content="Banner ${esc(m.title)} ${esc(m.name)}">
+  <meta property="og:updated_time" content="${isoDate(m.updated)}">
+  <meta property="article:published_time" content="${isoDate(m.effective)}">
+  <meta property="article:modified_time" content="${isoDate(m.updated)}">
 
   <!-- Twitter / X -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${esc(pageTitle)}">
   <meta name="twitter:description" content="${esc(pageDesc)}">
   <meta name="twitter:image" content="${ogImg}">
-  <meta name="twitter:image:alt" content="Banner ${esc(M.title)} ${esc(M.name)}">
+  <meta name="twitter:image:alt" content="Banner ${esc(m.title)} ${esc(m.name)}">
 
   <meta name="pinterest-rich-pin" content="true">
   <meta itemprop="name" content="${esc(pageTitle)}">
   <meta itemprop="description" content="${esc(pageDesc)}">
   <meta itemprop="image" content="${ogImg}">
 
-  ${jsonLd()}`;
+  ${jsonLd(P, lang, T)}`;
 
   const tldr = `    <div class="tldr">
-      <h2>${esc(policy.tldr.title)}</h2>
+      <h2>${esc(P.tldr.title)}</h2>
       <ol>
-${policy.tldr.points.map(p => `        <li>${esc(p)}</li>`).join('\n')}
+${P.tldr.points.map(p => `        <li>${esc(p)}</li>`).join('\n')}
       </ol>
-      <div class="cl">${esc(policy.tldr.closing)}</div>
+      <div class="cl">${esc(P.tldr.closing)}</div>
     </div>`;
 
   const why = `    <section class="why" id="kenapa">
-      <h2>${esc(policy.why.title)}</h2>
-      <div class="sub">${esc(policy.why.sub)}</div>
-${policy.why.paras.map(p => `      <p>${esc(p)}</p>`).join('\n')}
+      <h2>${esc(P.why.title)}</h2>
+      <div class="sub">${esc(P.why.sub)}</div>
+${P.why.paras.map(p => `      <p>${esc(p)}</p>`).join('\n')}
     </section>`;
 
   const alert = `    <div class="alert">
-      <h2>${esc(policy.alert.title)}</h2>
-${policy.alert.paras.map(p => `      <p>${rich(pick(p, v))}</p>`).join('\n')}
+      <h2>${esc(P.alert.title)}</h2>
+${P.alert.paras.map(p => `      <p>${rich(pick(p, v))}</p>`).join('\n')}
     </div>`;
 
   const apiCard = internal ? '' : `
     <section class="card" id="api">
-      <h2><span class="num">API</span> Mau Pakai Kebijakan Ini?</h2>
-      <div class="sub">Gratis, open source, lisensi MIT. Boleh dipakai siapa aja asal izin dan cantumin kredit.</div>
+      <h2><span class="num">API</span> ${T.api.title}</h2>
+      <div class="sub">${T.api.sub}</div>
       <ul>
-        <li>Tarik datanya real time lewat API publik. Format JSON, HTML, Markdown, atau teks polos.</li>
-        <li>Atau tempel satu baris script, langsung jadi halaman kebijakan lengkap di web lu.</li>
-        <li>Punya link bio? Pasang <b>gate popup</b>: orang harus baca kebijakan dan pencet setuju dulu sebelum link WhatsApp-nya kebuka.</li>
-        <li>Tanpa API key, tanpa daftar, CORS kebuka buat semua origin.</li>
+${T.api.items.map(i => `        <li>${i}</li>`).join('\n')}
       </ul>
-      <pre><code>&lt;!-- Widget kebijakan --&gt;
+      <pre><code>&lt;!-- Widget kebijakan / Policy widget --&gt;
 &lt;div id="xyc-policy"&gt;&lt;/div&gt;
-&lt;script src="${M.url}/embed.js" defer&gt;&lt;/script&gt;
+&lt;script src="${m.url}/embed.js" defer&gt;&lt;/script&gt;
 
-&lt;!-- Gate popup buat link bio --&gt;
-&lt;script src="${M.url}/gate.js" defer&gt;&lt;/script&gt;
+&lt;!-- Gate popup buat link bio / consent gate for bio links --&gt;
+&lt;script src="${m.url}/gate.js" defer&gt;&lt;/script&gt;
 &lt;a href="https://chat.whatsapp.com/xxxx" data-xyc-gate&gt;Join Grup&lt;/a&gt;</code></pre>
       <div class="cta">
-        <a class="btn ghost" href="/demo">Coba Gate Popup</a>
-        <a class="btn ghost" href="/docs">Dokumentasi API</a>
-        <a class="btn ghost" href="${M.repo}" target="_blank" rel="noopener">Source Code</a>
+        <a class="btn ghost" href="/demo">${T.api.demo}</a>
+        <a class="btn ghost" href="/docs">${T.api.docs}</a>
+        <a class="btn ghost" href="${m.repo}" target="_blank" rel="noopener">${T.api.src}</a>
       </div>
     </section>`;
 
   const feedback = `
     <div class="fb" id="fb">
       <div id="fbAsk">
-        <h2>Menurut lu kebijakan ini gimana?</h2>
-        <p class="q">Jujur aja, ga usah sungkan. Masukannya langsung masuk ke admin.</p>
+        <h2>${T.fb.title}</h2>
+        <p class="q">${T.fb.q}</p>
         <div class="vote">
           <button class="vb up" type="button" data-vote="like">
             <svg viewBox="0 0 24 24"><path d="M2 21h4V9H2v12zm20-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L13.17 1 6.59 7.59C6.22 7.95 6 8.45 6 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg>
-            Bagus
+            ${T.fb.up}
           </button>
           <button class="vb down" type="button" data-vote="dislike">
             <svg viewBox="0 0 24 24"><path d="M22 3h-4v12h4V3zM2 14c0 1.1.9 2 2 2h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L10.83 23l6.58-6.59c.37-.36.59-.86.59-1.41V5c0-1.1-.9-2-2-2H7c-.83 0-1.54.5-1.84 1.22L2.14 11.27c-.09.23-.14.47-.14.73v2z"/></svg>
-            Kurang
+            ${T.fb.down}
           </button>
         </div>
       </div>
-      <div class="done" id="fbDone">Makasih ya, masukannya udah masuk.</div>
+      <div class="done" id="fbDone">${T.fb.done}</div>
     </div>
 
     <div class="mask" id="fbMask" role="dialog" aria-modal="true" aria-labelledby="fbTitle" aria-describedby="fbDesc">
       <div class="modal">
-        <h3 id="fbTitle">Bagian mana yang bikin ganjel?</h3>
-        <p class="mp" id="fbDesc">Pilih yang paling relevan, terus ceritain dikit. Anonim kok, kecuali lu isi kontaknya sendiri.</p>
+        <h3 id="fbTitle">${T.fb.titleBad}</h3>
+        <p class="mp" id="fbDesc">${T.fb.desc}</p>
         <div class="msg" id="fbMsg"></div>
         <div class="chips" id="fbChips"></div>
-        <label for="fbText">Ceritain dikit</label>
-        <textarea id="fbText" placeholder="Tulis apa adanya di sini..."></textarea>
-        <label for="fbContact">Kontak (opsional, kalau mau dibales)</label>
-        <input id="fbContact" type="text" placeholder="Nomor WA atau email" autocomplete="off">
+        <label for="fbText">${T.fb.textLabel}</label>
+        <textarea id="fbText" placeholder="${T.fb.textPh}"></textarea>
+        <label for="fbContact">${T.fb.contactLabel}</label>
+        <input id="fbContact" type="text" placeholder="${T.fb.contactPh}" autocomplete="off">
         <div class="mact">
-          <button class="btn ghost" type="button" id="fbCancel">Batal</button>
-          <button class="btn" type="button" id="fbSend">Kirim ke Admin</button>
+          <button class="btn ghost" type="button" id="fbCancel">${T.fb.cancel}</button>
+          <button class="btn" type="button" id="fbSend">${T.fb.send}</button>
         </div>
       </div>
     </div>`;
 
   const contact = `
     <section class="card" id="kontak">
-      <h2><span class="num">?</span> Kontak &amp; Lapor</h2>
-      <div class="sub">Ada masalah, mau lapor penipuan, atau mau izin pakai kebijakan ini.</div>
+      <h2><span class="num">?</span> ${T.contact.title}</h2>
+      <div class="sub">${T.contact.sub}</div>
       <ul>
-        <li>Lapor penipuan wajib bawa <b>bukti chat plus bukti transfer</b>. Tanpa itu susah diproses.</li>
-        <li>Semua pengumuman resmi keluarnya dari Saluran. Kalau ragu, cek ke sana dulu.</li>
-        <li>Admin bukan CS 24 jam, dibales kalau lagi sempet.</li>
+${T.contact.items.map(i => `        <li>${i}</li>`).join('\n')}
       </ul>
       <div class="cta">
-        <a class="btn" href="${wa('Halo Admin XyCloud, saya mau nanya/lapor soal kebijakan grup.')}" target="_blank" rel="noopener">Japri Admin</a>
-        <a class="btn alt" href="${M.channelUrl}" target="_blank" rel="noopener">Ikuti Saluran Resmi</a>
-        <a class="btn ghost" href="${wa('Halo Admin XyCloud, saya mau izin pakai kebijakan dari rules.xyc.my.id untuk komunitas saya.')}" target="_blank" rel="noopener">Izin Pakai Kebijakan</a>
+        <a class="btn" href="${wa(T.contact.wa1)}" target="_blank" rel="noopener">${T.contact.cta1}</a>
+        <a class="btn alt" href="${m.channelUrl}" target="_blank" rel="noopener">${T.contact.cta2}</a>
+        <a class="btn ghost" href="${wa(T.contact.wa2)}" target="_blank" rel="noopener">${T.contact.cta3}</a>
       </div>
     </section>`;
 
   const switcher = internal
-    ? `    <div class="switch"><a href="/">&larr; Balik ke versi publik</a></div>`
-    : `    <div class="switch"><a href="/internal">Versi internal (blak-blakan) &rarr;</a></div>`;
+    ? `    <div class="switch"><a href="${pagePath('public', lang)}">${T.switchInternal}</a></div>`
+    : `    <div class="switch"><a href="${pagePath('internal', lang)}">${T.switchPublic}</a></div>`;
+
+  // Toggle bahasa: link statis (jalan tanpa JS), kliknya sekalian simpan pilihan manual
+  // supaya auto-detect berikutnya tidak menimpa.
+  const langSwitch = `
+  <div class="langsw" role="group" aria-label="Bahasa / Language">
+    <a href="${pagePath(v, 'id')}" hreflang="id" lang="id" class="${lang === 'id' ? 'on' : ''}"${lang === 'id' ? ' aria-current="true"' : ''} onclick="try{localStorage.setItem('xyc_lang','id')}catch(e){}">ID</a><span class="dot"></span><a href="${pagePath(v, 'en')}" hreflang="en" lang="en" class="${lang === 'en' ? 'on' : ''}"${lang === 'en' ? ' aria-current="true"' : ''} onclick="try{localStorage.setItem('xyc_lang','en')}catch(e){}">EN</a>
+  </div>`;
 
   const js = `
 <script>
@@ -355,7 +551,7 @@ ${policy.alert.paras.map(p => `      <p>${rich(pick(p, v))}</p>`).join('\n')}
     bar.style.width=(max>0?(h.scrollTop/max)*100:0)+'%';
   },{passive:true});
 
-  var REASONS=['Kepanjangan','Bahasanya kasar','Terlalu ketat','Ada yang ga jelas','Ga setuju sama aturan keluar-masuk','Lainnya'];
+  var REASONS=${JSON.stringify(T.fb.reasons)};
   var mask=document.getElementById('fbMask'),chips=document.getElementById('fbChips'),
       msg=document.getElementById('fbMsg'),vote='',sel=[];
 
@@ -378,8 +574,8 @@ ${policy.alert.paras.map(p => `      <p>${rich(pick(p, v))}</p>`).join('\n')}
   function open(v){
     vote=v;
     document.getElementById('fbTitle').textContent = v==='like'
-      ? 'Mantap, bagian mana yang paling kena?'
-      : 'Bagian mana yang bikin ganjel?';
+      ? ${JSON.stringify(T.fb.titleLike)}
+      : ${JSON.stringify(T.fb.titleBad)};
     lastFocus=document.activeElement;
     mask.classList.add('on');
     document.body.style.overflow='hidden';
@@ -410,15 +606,15 @@ ${policy.alert.paras.map(p => `      <p>${rich(pick(p, v))}</p>`).join('\n')}
   document.getElementById('fbSend').onclick=function(){
     var btn=this,text=document.getElementById('fbText').value.trim();
     if(!sel.length && !text){
-      msg.className='msg err';msg.textContent='Pilih minimal satu alasan atau tulis sesuatu dulu.';return;
+      msg.className='msg err';msg.textContent=${JSON.stringify(T.fb.errEmpty)};return;
     }
-    btn.disabled=true;btn.textContent='Ngirim...';
+    btn.disabled=true;btn.textContent=${JSON.stringify(T.fb.sending)};
     fetch('/api/feedback',{
       method:'POST',headers:{'Content-Type':'application/json'},
       body:JSON.stringify({
         vote:vote,reasons:sel,message:text,
         contact:document.getElementById('fbContact').value.trim(),
-        page:location.pathname,version:'${M.version}'
+        page:location.pathname,version:'${m.version}',lang:'${lang}'
       })
     }).then(function(r){return r.json()}).then(function(d){
       if(!d.ok)throw new Error(d.error||'gagal');
@@ -428,8 +624,8 @@ ${policy.alert.paras.map(p => `      <p>${rich(pick(p, v))}</p>`).join('\n')}
       try{localStorage.setItem('xyc_fb','1')}catch(e){}
     }).catch(function(e){
       msg.className='msg err';
-      msg.textContent='Gagal ngirim ('+e.message+'). Coba lagi atau japri admin langsung.';
-      btn.disabled=false;btn.textContent='Kirim ke Admin';
+      msg.textContent=${JSON.stringify(T.fb.errFail)}+e.message+${JSON.stringify(T.fb.errFail2)};
+      btn.disabled=false;btn.textContent=${JSON.stringify(T.fb.send)};
     });
   };
 
@@ -443,7 +639,7 @@ ${policy.alert.paras.map(p => `      <p>${rich(pick(p, v))}</p>`).join('\n')}
 </script>`;
 
   return `<!DOCTYPE html>
-<html lang="id">
+<html lang="${T.htmlLang}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -453,21 +649,23 @@ ${policy.alert.paras.map(p => `      <p>${rich(pick(p, v))}</p>`).join('\n')}
   <link rel="apple-touch-icon" href="/icon-180.png">
   <link rel="mask-icon" href="/favicon.svg" color="#075e54">
   <link rel="manifest" href="/site.webmanifest">${seo}
+${autoLangScript()}
   <style>${CSS}</style>
 </head>
 <body>
 
-<a class="skip" href="#isi">Lewati ke isi</a>
+<a class="skip" href="#isi">${T.skip}</a>
 <div id="bar" aria-hidden="true"></div>
 
 <header>
-  <div class="badge${internal ? ' warn' : ''}">${internal ? 'Versi Internal - Tanpa Sensor' : 'Grup &amp; Saluran Resmi'}</div>
-  <h1>${esc(M.title)}</h1>
-  <div class="grup">${M.nameStyled}</div>
+${langSwitch}
+  <div class="badge${internal ? ' warn' : ''}">${internal ? T.badgeInternal : T.badgePublic}</div>
+  <h1>${esc(m.title)}</h1>
+  <div class="grup">${m.nameStyled}</div>
   <div class="tags">
-${M.tags.map(t => `    <span class="tag">${esc(t)}</span>`).join('\n')}
+${m.tags.map(t => `    <span class="tag">${esc(t)}</span>`).join('\n')}
   </div>
-  <p class="meta">Versi ${M.version} &middot; Update ${M.updated} &middot; Baca santai ${M.readMinutes} menit</p>
+  <p class="meta">${T.metaLine(m)}</p>
 </header>
 
 <div class="wrap" id="isi">
@@ -478,21 +676,21 @@ ${alert}
 
 ${why}
 
-${renderToc()}
+${renderToc(P, T)}
 
-${renderSections(v)}
+${renderSections(P, v)}
 
-  <h2 class="section-title">Yang sering ditanyain</h2>
-${renderFaq()}
+  <h2 class="section-title">${T.faqTitle}</h2>
+${renderFaq(P)}
 ${apiCard}
 ${feedback}
 ${contact}
 ${switcher}
 
   <footer>
-    <p>${rich(pick(policy.footer, v))}</p>
-    <p style="margin-top:10px">&copy; 2026 <b>${M.nameStyled}</b> &middot; ${esc(M.tagline)}</p>
-    <p style="margin-top:6px">Open source (MIT) &middot; <a href="${M.repo}" target="_blank" rel="noopener">GitHub</a> &middot; <a href="/api/policy">API</a> &middot; <a href="/docs">Docs</a> &middot; <a href="/status">Status</a></p>
+    <p>${rich(pick(P.footer, v))}</p>
+    <p style="margin-top:10px">&copy; 2026 <b>${m.nameStyled}</b> &middot; ${esc(m.tagline)}</p>
+    <p style="margin-top:6px">Open source (MIT) &middot; <a href="${m.repo}" target="_blank" rel="noopener">GitHub</a> &middot; <a href="/api/policy">API</a> &middot; <a href="/docs">Docs</a> &middot; <a href="/status">Status</a></p>
   </footer>
 
 </div>
@@ -504,28 +702,48 @@ ${js}
 
 const pub = path.join(root, 'public');
 fs.mkdirSync(pub, { recursive: true });
-fs.writeFileSync(path.join(pub, 'index.html'), buildPage('public'));
-fs.writeFileSync(path.join(pub, 'internal.html'), buildPage('internal'));
+fs.mkdirSync(path.join(pub, 'en'), { recursive: true });
+fs.writeFileSync(path.join(pub, 'index.html'), buildPage('public', 'id'));
+fs.writeFileSync(path.join(pub, 'internal.html'), buildPage('internal', 'id'));
+fs.writeFileSync(path.join(pub, 'en', 'index.html'), buildPage('public', 'en'));
+fs.writeFileSync(path.join(pub, 'en', 'internal.html'), buildPage('internal', 'en'));
 
 fs.writeFileSync(path.join(pub, 'robots.txt'), `User-agent: *
 Allow: /
 Disallow: /internal
 Disallow: /internal.html
+Disallow: /en/internal
+Disallow: /en/internal.html
 
 User-agent: GPTBot
 Allow: /
 Disallow: /internal
 Disallow: /internal.html
+Disallow: /en/internal
+Disallow: /en/internal.html
 
 Sitemap: ${M.url}/sitemap.xml
 `);
 
+const alt = (base) => `    <xhtml:link rel="alternate" hreflang="id" href="${M.url}/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="${M.url}/en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="${M.url}/"/>`;
+
 fs.writeFileSync(path.join(pub, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>${M.url}/</loc><lastmod>${M.updated}</lastmod><changefreq>monthly</changefreq><priority>1.0</priority>
+    <loc>${M.url}/</loc>
+${alt()}
+    <lastmod>${M.updated}</lastmod><changefreq>monthly</changefreq><priority>1.0</priority>
     <image:image><image:loc>${M.url}/og.png</image:loc><image:title>${esc(M.title)} ${esc(M.name)}</image:title></image:image>
+  </url>
+  <url>
+    <loc>${M.url}/en</loc>
+${alt()}
+    <lastmod>${M.updated}</lastmod><changefreq>monthly</changefreq><priority>0.9</priority>
+    <image:image><image:loc>${M.url}/og.png</image:loc><image:title>${esc(POLICIES.en.meta.title)} ${esc(M.name)}</image:title></image:image>
   </url>
   <url>
     <loc>${M.url}/docs</loc><lastmod>${M.updated}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority>
@@ -582,5 +800,5 @@ fs.writeFileSync(path.join(pub, 'site.webmanifest'), JSON.stringify({
   icons: iconList
 }, null, 2));
 
-console.log('[build] index, internal, robots, sitemap, manifest, favicon' +
+console.log('[build] id: index+internal, en: en/index+en/internal, robots, sitemap (hreflang), manifest, favicon' +
   (iconsDone.length ? `, icon-${iconsDone.join('/')} -> public/` : ' -> public/'));

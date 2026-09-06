@@ -1,4 +1,11 @@
-import policy from '../data/policy.json' with { type: 'json' };
+import policyId from '../data/policy.json' with { type: 'json' };
+import policyEn from '../data/policy.en.json' with { type: 'json' };
+
+// Dua bahasa: default `id` (kompatibel dengan pemanggil lama), `?lang=en` untuk
+// Inggris. Struktur kedua file identik, id section disamakan, jadi ?section=
+// tetap bekerja sama untuk kedua bahasa.
+const POLICIES = { id: policyId, en: policyEn };
+const LANGS = Object.keys(POLICIES);
 
 // Versi "internal" isinya blak-blakan dan niatnya cuma buat member grup.
 // Sebelumnya ?version=internal terbuka buat siapa saja (CORS *), dan embed.js
@@ -17,26 +24,37 @@ function internalAllowed(req, url) {
 const pick = (o, v) => (v === 'internal' && o.internal ? o.internal : o.public);
 const strip = (s) => String(s).replace(/<[^>]+>/g, '');
 
-function cors(res) {
+// Label kecil di output markdown/html supaya ikut bahasa yang diminta.
+const FMT = {
+  id: { ver: 'Versi', upd: 'Update', src: 'Sumber' },
+  en: { ver: 'Version', upd: 'Updated', src: 'Source' }
+};
+
+function cors(res, lang) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   res.setHeader('Access-Control-Max-Age', '86400');
   res.setHeader('Cache-Control', 'public, s-maxage=3600, stale-while-revalidate=86400');
-  res.setHeader('X-Policy-Version', policy.meta.version);
-  res.setHeader('X-Policy-Source', policy.meta.url);
+  res.setHeader('X-Policy-Version', POLICIES[lang].meta.version);
+  res.setHeader('X-Policy-Language', lang);
+  res.setHeader('X-Policy-Source', POLICIES[lang].meta.url);
   res.setHeader('X-Policy-License', 'MIT - credit rules.xyc.my.id');
 }
 
-function shape(version) {
+function shape(version, lang) {
+  const policy = POLICIES[lang];
+  const M = policy.meta;
   return {
     ok: true,
     meta: {
-      ...policy.meta,
+      ...M,
       requestedVersion: version,
+      requestedLanguage: lang,
+      availableLanguages: LANGS,
       license: 'MIT',
       attribution: 'Wajib cantumkan kredit ke https://rules.xyc.my.id',
-      docs: `${policy.meta.url}/docs`
+      docs: `${M.url}/docs`
     },
     tldr: policy.tldr ? {
       title: policy.tldr.title,
@@ -68,11 +86,12 @@ function shape(version) {
   };
 }
 
-function toMarkdown(d) {
+function toMarkdown(d, lang) {
   const L = [];
+  const F = FMT[lang];
   L.push(`# ${d.meta.title} — ${d.meta.name}`, '');
   L.push(`> ${d.meta.tagline}`, '');
-  L.push(`**Versi ${d.meta.version} · Update ${d.meta.updated}**`, '');
+  L.push(`**${F.ver} ${d.meta.version} · ${F.upd} ${d.meta.updated}**`, '');
   if (d.tldr) {
     L.push(`## ${d.tldr.title}`, '');
     d.tldr.points.forEach((p, i) => L.push(`${i + 1}. ${p}`));
@@ -92,15 +111,16 @@ function toMarkdown(d) {
   });
   L.push('## FAQ', '');
   d.faq.forEach(f => L.push(`**${f.q}**`, '', f.a, ''));
-  L.push('---', '', d.footer, '', `Sumber: ${d.meta.url}`);
+  L.push('---', '', d.footer, '', `${F.src}: ${d.meta.url}`);
   return L.join('\n');
 }
 
-function toText(d) {
-  return toMarkdown(d).replace(/[#>_*`]/g, '').replace(/\n{3,}/g, '\n\n');
+function toText(d, lang) {
+  return toMarkdown(d, lang).replace(/[#>_*`]/g, '').replace(/\n{3,}/g, '\n\n');
 }
 
-function toHtml(d) {
+function toHtml(d, lang) {
+  const F = FMT[lang];
   const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   const sec = d.sections.map(s => `<section class="xyc-sec" id="xyc-${s.id}">
 <h2>${s.number}. ${esc(s.title)}</h2>
@@ -109,27 +129,29 @@ function toHtml(d) {
 ${s.note ? `<div class="xyc-note xyc-${s.note.level}">${esc(s.note.text)}</div>` : ''}
 </section>`).join('\n');
   const faq = d.faq.map(f => `<details class="xyc-faq"><summary>${esc(f.q)}</summary><p>${esc(f.a)}</p></details>`).join('\n');
-  return `<div class="xyc-policy" data-version="${d.meta.version}">
-<header class="xyc-head"><h1>${esc(d.meta.title)}</h1><p class="xyc-grup">${d.meta.nameStyled}</p><p class="xyc-meta">Versi ${d.meta.version} · Update ${d.meta.updated}</p></header>
+  return `<div class="xyc-policy" data-version="${d.meta.version}" data-lang="${lang}">
+<header class="xyc-head"><h1>${esc(d.meta.title)}</h1><p class="xyc-grup">${esc(d.meta.nameStyled)}</p><p class="xyc-meta">${F.ver} ${d.meta.version} · ${F.upd} ${d.meta.updated}</p></header>
 ${d.tldr ? `<div class="xyc-tldr"><h2>${esc(d.tldr.title)}</h2><ol>${d.tldr.points.map(p => `<li>${esc(p)}</li>`).join('')}</ol><p class="xyc-tldr-cl">${esc(d.tldr.closing)}</p></div>` : ''}
 <div class="xyc-alert"><h2>${esc(d.alert.title)}</h2>${d.alert.paragraphs.map(p => `<p>${esc(p)}</p>`).join('')}</div>
 ${sec}
 <h2 class="xyc-faq-title">FAQ</h2>
 ${faq}
-<footer class="xyc-foot"><p>${esc(d.footer)}</p><p><a href="${d.meta.url}" target="_blank" rel="noopener">Sumber: ${d.meta.domain}</a></p></footer>
+<footer class="xyc-foot"><p>${esc(d.footer)}</p><p><a href="${d.meta.url}" target="_blank" rel="noopener">${F.src}: ${esc(d.meta.domain)}</a></p></footer>
 </div>`;
 }
 
 export default function handler(req, res) {
-  cors(res);
+  const url = new URL(req.url, `https://${req.headers.host || POLICIES.id.meta.domain}`);
+  const q = url.searchParams;
+  const langRaw = (q.get('lang') || 'id').toLowerCase();
+  const lang = POLICIES[langRaw] ? langRaw : 'id';
+  const format = (q.get('format') || 'json').toLowerCase();
+
+  cors(res, lang);
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (!['GET', 'HEAD'].includes(req.method)) {
     return res.status(405).json({ ok: false, error: 'method_not_allowed', allowed: ['GET', 'HEAD', 'OPTIONS'] });
   }
-
-  const url = new URL(req.url, `https://${req.headers.host || policy.meta.domain}`);
-  const q = url.searchParams;
-  const format = (q.get('format') || 'json').toLowerCase();
 
   if (q.get('version') === 'internal' && !internalAllowed(req, url)) {
     res.setHeader('Content-Type', 'application/json; charset=utf-8');
@@ -147,7 +169,7 @@ export default function handler(req, res) {
   const sectionId = q.get('section');
   const pretty = q.get('pretty') === '1' || q.get('pretty') === 'true';
 
-  let data = shape(version);
+  let data = shape(version, lang);
 
   if (sectionId) {
     const found = data.sections.find(s => s.id === sectionId || String(s.number) === sectionId);
@@ -162,15 +184,15 @@ export default function handler(req, res) {
 
   if (format === 'markdown' || format === 'md') {
     res.setHeader('Content-Type', 'text/markdown; charset=utf-8');
-    return res.status(200).send(toMarkdown(data));
+    return res.status(200).send(toMarkdown(data, lang));
   }
   if (format === 'text' || format === 'txt') {
     res.setHeader('Content-Type', 'text/plain; charset=utf-8');
-    return res.status(200).send(toText(data));
+    return res.status(200).send(toText(data, lang));
   }
   if (format === 'html') {
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
-    return res.status(200).send(toHtml(data));
+    return res.status(200).send(toHtml(data, lang));
   }
   if (format === 'index') {
     res.setHeader('Content-Type', 'application/json; charset=utf-8');

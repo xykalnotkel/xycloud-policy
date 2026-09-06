@@ -42,7 +42,11 @@ http.createServer(async (req, res) => {
     return mod.default(req, res);
   }
   let p = u.pathname === '/' ? '/index.html' : u.pathname;
-  if (!path.extname(p)) p += '.html';
+  if (!path.extname(p)) {
+    // /en dan /en/internal -> cari folder/index.html dulu, baru fallback ke *.html
+    const asDir = path.join(PUB, p, 'index.html');
+    p = fs.existsSync(asDir) ? path.join(p, 'index.html') : p + '.html';
+  }
   const f = path.join(PUB, p);
   if (!f.startsWith(PUB) || !fs.existsSync(f)) { res.writeHead(404).end('404'); return; }
   res.writeHead(200, { 'Content-Type': MIME[path.extname(f)] || 'application/octet-stream', 'Access-Control-Allow-Origin': '*' });

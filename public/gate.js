@@ -1,5 +1,5 @@
 /*!
- * XyCloud Policy Gate v1.0
+ * XyCloud Policy Gate v1.1
  * Popup persetujuan: orang harus baca kebijakan dan pencet Setuju
  * sebelum link WhatsApp (atau link apa pun) kebuka.
  *
@@ -15,9 +15,15 @@
  *   data-remember="30"       hari ingat persetujuan, 0=selalu tanya (default: 30)
  *   data-require="scroll|check|both|none" syarat tombol aktif (default: scroll)
  *   data-accent="#25d366"
+ *   data-lang="id|en|auto"   bahasa isi + tombol           (default: auto)
+ *
+ *   data-lang="auto" mendeteksi bahasa browser pengunjung:
+ *   Indonesia -> id, selain itu -> en. Halaman pemasang tetap satu, gate-nya
+ *   yang menyesuaikan bahasa pembacanya.
  *
  * Programmatic:
  *   XycGate.open('https://chat.whatsapp.com/xxx').then(ok => { ... })
+ *   XycGate.open('https://chat.whatsapp.com/xxx', '_blank', { lang: 'en' })
  *   XycGate.reset()   // hapus persetujuan tersimpan
  *
  * Lisensi MIT. Wajib mencantumkan kredit ke https://rules.xyc.my.id
@@ -40,8 +46,69 @@
     theme: D.theme === 'dark' ? 'dark' : 'light',
     remember: D.remember === undefined ? 30 : parseInt(D.remember, 10) || 0,
     require: D.require || 'scroll',
-    accent: safeAccent(D.accent)
+    accent: safeAccent(D.accent),
+    lang: D.lang || 'auto'
   };
+
+  // Label antarmuka gate, dua bahasa. Isi kebijakan ikut bahasa yang sama
+  // lewat /api/policy?lang=... jadi popup-nya campur bahasa.
+  var STR = {
+    id: {
+      loading: 'Memuat kebijakan&hellip;',
+      close: 'Tutup',
+      badge: 'Baca dulu sebentar',
+      tldrTitle: 'Intinya cuma tiga',
+      more: 'Lihat semua',
+      sections: 'bagian',
+      end: 'Udah sampai bawah. Makasih udah baca.',
+      chk: 'Gua udah baca dan ngerti isinya, terutama soal keluar dari grup ga bisa balik lagi.',
+      hint: 'Scroll sampai bawah dulu ya',
+      hintGo: 'Oke, lanjut',
+      cancel: 'Batal',
+      agree: 'Setuju &amp; Lanjut',
+      credit: 'Kebijakan oleh',
+      failTitle: 'Gagal memuat',
+      failBody: 'Kebijakannya lagi ga bisa dimuat, jadi gate-nya ga bisa dibuka dulu. Coba lagi sebentar, atau baca kebijakannya langsung di',
+      failBody2: 'lalu balik lagi ke sini.',
+      retry: 'Coba Lagi',
+      stillFail: 'Masih gagal',
+      stillBody: 'Belum bisa dimuat juga. Baca langsung di'
+    },
+    en: {
+      loading: 'Loading the policy&hellip;',
+      close: 'Close',
+      badge: 'Quick read first',
+      tldrTitle: 'Just three things',
+      more: 'Show all',
+      sections: 'sections',
+      end: 'That&rsquo;s the bottom. Thanks for reading.',
+      chk: 'I&rsquo;ve read and understood this — especially that leaving the group is permanent.',
+      hint: 'Scroll to the bottom first',
+      hintGo: 'Ok, you can continue',
+      cancel: 'Cancel',
+      agree: 'Agree &amp; Continue',
+      credit: 'Policy by',
+      failTitle: 'Failed to load',
+      failBody: 'The policy can&rsquo;t be loaded right now, so the gate can&rsquo;t open yet. Try again in a moment, or read the policy directly at',
+      failBody2: 'then come back here.',
+      retry: 'Try Again',
+      stillFail: 'Still failing',
+      stillBody: 'Still can&rsquo;t load. Read it directly at'
+    }
+  };
+
+  // auto: kalau salah satu bahasa browsernya Indonesia -> id, selain itu -> en.
+  // Gagal baca navigator -> id (default lama, aman buat pemasang Indonesia).
+  function detectLang() {
+    if (CFG.lang === 'id' || CFG.lang === 'en') return CFG.lang;
+    try {
+      var ls = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ''];
+      for (var i = 0; i < ls.length; i++) {
+        if (/^id/i.test(ls[i] || '')) return 'id';
+      }
+      return ls[0] ? 'en' : 'id';
+    } catch (e) { return 'id'; }
+  }
 
   // data-accent disuntik ke dalam <style>; tanpa disaring bisa menutup blok CSS.
   function safeAccent(v) {
@@ -62,7 +129,7 @@
   }
 
   var KEY = 'xyc_gate_ok';
-  var cache = null, pending = null, host = null, shadow = null;
+  var cache = {}, pending = null, host = null, shadow = null;
 
   function agreed() {
     if (!CFG.remember) return false;
@@ -143,29 +210,31 @@
     ].join('\n');
   }
 
-  function build() {
+  function build(lang) {
     host = document.createElement('div');
     host.setAttribute('data-xyc-gate-root', '');
+    host.setAttribute('data-lang', lang);
     shadow = host.attachShadow({ mode: 'open' });
     var st = document.createElement('style');
     st.textContent = styles();
     shadow.appendChild(st);
     var mask = document.createElement('div');
     mask.className = 'mask';
-    mask.innerHTML = '<div class="box" role="dialog" aria-modal="true"><div class="ld">Memuat kebijakan&hellip;</div></div>';
+    mask.innerHTML = '<div class="box" role="dialog" aria-modal="true"><div class="ld">' + STR[lang].loading + '</div></div>';
     shadow.appendChild(mask);
     document.body.appendChild(host);
     return mask;
   }
 
-  function fetchPolicy() {
-    if (cache) return Promise.resolve(cache);
-    return fetch(ORIGIN + '/api/policy', { mode: 'cors' })
+  function fetchPolicy(lang) {
+    if (cache[lang]) return Promise.resolve(cache[lang]);
+    return fetch(ORIGIN + '/api/policy?lang=' + lang, { mode: 'cors' })
       .then(function (r) { return r.json(); })
-      .then(function (d) { if (!d.ok) throw new Error('bad'); cache = d; return d; });
+      .then(function (d) { if (!d.ok) throw new Error('bad'); cache[lang] = d; return d; });
   }
 
-  function paint(mask, d) {
+  function paint(mask, d, lang) {
+    var S = STR[lang];
     var box = mask.querySelector('.box');
     var tl = d.tldr && d.tldr.points ? d.tldr.points : [];
     var key = d.sections.filter(function (s) {
@@ -191,27 +260,27 @@
 
     box.innerHTML =
       '<div class="hd">' +
-        '<button class="x" aria-label="Tutup">&times;</button>' +
-        '<div class="bdg">Baca dulu sebentar</div>' +
+        '<button class="x" aria-label="' + S.close + '">&times;</button>' +
+        '<div class="bdg">' + S.badge + '</div>' +
         '<h2>' + esc(d.meta.title) + '</h2>' +
         '<div class="g">' + esc(d.meta.nameStyled) + '</div>' +
       '</div>' +
       '<div class="bd">' +
-        (tl.length ? '<div class="tl"><h3>Intinya cuma tiga</h3><ol>' +
+        (tl.length ? '<div class="tl"><h3>' + S.tldrTitle + '</h3><ol>' +
           tl.map(function (p) { return '<li>' + esc(p) + '</li>'; }).join('') + '</ol></div>' : '') +
         '<div id="short">' + short + '</div>' +
-        '<button class="more" id="more">Lihat semua ' + d.sections.length + ' bagian &darr;</button>' +
+        '<button class="more" id="more">' + S.more + ' ' + d.sections.length + ' ' + S.sections + ' &darr;</button>' +
         '<div id="full" style="display:none">' + full + '</div>' +
-        '<div class="end" id="end">Udah sampai bawah. Makasih udah baca.</div>' +
+        '<div class="end" id="end">' + S.end + '</div>' +
       '</div>' +
       '<div class="ft">' +
-        (needChk ? '<label class="chk"><input type="checkbox" id="chk"><span>Gua udah baca dan ngerti isinya, terutama soal keluar dari grup ga bisa balik lagi.</span></label>' : '') +
-        (needScroll ? '<div class="hint" id="hint">Scroll sampai bawah dulu ya</div>' : '') +
+        (needChk ? '<label class="chk"><input type="checkbox" id="chk"><span>' + S.chk + '</span></label>' : '') +
+        (needScroll ? '<div class="hint" id="hint">' + S.hint + '</div>' : '') +
         '<div class="row">' +
-          '<button class="b no" id="no">Batal</button>' +
-          '<button class="b ok" id="ok"' + (CFG.require === 'none' ? '' : ' disabled') + '>Setuju &amp; Lanjut</button>' +
+          '<button class="b no" id="no">' + S.cancel + '</button>' +
+          '<button class="b ok" id="ok"' + (CFG.require === 'none' ? '' : ' disabled') + '>' + S.agree + '</button>' +
         '</div>' +
-        '<div class="cr">Kebijakan oleh <a href="' + esc(d.meta.url) + '" target="_blank" rel="noopener">' + esc(d.meta.domain) + '</a></div>' +
+        '<div class="cr">' + S.credit + ' <a href="' + esc(d.meta.url) + '" target="_blank" rel="noopener">' + esc(d.meta.domain) + '</a></div>' +
       '</div>';
 
     var bd = box.querySelector('.bd');
@@ -231,7 +300,7 @@
       if (bd.scrollTop + bd.clientHeight >= bd.scrollHeight - 24) {
         if (!reachedBottom) {
           reachedBottom = true;
-          if (hint) { hint.textContent = 'Oke, lanjut'; hint.className = 'hint go'; }
+          if (hint) { hint.textContent = S.hintGo; hint.className = 'hint go'; }
         }
         refresh();
       }
@@ -252,7 +321,7 @@
     setTimeout(function () {
       if (bd.scrollHeight <= bd.clientHeight + 8) {
         reachedBottom = true;
-        if (hint) { hint.textContent = 'Oke, lanjut'; hint.className = 'hint go'; }
+        if (hint) { hint.textContent = S.hintGo; hint.className = 'hint go'; }
         refresh();
       }
     }, 60);
@@ -274,7 +343,7 @@
     }
   }
 
-  function open(href, target) {
+  function open(href, target, opts) {
     var dest = safeHref(href);
     if (href && !dest) {
       console.warn('[xyc-gate] href ditolak, protokol tidak diizinkan:', href);
@@ -287,36 +356,38 @@
       }
       return Promise.resolve(true);
     }
+    // Bahasa untuk popup ini: opts.lang > data-lang > deteksi browser.
+    var lang = (opts && (opts.lang === 'id' || opts.lang === 'en')) ? opts.lang : detectLang();
+    var S = STR[lang];
     return new Promise(function (resolve) {
       pending = { href: dest, target: target, resolve: resolve };
-      maskEl = build();
+      maskEl = build(lang);
       prevOverflow = document.documentElement.style.overflow;
       document.documentElement.style.overflow = 'hidden';
       requestAnimationFrame(function () { maskEl.classList.add('on'); });
 
-      fetchPolicy().then(function (d) { paint(maskEl, d); }).catch(function () {
+      fetchPolicy(lang).then(function (d) { paint(maskEl, d, lang); }).catch(function () {
         // Sengaja fail-closed: kalau kebijakan tidak bisa ditampilkan, jangan
         // tawarkan jalan pintas. Sebelumnya ada tombol "Lanjut Aja" yang tetap
         // membuka link tanpa membaca apa pun, jadi gate-nya bisa dilewati begitu saja.
         maskEl.querySelector('.box').innerHTML =
-          '<div class="hd"><h2>Gagal memuat</h2></div>' +
-          '<div class="bd"><p style="font-size:14px;line-height:1.6">Kebijakannya lagi ga bisa dimuat, jadi gate-nya ga bisa dibuka dulu. ' +
-          'Coba lagi sebentar, atau baca kebijakannya langsung di ' +
+          '<div class="hd"><h2>' + S.failTitle + '</h2></div>' +
+          '<div class="bd"><p style="font-size:14px;line-height:1.6">' + S.failBody + ' ' +
           '<a href="' + ORIGIN + '" target="_blank" rel="noopener" style="color:' + CFG.accent + '">' +
-          ORIGIN.replace(/^https?:\/\//, '') + '</a> lalu balik lagi ke sini.</p></div>' +
-          '<div class="ft"><div class="row"><button class="b no" id="no" style="flex:1">Tutup</button>' +
-          '<button class="b ok" id="retry" style="flex:1">Coba Lagi</button></div></div>';
+          ORIGIN.replace(/^https?:\/\//, '') + '</a> ' + S.failBody2 + '</p></div>' +
+          '<div class="ft"><div class="row"><button class="b no" id="no" style="flex:1">' + S.close + '</button>' +
+          '<button class="b ok" id="retry" style="flex:1">' + S.retry + '</button></div></div>';
         maskEl.querySelector('#no').onclick = function () { finish(false); };
         maskEl.querySelector('#retry').onclick = function () {
           var m = maskEl;
-          m.querySelector('.box').innerHTML = '<div class="ld">Memuat kebijakan&hellip;</div>';
-          fetchPolicy().then(function (d) { paint(m, d); }).catch(function () {
+          m.querySelector('.box').innerHTML = '<div class="ld">' + S.loading + '</div>';
+          fetchPolicy(lang).then(function (d) { paint(m, d, lang); }).catch(function () {
             m.querySelector('.box').innerHTML =
-              '<div class="hd"><h2>Masih gagal</h2></div>' +
-              '<div class="bd"><p style="font-size:14px;line-height:1.6">Belum bisa dimuat juga. Baca langsung di ' +
+              '<div class="hd"><h2>' + S.stillFail + '</h2></div>' +
+              '<div class="bd"><p style="font-size:14px;line-height:1.6">' + S.stillBody + ' ' +
               '<a href="' + ORIGIN + '" target="_blank" rel="noopener" style="color:' + CFG.accent + '">' +
               ORIGIN.replace(/^https?:\/\//, '') + '</a>.</p></div>' +
-              '<div class="ft"><div class="row"><button class="b no" id="no" style="flex:1">Tutup</button></div></div>';
+              '<div class="ft"><div class="row"><button class="b no" id="no" style="flex:1">' + S.close + '</button></div></div>';
             m.querySelector('#no').onclick = function () { finish(false); };
           });
         };
@@ -346,6 +417,6 @@
     agreed: agreed,
     reset: function () { try { localStorage.removeItem(KEY); } catch (e) {} },
     config: CFG,
-    version: '1.0.0'
+    version: '1.1.0'
   };
 })();

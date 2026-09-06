@@ -11,6 +11,7 @@
  *   data-section="promosi"    tampilkan 1 section    (default: semua)
  *   data-accent="#25d366"     warna aksen (hex/nama warna CSS saja)
  *   data-credit="true|false"  tampilkan kredit       (default: true, mohon jangan dimatikan)
+ *   data-lang="id|en|auto"    bahasa isi widget      (default: auto = deteksi browser)
  *
  * Lisensi MIT. Wajib mencantumkan kredit ke https://rules.xyc.my.id
  */
@@ -32,8 +33,45 @@
     theme: D.theme || 'auto',
     section: D.section || '',
     accent: safeAccent(D.accent),
-    credit: D.credit !== 'false'
+    credit: D.credit !== 'false',
+    lang: D.lang || 'auto'
   };
+
+  // Label kecil widget per bahasa. Isi kebijakan diambil dari /api/policy?lang=...
+  var STR = {
+    id: {
+      loading: 'Memuat kebijakan&hellip;',
+      ver: 'Versi', upd: 'Update',
+      credit: 'Kebijakan oleh',
+      err: 'Gagal memuat kebijakan (',
+      err2: '). Buka langsung di ',
+      noTarget: 'target tidak ketemu:',
+      noTarget2: '- bikin <div id="xyc-policy"></div> dulu.',
+      badResp: 'respons tidak valid'
+    },
+    en: {
+      loading: 'Loading the policy&hellip;',
+      ver: 'Version', upd: 'Updated',
+      credit: 'Policy by',
+      err: 'Failed to load the policy (',
+      err2: '). Open it directly at ',
+      noTarget: 'target not found:',
+      noTarget2: '- create <div id="xyc-policy"></div> first.',
+      badResp: 'invalid response'
+    }
+  };
+
+  // auto: bahasa browser Indonesia -> id, selain itu -> en, gagal baca -> id.
+  function detectLang() {
+    if (opt.lang === 'id' || opt.lang === 'en') return opt.lang;
+    try {
+      var ls = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ''];
+      for (var i = 0; i < ls.length; i++) {
+        if (/^id/i.test(ls[i] || '')) return 'id';
+      }
+      return ls[0] ? 'en' : 'id';
+    } catch (e) { return 'id'; }
+  }
 
   // data-accent masuk mentah ke dalam <style>. Tanpa disaring, nilai seperti
   // "red;}body{display:none" bisa menutup blok CSS dan menyuntik aturan lain.
@@ -97,12 +135,13 @@
       .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 
-  function render(host, d) {
+  function render(host, d, lang) {
+    var S = STR[lang];
     var h = [];
     h.push('<div class="xyc-w">');
     h.push('<div class="xyc-hd"><h2>' + esc(d.meta.title) + '</h2>');
     h.push('<div class="g">' + esc(d.meta.nameStyled) + '</div>');
-    h.push('<div class="m">Versi ' + esc(d.meta.version) + ' &middot; Update ' + esc(d.meta.updated) + '</div></div>');
+    h.push('<div class="m">' + S.ver + ' ' + esc(d.meta.version) + ' &middot; ' + S.upd + ' ' + esc(d.meta.updated) + '</div></div>');
 
     if (d.alert && !opt.section) {
       h.push('<div class="xyc-al"><h3>' + esc(d.alert.title) + '</h3>');
@@ -131,7 +170,7 @@
 
     h.push('<div class="xyc-ft"><p>' + esc(d.footer) + '</p>');
     if (opt.credit) {
-      h.push('<p>Kebijakan oleh <a href="' + esc(d.meta.url) + '" target="_blank" rel="noopener">' + esc(d.meta.domain) + '</a> &middot; MIT License</p>');
+      h.push('<p>' + S.credit + ' <a href="' + esc(d.meta.url) + '" target="_blank" rel="noopener">' + esc(d.meta.domain) + '</a> &middot; MIT License</p>');
     }
     h.push('</div></div>');
 
@@ -139,9 +178,11 @@
   }
 
   function boot() {
+    var lang = detectLang();
+    var S = STR[lang];
     var host = document.querySelector(opt.target);
     if (!host) {
-      console.warn('[xyc-policy] target tidak ketemu:', opt.target, '- bikin <div id="xyc-policy"></div> dulu.');
+      console.warn('[xyc-policy] ' + S.noTarget, opt.target, S.noTarget2);
       return;
     }
 
@@ -149,10 +190,11 @@
       window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
     injectStyle(dark);
 
-    host.innerHTML = '<div class="xyc-w"><div class="xyc-ld">Memuat kebijakan&hellip;</div></div>';
+    host.innerHTML = '<div class="xyc-w"><div class="xyc-ld">' + S.loading + '</div></div>';
 
     // Selalu versi publik. Versi internal tidak lagi bisa ditarik dari widget.
-    var url = origin + '/api/policy' + (opt.section ? '?section=' + encodeURIComponent(opt.section) : '');
+    var q = '?lang=' + lang + (opt.section ? '&section=' + encodeURIComponent(opt.section) : '');
+    var url = origin + '/api/policy' + q;
 
     fetch(url, { mode: 'cors' })
       .then(function (r) {
@@ -160,13 +202,13 @@
         return r.json();
       })
       .then(function (d) {
-        if (!d || !d.ok) throw new Error('respons tidak valid');
-        render(host, d);
+        if (!d || !d.ok) throw new Error(S.badResp);
+        render(host, d, lang);
         host.dispatchEvent(new CustomEvent('xyc:policy:loaded', { bubbles: true, detail: d }));
       })
       .catch(function (e) {
-        host.innerHTML = '<div class="xyc-w"><div class="xyc-er">Gagal memuat kebijakan (' + esc(e.message) +
-          '). Buka langsung di <a href="' + origin + '">' + origin.replace(/^https?:\/\//, '') + '</a></div></div>';
+        host.innerHTML = '<div class="xyc-w"><div class="xyc-er">' + S.err + esc(e.message) +
+          S.err2 + '<a href="' + origin + '">' + origin.replace(/^https?:\/\//, '') + '</a></div></div>';
       });
   }
 

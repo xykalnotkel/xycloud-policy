@@ -2,10 +2,14 @@ User-agent: *
 Allow: /
 Disallow: /internal
 Disallow: /internal.html
+Disallow: /en/internal
+Disallow: /en/internal.html
 
 User-agent: GPTBot
 Allow: /
 Disallow: /internal
 Disallow: /internal.html
+Disallow: /en/internal
+Disallow: /en/internal.html
 
 Sitemap: https://rules.xyc.my.id/sitemap.xml
